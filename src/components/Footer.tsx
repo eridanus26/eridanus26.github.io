@@ -1,14 +1,34 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { blogData } from '../data/blogData';
 
 export default function Footer() {
   const [daysRunning, setDaysRunning] = useState(0);
-  const startDate = new Date('2024-01-01'); // Mock start date
+  const [visitorCount, setVisitorCount] = useState(0);
+  const startDate = new Date('2026-04-08');
+
+  const lastUpdateDate = useMemo(() => {
+    if (blogData.posts.length === 0) return new Date().toLocaleDateString();
+    const dates = blogData.posts.map(p => new Date(p.date).getTime());
+    const latest = Math.max(...dates);
+    return new Date(latest).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  }, []);
 
   useEffect(() => {
+    // Days running calculation
     const now = new Date();
     const diff = Math.floor((now.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24));
-    setDaysRunning(diff);
+    setDaysRunning(Math.max(0, diff));
+
+    // Simple visitor counter using localStorage
+    const storedVisits = localStorage.getItem('site_visits');
+    const currentVisits = storedVisits ? parseInt(storedVisits) : 1024; // Base number
+    const newVisits = currentVisits + 1;
+    localStorage.setItem('site_visits', newVisits.toString());
+    setVisitorCount(newVisits);
   }, []);
 
   return (
@@ -26,8 +46,8 @@ export default function Footer() {
             <h4 className="text-xs font-serif tracking-[0.2em] uppercase text-[#A84848]/60">Site Stats</h4>
             <ul className="space-y-2 text-sm text-[#2A1A18]/70 font-serif">
               <li>Days Running: <span className="text-[#A84848] font-bold">{daysRunning}</span></li>
-              <li>Total Visitors: <span className="text-[#A84848] font-bold">1,234</span></li>
-              <li>Last Update: <span className="text-[#A84848] font-bold">{new Date().toLocaleDateString()}</span></li>
+              <li>Total Visitors: <span className="text-[#A84848] font-bold">{visitorCount.toLocaleString()}</span></li>
+              <li>Last Update: <span className="text-[#A84848] font-bold">{lastUpdateDate}</span></li>
             </ul>
           </div>
 

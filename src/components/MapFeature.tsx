@@ -31,7 +31,7 @@ export default function MapFeature({ customPosts, filterCategory = 'all' }: MapF
   };
 
   return (
-    <div className="space-y-8">
+    <div className="h-full flex flex-col space-y-8">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="space-y-1">
           <h2 className="text-2xl font-serif italic text-[#1A0E0C]">Journey Explorer</h2>
@@ -44,7 +44,7 @@ export default function MapFeature({ customPosts, filterCategory = 'all' }: MapF
         </div>
       </div>
 
-      <div className="relative aspect-[2/1] bg-[#F0E8E4]/50 rounded-[2rem] border border-[#A84848]/10 overflow-hidden shadow-inner">
+      <div className="relative flex-grow bg-[#F0E8E4]/50 rounded-[2rem] border border-[#A84848]/10 overflow-hidden shadow-inner">
         {/* Simplified World Map SVG */}
         <svg viewBox="0 0 800 400" className="w-full h-full opacity-10">
           <path

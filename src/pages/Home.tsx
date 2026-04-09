@@ -21,12 +21,14 @@ export default function Home() {
   useEffect(() => {
     const randomGratitude = blogData.gratitudeLibrary[Math.floor(Math.random() * blogData.gratitudeLibrary.length)];
     const randomIllustration = blogData.foodIllustrations[Math.floor(Math.random() * blogData.foodIllustrations.length)];
-    const formattedDate = new Date().toLocaleDateString('en-US', { 
-      weekday: 'long', 
-      year: 'numeric', 
-      month: 'long', 
-      day: 'numeric' 
-    });
+    
+    const formattedDate = new Intl.DateTimeFormat('en-US', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      timeZone: blogData.timezone
+    }).format(new Date());
 
     setTodayInfo({
       date: formattedDate,
@@ -179,11 +181,11 @@ export default function Home() {
       </section>
 
       {/* Latest Stories Section */}
-      <section className="bg-[#1A0E18] py-32 rounded-[4rem] text-[#E8D8E0]">
+      <section className="bg-[#F8F4F6] py-32 rounded-[4rem] text-[#1A0E0C]">
         <div className="container mx-auto px-4 space-y-20">
           <div className="text-center space-y-6">
-            <h2 className="text-5xl font-serif italic text-[#F0E0E4]">Fresh from the Oven</h2>
-            <p className="text-[#E8D8E0]/40 font-serif max-w-xl mx-auto">The latest musings, captures, and discoveries from my daily explorations.</p>
+            <h2 className="text-5xl font-serif italic text-[#1A0E0C]">Fresh from the Oven</h2>
+            <p className="text-[#2A1A18]/50 font-serif max-w-xl mx-auto">The latest musings, captures, and discoveries from my daily explorations.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
@@ -191,15 +193,15 @@ export default function Home() {
               <Link 
                 key={post.id} 
                 to={`/post/${post.id}`} 
-                className="group flex gap-8 items-center border-b border-[#E8D8E0]/10 pb-12 last:border-0"
+                className="group flex gap-8 items-center border-b border-[#A84848]/10 pb-12 last:border-0"
               >
-                <div className="w-32 h-32 rounded-2xl overflow-hidden flex-shrink-0 collage-border border-white/20">
+                <div className="w-32 h-32 rounded-2xl overflow-hidden flex-shrink-0 collage-border border-[#A84848]/10">
                   <img src={post.coverImage} className="w-full h-full object-cover grayscale-[0.2] group-hover:grayscale-0 transition-all" referrerPolicy="no-referrer" />
                 </div>
                 <div className="space-y-2">
-                  <span className="text-[10px] uppercase tracking-widest text-[#d4a8c8] font-serif">{post.category}</span>
-                  <h3 className="text-2xl font-serif italic group-hover:text-[#d4a8c8] transition-colors leading-tight">{post.title}</h3>
-                  <p className="text-sm text-[#E8D8E0]/50 line-clamp-1 font-serif italic">{post.excerpt}</p>
+                  <span className="text-[10px] uppercase tracking-widest text-[#A84848]/60 font-serif">{post.category}</span>
+                  <h3 className="text-2xl font-serif italic text-[#1A0E0C] group-hover:text-[#A84848] transition-colors leading-tight">{post.title}</h3>
+                  <p className="text-sm text-[#2A1A18]/50 line-clamp-1 font-serif italic">{post.excerpt}</p>
                 </div>
               </Link>
             ))}
@@ -207,7 +209,7 @@ export default function Home() {
           
           <div className="text-center pt-10">
             <Link to="/posts">
-              <button className="elegant-button bg-[#C89098] hover:bg-[#E0B0B8]">Explore Full Archive</button>
+              <button className="elegant-button bg-[#A84848] text-white hover:bg-[#8A3838]">Explore Full Archive</button>
             </Link>
           </div>
         </div>

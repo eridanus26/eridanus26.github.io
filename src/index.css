@@ -41,6 +41,7 @@
     background-color: var(--color-main-bg);
     color: var(--color-text-color);
     font-family: var(--font-sans);
+    font-size: 1.125rem; /* Increased from default */
     @apply transition-colors duration-300;
   }
 
@@ -95,7 +96,7 @@
   }
 
   .markdown-body {
-    @apply font-serif text-lg leading-relaxed text-[#2A1A18]/80 space-y-6;
+    @apply font-serif text-xl leading-relaxed text-[#2A1A18]/80 space-y-6;
   }
 
   .markdown-body h1 { @apply text-4xl mt-12 mb-6; }

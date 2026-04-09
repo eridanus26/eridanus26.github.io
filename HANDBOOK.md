@@ -2,130 +2,67 @@
 
 Welcome to your personal digital archive. This handbook provides detailed instructions on how to maintain, update, and customize your website.
 
-## 1. Updating Content (Posts)
+## 1. Managing Posts (New Workflow)
 
-All site content is managed in `src/data/blogData.ts`. To add or edit a post, find the `posts` array and add a new object following these formats:
+To keep your project organized, each blog post is stored in its own file within the `src/data/posts/` directory.
 
-### General Post Format
+### How to add a new post:
+
+1.  **Create a new file**: In `src/data/posts/`, create a new file named `postN.ts` (e.g., `post4.ts`).
+2.  **Define the post**: Copy the structure from an existing post and update the fields.
+3.  **Import in blogData**: Open `src/data/blogData.ts`, import your new post at the top, and add it to the `posts` array.
+
+### Versatile Content Styling (Markdown + HTML)
+
+You can now use multi-line text and even HTML directly inside your post content. This allows for advanced styling like wrapping text around images or embedding external plugins.
+
+**Example of a versatile post content:**
 ```typescript
-{
-  id: 'unique-id',
-  title: 'Post Title',
-  date: 'YYYY-MM-DD',
-  category: 'general',
-  tags: ['tag1', 'tag2'],
-  excerpt: 'Short summary for the card view.',
-  content: 'Full markdown content here...',
-  coverImage: 'https://url-to-image.jpg',
-}
+export const myPost = {
+  // ... metadata ...
+  content: `
+# My Artistic Story
+
+You can write naturally across multiple lines.
+
+<div style="display: flex; gap: 20px; align-items: center; margin: 40px 0;">
+  <img src="/images/my-photo.jpg" style="width: 200px; border-radius: 20px; transform: rotate(-2deg);" />
+  <p style="font-style: italic; opacity: 0.8;">
+    This text is wrapped next to a rotated image using a simple HTML div!
+  </p>
+</div>
+
+### Embedding Plugins
+You can paste embed codes from Spotify, Google Maps, or YouTube directly:
+
+<iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/..." width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+  `
+};
 ```
 
-### Photography Post Format
-```typescript
-{
-  id: 'unique-id',
-  title: 'Collection Name',
-  date: 'YYYY-MM-DD',
-  category: 'photography',
-  theme: 'Urban/Nature/etc',
-  collection: 'Collection Name',
-  tags: ['tag1'],
-  excerpt: '...',
-  content: '...',
-  coverImage: '...',
-  images: ['img1-url', 'img2-url'],
-  showOnMap: true, // Optional
-  location: { lat: 0, lng: 0, name: 'Location Name' } // Optional
-}
-```
+## 2. Image Storage
 
-### Travel Post Format
-```typescript
-{
-  id: 'unique-id',
-  title: 'Trip Name',
-  date: 'YYYY-MM-DD',
-  category: 'travel',
-  duration: '5 days',
-  tags: ['tag1'],
-  excerpt: '...',
-  content: '...',
-  coverImage: '...',
-  showOnMap: true,
-  location: { lat: 0, lng: 0, name: 'City, Country' }
-}
-```
+**Where to store your images:**
+Store all your personal images in the `public/images/` folder.
 
-### Food Post Format (Recipe or Review)
-```typescript
-{
-  id: 'unique-id',
-  title: 'Dish Name',
-  date: 'YYYY-MM-DD',
-  category: 'food',
-  foodType: 'recipe', // or 'review'
-  cuisine: 'Japanese/French/etc',
-  price: '$$', // For reviews
-  rating: 4.5, // For reviews
-  ingredients: ['item1', 'item2'], // For recipes
-  tags: ['tag1'],
-  excerpt: '...',
-  content: '...',
-  coverImage: '...',
-  showOnMap: true, // Recommended for reviews
-  location: { lat: 0, lng: 0, name: 'Restaurant Name' }
-}
-```
+-   **Referencing images**: In your post content, you can refer to them using a simple path: `/images/your-image.jpg`.
+-   **Why `public/`?**: Files in the `public` folder are served directly at the root of your website, making them easy to link without complex imports.
 
-## 2. Customizing Site Identity
+## 3. Site Configuration & Timezone
 
-To change the site title, description, or intro, edit the top-level fields in `src/data/blogData.ts`:
+You can customize global site settings in `src/data/blogData.ts`:
 
-- `siteTitle`: Appears in the navigation and welcome page.
-- `siteDescription`: Appears under the title on the welcome page.
-- `siteIntro`: Appears in the footer.
-- `about`: Update your bio, avatar, and social links here.
+-   **Timezone**: Change the `timezone` field (e.g., `'Asia/Tokyo'`, `'Europe/Paris'`, `'America/New_York'`). This automatically updates the "Today is..." date on the homepage.
+-   **Site Stats**: The "Days Running" starts from **April 8, 2026** (configurable in `src/components/Footer.tsx`).
 
-## 3. Editing Styles & Artistic Expressions
+## 4. Map & Locations
 
-### Floating Illustrations
-To add or edit floating illustrations (like the emojis on the welcome page), edit `src/components/WelcomePage.tsx`. Look for the "Collage Elements" section. You can add more `<span>` elements with different emojis and CSS animations.
+To link a post to the Map view:
+1.  Add a `location` object: `{ lat: 35.6895, lng: 139.6917, name: 'Tokyo' }`.
+2.  Set `showOnMap: true`.
 
-To make them move, you can use Tailwind's `animate-bounce` or create custom keyframes in `src/index.css`.
-
-### Avant-Garde Styling
-The "collage" look is achieved using the `.collage-card` and `.collage-border` classes in `src/index.css`. You can modify these to change the shadow offsets, border styles, or rotation angles.
-
-To add more "personal" touches, consider adding `rotate-[xdeg]` classes to images or cards to give them a "scattered on a desk" feel.
-
-### Quick Filters
-Quick filters for Food and Posts are defined in their respective page files (`src/pages/FoodRecipes.tsx`, `src/pages/FoodReviews.tsx`, `src/pages/Posts.tsx`). 
-
-To edit these:
-1. Open the page file (e.g., `src/pages/FoodRecipes.tsx`).
-2. Find the `Quick Filters` section in the JSX.
-3. Update the array of strings (e.g., `['Matcha', 'Dessert', 'Baking']`).
-4. The filtering logic uses `setSearch(tag)`, which automatically updates the search input and filters the list.
-
-## 4. Advanced Map Integration
-
-The current map uses `react-simple-maps` for a lightweight, SVG-based interactive experience. If you want to switch to a more detailed map like Google Maps:
-
-### Option A: Google Maps (via `google-map-react`)
-1. **Install the library**: `npm install google-map-react`
-2. **Get an API Key**: Obtain a key from the Google Cloud Console.
-3. **Replace MapFeature**: Create a new component that uses `GoogleMapReact`.
-4. **Markers**: Use custom React components as markers on the map.
-
-### Option B: Leaflet (Open Source)
-1. **Install**: `npm install react-leaflet leaflet`
-2. **Setup**: Leaflet is great for detailed street maps without an API key (using OpenStreetMap tiles).
-
-### Option C: Mapbox
-1. **Install**: `npm install react-map-gl mapbox-gl`
-2. **Setup**: Offers highly customizable, beautiful vector maps (requires a Mapbox token).
-
-*Note: For most personal blogs, the current SVG map is preferred as it requires no API keys and loads instantly.*
+**Map Formatting**:
+The map is now constrained to a maximum height of 600px and is contained within a "collage-card" to prevent it from bleeding into the background. It is fully responsive and will scale down on mobile devices.
 
 ## 5. Local Development & Git Commands
 
@@ -135,7 +72,7 @@ To see your changes on your own computer before pushing to GitHub:
 1. **Open Terminal**: Open your project folder in VS Code and open the terminal (`Ctrl + ` ` or `Cmd + ` `).
 2. **Install Dependencies** (Only needed once):
    ```bash
-   npm install
+   npm install --legacy-peer-deps
    ```
 3. **Start Dev Server**:
    ```bash
@@ -170,8 +107,10 @@ Run these commands in order to link your local folder to your new GitHub reposit
    ```
 6. **Push to GitHub**:
    ```bash
-   git push -u origin main
+   git push -u origin main --force
    ```
+
+*Note: Use `--force` only for the first push to ensure your local code completely replaces whatever is currently on GitHub.*
 
 ---
 
@@ -189,6 +128,39 @@ Whenever you make changes in the future, run these three commands:
 3. **Push Changes**:
    ```bash
    git push origin main
+   ```
+
+---
+
+### Troubleshooting Git Errors
+
+#### Error: `fatal: unknown index entry format`
+This means your Git index (the staging area) has become corrupted. To fix it:
+
+1. **Delete the corrupted index**:
+   ```bash
+   rm -f .git/index
+   ```
+2. **Try adding files again**:
+   ```bash
+   git add .
+   ```
+
+#### Error: `fatal: not a git repository` or other persistent issues
+If Git is still acting up, it's often easiest to start the Git state from scratch:
+
+1. **Delete the entire .git folder**:
+   ```bash
+   rm -rf .git
+   ```
+2. **Re-initialize and push**:
+   ```bash
+   git init
+   git add .
+   git commit -m "Fresh start"
+   git branch -M main
+   git remote add origin https://github.com/eridanus26/eridanus26.github.io.git
+   git push -u origin main --force
    ```
 
 ---
@@ -244,7 +216,7 @@ jobs:
           node-version: 20
           cache: 'npm'
       - name: Install dependencies
-        run: npm install
+        run: npm install --legacy-peer-deps
       - name: Build
         run: npm run build
       - name: Setup Pages

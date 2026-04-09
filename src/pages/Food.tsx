@@ -3,14 +3,12 @@ import { blogData } from '../data/blogData';
 import { FoodPost } from '../types';
 import PostCard from '../components/PostCard';
 import { Input } from '@/components/ui/input';
-import { Search, Filter, UtensilsCrossed } from 'lucide-react';
+import { Search, Filter, UtensilsCrossed, ChefHat, Star, Coffee } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 
 export default function Food() {
   const [search, setSearch] = useState('');
-  const [cuisineFilter, setCuisineFilter] = useState('all');
-  const [typeFilter, setTypeFilter] = useState('all');
 
   const foodPosts = useMemo(() => 
     blogData.posts.filter(p => p.category === 'food') as FoodPost[], 
@@ -21,17 +19,12 @@ export default function Food() {
       const matchesSearch = post.title.toLowerCase().includes(search.toLowerCase()) || 
                            post.ingredients?.some(i => i.toLowerCase().includes(search.toLowerCase())) ||
                            post.tags.some(t => t.toLowerCase().includes(search.toLowerCase()));
-      const matchesCuisine = cuisineFilter === 'all' || post.cuisine === cuisineFilter;
-      const matchesType = typeFilter === 'all' || post.foodType === typeFilter;
-      return matchesSearch && matchesCuisine && matchesType;
+      return matchesSearch;
     });
-  }, [foodPosts, search, cuisineFilter, typeFilter]);
+  }, [foodPosts, search]);
 
-  const cuisines = useMemo(() => {
-    const set = new Set<string>();
-    foodPosts.forEach(p => p.cuisine && set.add(p.cuisine));
-    return Array.from(set).sort();
-  }, [foodPosts]);
+  const recipes = useMemo(() => filteredPosts.filter(p => p.foodType === 'recipe'), [filteredPosts]);
+  const reviews = useMemo(() => filteredPosts.filter(p => p.foodType === 'review'), [filteredPosts]);
 
   return (
     <div className="container mx-auto px-4 py-20 space-y-20">
@@ -44,46 +37,21 @@ export default function Food() {
       </div>
 
       <div className="bg-white p-8 rounded-[2rem] border border-[#A84848]/10 shadow-sm space-y-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-[#A84848]/40" size={18} />
-            <Input 
-              placeholder="Search ingredients or dishes..." 
-              className="pl-10 h-12 rounded-xl border-[#A84848]/10 font-serif italic"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-          </div>
-
-          <Select onValueChange={setCuisineFilter} defaultValue="all">
-            <SelectTrigger className="h-12 rounded-xl border-[#A84848]/10 font-serif italic">
-              <SelectValue placeholder="Cuisine" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All Cuisines</SelectItem>
-              {cuisines.map(c => (
-                <SelectItem key={c} value={c}>{c}</SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-
-          <Select onValueChange={setTypeFilter} defaultValue="all">
-            <SelectTrigger className="h-12 rounded-xl border-[#A84848]/10 font-serif italic">
-              <SelectValue placeholder="Type" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All Types</SelectItem>
-              <SelectItem value="recipe">Recipes</SelectItem>
-              <SelectItem value="review">Reviews</SelectItem>
-            </SelectContent>
-          </Select>
+        <div className="max-w-2xl mx-auto relative">
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-[#A84848]/40" size={20} />
+          <Input 
+            placeholder="Search ingredients or dishes..." 
+            className="pl-12 h-14 rounded-full border-[#A84848]/10 bg-white shadow-sm focus-visible:ring-[#A84848]/30 font-serif italic"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
         </div>
 
-        <div className="flex flex-wrap gap-3">
+        <div className="flex flex-wrap justify-center gap-3">
           <span className="text-[10px] uppercase tracking-widest text-[#A84848]/60 font-serif flex items-center mr-2">
             <Filter size={12} className="mr-1" /> Quick Filters:
           </span>
-          {['Matcha', 'Croissant', 'Paris', 'Dessert'].map(tag => (
+          {['Matcha', 'Croissant', 'Paris', 'Dessert', 'Baking'].map(tag => (
             <Badge 
               key={tag} 
               variant="outline" 
@@ -96,19 +64,67 @@ export default function Food() {
         </div>
       </div>
 
-      {filteredPosts.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-          {filteredPosts.map((post) => (
-            <PostCard key={post.id} post={post} />
-          ))}
+      <Tabs defaultValue="all" className="space-y-12">
+        <div className="flex justify-center">
+          <TabsList className="bg-[#F0E8E4] border border-[#A84848]/10 rounded-full p-1 h-14">
+            <TabsTrigger value="all" className="rounded-full px-8 text-xs font-serif tracking-widest uppercase data-[state=active]:bg-[#A84848] data-[state=active]:text-white transition-all">
+              <Coffee size={14} className="mr-2" /> All Flavors
+            </TabsTrigger>
+            <TabsTrigger value="recipes" className="rounded-full px-8 text-xs font-serif tracking-widest uppercase data-[state=active]:bg-[#A84848] data-[state=active]:text-white transition-all">
+              <ChefHat size={14} className="mr-2" /> Recipes
+            </TabsTrigger>
+            <TabsTrigger value="reviews" className="rounded-full px-8 text-xs font-serif tracking-widest uppercase data-[state=active]:bg-[#A84848] data-[state=active]:text-white transition-all">
+              <Star size={14} className="mr-2" /> Reviews
+            </TabsTrigger>
+          </TabsList>
         </div>
-      ) : (
-        <div className="text-center py-32 space-y-6">
-          <div className="text-6xl opacity-20">🍽️</div>
-          <h3 className="text-2xl font-serif italic text-[#1A0E0C]">No flavors found</h3>
-          <p className="text-[#2A1A18]/50 font-serif">Try adjusting your filters or search terms.</p>
-        </div>
-      )}
+
+        <TabsContent value="all">
+          {filteredPosts.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+              {filteredPosts.map((post) => (
+                <PostCard key={post.id} post={post} />
+              ))}
+            </div>
+          ) : (
+            <EmptyState />
+          )}
+        </TabsContent>
+
+        <TabsContent value="recipes">
+          {recipes.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+              {recipes.map((post) => (
+                <PostCard key={post.id} post={post} />
+              ))}
+            </div>
+          ) : (
+            <EmptyState />
+          )}
+        </TabsContent>
+
+        <TabsContent value="reviews">
+          {reviews.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+              {reviews.map((post) => (
+                <PostCard key={post.id} post={post} />
+              ))}
+            </div>
+          ) : (
+            <EmptyState />
+          )}
+        </TabsContent>
+      </Tabs>
+    </div>
+  );
+}
+
+function EmptyState() {
+  return (
+    <div className="text-center py-32 space-y-6">
+      <div className="text-6xl opacity-20">🍽️</div>
+      <h3 className="text-2xl font-serif italic text-[#1A0E0C]">No flavors found</h3>
+      <p className="text-[#2A1A18]/50 font-serif">Try adjusting your filters or search terms.</p>
     </div>
   );
 }

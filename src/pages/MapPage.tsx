@@ -44,7 +44,7 @@ export default function MapPage() {
         ))}
       </div>
 
-      <div className="collage-card p-4 md:p-8 bg-white shadow-2xl">
+      <div className="collage-card p-4 md:p-8 bg-white shadow-2xl overflow-hidden">
         <div className="flex items-center justify-between mb-8 px-4">
           <div className="flex items-center gap-3">
             <MapIcon size={20} className="text-[#A84848]" />
@@ -54,7 +54,7 @@ export default function MapPage() {
             <Filter size={12} /> Filtering: {activeCategory}
           </div>
         </div>
-        <div className="aspect-[2/1] min-h-[400px] md:min-h-[600px]">
+        <div className="w-full h-[400px] md:h-[600px] relative">
           <MapFeature filterCategory={activeCategory} />
         </div>
       </div>

@@ -7,8 +7,7 @@ import Home from './pages/Home';
 import Posts from './pages/Posts';
 import Photography from './pages/Photography';
 import Travel from './pages/Travel';
-import FoodRecipes from './pages/FoodRecipes';
-import FoodReviews from './pages/FoodReviews';
+import Food from './pages/Food';
 import MapPage from './pages/MapPage';
 import Academics from './pages/Academics';
 import About from './pages/About';
@@ -27,7 +26,7 @@ export default function App() {
   const location = useLocation();
 
   return (
-    <div className="min-h-screen bg-[#FAF7F4] selection:bg-[#F0D0D0] selection:text-[#7A3030] overflow-x-hidden">
+    <div className="min-h-screen bg-[#FAF7F4] selection:bg-[#F0D0D0] selection:text-[#7A3030]">
       <div className="grain-overlay" />
       {/* Global Artistic Elements */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
@@ -57,8 +56,9 @@ export default function App() {
 
       <WelcomePage />
       
+      <Navigation />
+      
       <div className="relative z-10">
-        <Navigation />
         <ScrollToTop />
         
         <main className="min-h-[calc(100vh-80px)]">
@@ -75,9 +75,7 @@ export default function App() {
                 <Route path="/posts" element={<Posts />} />
                 <Route path="/photography" element={<Photography />} />
                 <Route path="/travel" element={<Travel />} />
-                <Route path="/food" element={<FoodRecipes />} />
-                <Route path="/food/recipes" element={<FoodRecipes />} />
-                <Route path="/food/reviews" element={<FoodReviews />} />
+                <Route path="/food" element={<Food />} />
                 <Route path="/map" element={<MapPage />} />
                 <Route path="/academics" element={<Academics />} />
                 <Route path="/about" element={<About />} />

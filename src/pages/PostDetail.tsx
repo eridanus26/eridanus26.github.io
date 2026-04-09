@@ -3,6 +3,7 @@ import { blogData } from '../data/blogData';
 import { motion } from 'motion/react';
 import { Calendar, MapPin, Tag, ArrowLeft, Clock, User } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
 import { Badge } from '@/components/ui/badge';
 
 export default function PostDetail() {
@@ -58,7 +59,7 @@ export default function PostDetail() {
       <article className="container mx-auto px-4 mt-16">
         <div className="max-w-3xl mx-auto space-y-12">
           <div className="prose prose-stone lg:prose-xl max-w-none font-serif leading-relaxed text-[#2A1A18]/80">
-            <ReactMarkdown>{post.content}</ReactMarkdown>
+            <ReactMarkdown rehypePlugins={[rehypeRaw]}>{post.content}</ReactMarkdown>
           </div>
 
           {/* Post Footer */}

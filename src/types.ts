@@ -51,6 +51,7 @@ export interface BlogData {
   siteTitle: string;
   siteDescription: string;
   siteIntro: string;
+  timezone: string;
   about: {
     name: string;
     bio: string;
