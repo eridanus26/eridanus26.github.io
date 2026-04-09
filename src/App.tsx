@@ -12,6 +12,8 @@ import MapPage from './pages/MapPage';
 import Academics from './pages/Academics';
 import About from './pages/About';
 import PostDetail from './pages/PostDetail';
+import Archive from './pages/Archive';
+import Search from './pages/Search';
 import { useEffect } from 'react';
 
 function ScrollToTop() {
@@ -24,6 +26,17 @@ function ScrollToTop() {
 
 export default function App() {
   const location = useLocation();
+
+  useEffect(() => {
+    // Simple visitor counter using localStorage
+    const storedVisits = localStorage.getItem('site_visits');
+    const currentVisits = storedVisits ? parseInt(storedVisits) : 1024;
+    const newVisits = currentVisits + 1;
+    localStorage.setItem('site_visits', newVisits.toString());
+    
+    // Dispatch a custom event so Footer can listen to it
+    window.dispatchEvent(new CustomEvent('visitorCountUpdate', { detail: newVisits }));
+  }, [location.pathname]);
 
   return (
     <div className="min-h-screen bg-[#FAF7F4] selection:bg-[#F0D0D0] selection:text-[#7A3030]">
@@ -80,6 +93,8 @@ export default function App() {
                 <Route path="/academics" element={<Academics />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/post/:id" element={<PostDetail />} />
+                <Route path="/archive/:type/:value" element={<Archive />} />
+                <Route path="/search" element={<Search />} />
               </Routes>
             </motion.div>
           </AnimatePresence>

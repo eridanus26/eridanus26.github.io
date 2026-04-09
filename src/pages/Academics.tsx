@@ -26,34 +26,34 @@ export default function Academics() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
         <div className="space-y-8">
           <div className="flex items-center gap-4 border-b border-[#A84848]/10 pb-4">
-            <Book size={20} className="text-[#A84848]" />
-            <h2 className="text-2xl font-serif italic text-[#1A0E0C]">Course Notes</h2>
+            <Book size={24} className="text-[#A84848]" />
+            <h2 className="text-3xl font-serif italic text-[#1A0E0C]">Course Notes</h2>
           </div>
           <div className="space-y-8">
             {courseNotes.map(post => <PostCard key={post.id} post={post} />)}
-            {courseNotes.length === 0 && <p className="text-sm font-serif italic text-[#2A1A18]/40">No notes uploaded yet.</p>}
+            {courseNotes.length === 0 && <p className="text-lg font-serif italic text-[#2A1A18]/40">No notes uploaded yet.</p>}
           </div>
         </div>
 
         <div className="space-y-8">
           <div className="flex items-center gap-4 border-b border-[#A84848]/10 pb-4">
-            <Code size={20} className="text-[#A84848]" />
-            <h2 className="text-2xl font-serif italic text-[#1A0E0C]">Projects</h2>
+            <Code size={24} className="text-[#A84848]" />
+            <h2 className="text-3xl font-serif italic text-[#1A0E0C]">Projects</h2>
           </div>
           <div className="space-y-8">
             {projects.map(post => <PostCard key={post.id} post={post} />)}
-            {projects.length === 0 && <p className="text-sm font-serif italic text-[#2A1A18]/40">No projects uploaded yet.</p>}
+            {projects.length === 0 && <p className="text-lg font-serif italic text-[#2A1A18]/40">No projects uploaded yet.</p>}
           </div>
         </div>
 
         <div className="space-y-8">
           <div className="flex items-center gap-4 border-b border-[#A84848]/10 pb-4">
-            <Microscope size={20} className="text-[#A84848]" />
-            <h2 className="text-2xl font-serif italic text-[#1A0E0C]">Research</h2>
+            <Microscope size={24} className="text-[#A84848]" />
+            <h2 className="text-3xl font-serif italic text-[#1A0E0C]">Research</h2>
           </div>
           <div className="space-y-8">
             {research.map(post => <PostCard key={post.id} post={post} />)}
-            {research.length === 0 && <p className="text-sm font-serif italic text-[#2A1A18]/40">No research papers yet.</p>}
+            {research.length === 0 && <p className="text-lg font-serif italic text-[#2A1A18]/40">No research papers yet.</p>}
           </div>
         </div>
       </div>

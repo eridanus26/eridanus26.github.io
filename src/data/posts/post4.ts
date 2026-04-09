@@ -5,6 +5,7 @@ export const post4: FoodPost = {
   title: 'The Perfect Matcha Mille Crepe',
   date: '2024-03-01',
   category: 'food',
+  subcategory: 'Recipes',
   foodType: 'recipe',
   cuisine: 'Japanese',
   tags: ['matcha', 'dessert', 'recipe'],

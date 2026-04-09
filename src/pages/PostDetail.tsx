@@ -38,51 +38,65 @@ export default function PostDetail() {
             animate={{ opacity: 1, y: 0 }}
             className="space-y-4"
           >
-            <div className="flex justify-center gap-3">
-              <Badge className="bg-[#A84848] text-white border-none font-serif italic px-4 py-1">
-                {post.category}
-              </Badge>
-            </div>
-            <h1 className="text-5xl md:text-7xl font-serif italic text-[#1A0E0C] leading-tight max-w-4xl mx-auto">
+            <h1 className="text-4xl md:text-6xl font-serif italic text-[#1A0E0C] leading-tight max-w-4xl mx-auto">
               {post.title}
             </h1>
-            <div className="flex flex-wrap justify-center items-center gap-6 text-sm font-serif italic text-[#2A1A18]/60">
-              <span className="flex items-center gap-2"><Calendar size={16} /> {post.date}</span>
-              {post.location && <span className="flex items-center gap-2"><MapPin size={16} /> {post.location.name}</span>}
-              <span className="flex items-center gap-2"><Clock size={16} /> 5 min read</span>
+            <div className="flex flex-wrap justify-center items-center gap-6 text-lg font-serif italic text-[#2A1A18]/60">
+              <span className="flex items-center gap-2"><Calendar size={18} /> {post.date}</span>
+              {post.location && <span className="flex items-center gap-2"><MapPin size={18} /> {post.location.name}</span>}
+              <span className="flex items-center gap-2"><Clock size={18} /> 5 min read</span>
+            </div>
+            
+            {/* Breadcrumbs */}
+            <div className="flex justify-center items-center gap-2 text-sm font-serif tracking-widest uppercase text-[#A84848]/40 pt-4">
+              <Link to={`/archive/category/${post.category}`} className="hover:text-[#A84848] transition-colors">
+                {post.category}
+              </Link>
+              {post.subcategory && (
+                <>
+                  <span>/</span>
+                  <Link to={`/archive/category/${post.subcategory}`} className="hover:text-[#A84848] transition-colors">
+                    {post.subcategory}
+                  </Link>
+                </>
+              )}
             </div>
           </motion.div>
         </div>
       </header>
 
       {/* Content */}
-      <article className="container mx-auto px-4 mt-16">
-        <div className="max-w-3xl mx-auto space-y-12">
-          <div className="prose prose-stone lg:prose-xl max-w-none font-serif leading-relaxed text-[#2A1A18]/80">
+      <article className="container mx-auto px-4 mt-24">
+        <div className="max-w-4xl mx-auto space-y-16">
+          <div className="prose prose-stone lg:prose-2xl max-w-none font-serif leading-relaxed text-[#2A1A18]/80">
             <ReactMarkdown rehypePlugins={[rehypeRaw]}>{post.content}</ReactMarkdown>
           </div>
 
           {/* Post Footer */}
-          <div className="pt-16 border-t border-[#A84848]/10 space-y-8">
+          <div className="pt-20 border-t border-[#A84848]/10 space-y-12">
             <div className="flex flex-wrap gap-4">
               {post.tags.map(tag => (
-                <span key={tag} className="text-xs font-serif italic text-[#A84848] bg-[#F0D0D0] px-4 py-1 rounded-full">
+                <Link 
+                  key={tag} 
+                  to={`/archive/tag/${tag}`}
+                  className="text-sm font-serif italic text-[#A84848] bg-[#F0D0D0] px-6 py-2 rounded-full hover:bg-[#A84848] hover:text-white transition-all"
+                >
                   #{tag}
-                </span>
+                </Link>
               ))}
             </div>
 
-            <div className="flex items-center justify-between">
-              <Link to="/posts" className="flex items-center gap-2 text-sm font-serif italic text-[#A84848] hover:underline">
-                <ArrowLeft size={16} /> Back to Archive
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
+              <Link to="/posts" className="flex items-center gap-2 text-lg font-serif italic text-[#A84848] hover:underline">
+                <ArrowLeft size={20} /> Back to Archive
               </Link>
               
-              <div className="flex items-center gap-4">
-                <span className="text-xs font-serif italic text-[#2A1A18]/40">Share this story:</span>
-                <div className="flex gap-3">
+              <div className="flex items-center gap-6">
+                <span className="text-sm font-serif italic text-[#2A1A18]/40">Share this story:</span>
+                <div className="flex gap-4">
                   {['Twitter', 'Instagram', 'Link'].map(p => (
-                    <button key={p} className="w-8 h-8 rounded-full border border-[#A84848]/10 flex items-center justify-center text-[#A84848] hover:bg-[#A84848] hover:text-white transition-all">
-                      <span className="text-[10px] font-bold">{p[0]}</span>
+                    <button key={p} className="w-10 h-10 rounded-full border border-[#A84848]/10 flex items-center justify-center text-[#A84848] hover:bg-[#A84848] hover:text-white transition-all">
+                      <span className="text-xs font-bold">{p[0]}</span>
                     </button>
                   ))}
                 </div>

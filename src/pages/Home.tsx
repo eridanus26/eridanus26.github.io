@@ -67,8 +67,8 @@ export default function Home() {
               <Link to="/posts">
                 <button className="elegant-button">Explore Archive</button>
               </Link>
-              <Link to="/about" className="group flex items-center gap-3 text-xs font-serif tracking-widest uppercase text-[#1A0E0C] hover:text-[#A84848] transition-colors">
-                Learn More <ArrowRight size={14} className="group-hover:translate-x-2 transition-transform" />
+              <Link to="/about" className="group flex items-center gap-3 text-sm font-serif tracking-widest uppercase text-[#1A0E0C] hover:text-[#A84848] transition-colors">
+                Learn More <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform" />
               </Link>
             </div>
           </motion.div>
@@ -113,21 +113,21 @@ export default function Home() {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-center relative z-10">
-            <div className="space-y-2 text-center md:text-left">
-              <span className="text-[10px] uppercase tracking-[0.3em] text-[#A84848]/60 font-serif">Today is</span>
-              <h3 className="text-2xl font-serif italic text-[#1A0E0C]">{todayInfo.date}</h3>
+            <div className="space-y-4 text-center md:text-left">
+              <span className="text-xs uppercase tracking-[0.3em] text-[#A84848]/60 font-serif">Today is</span>
+              <h3 className="text-3xl font-serif italic text-[#1A0E0C]">{todayInfo.date}</h3>
             </div>
             
-            <div className="space-y-4 text-center px-8 border-x border-[#A84848]/10">
-              <span className="text-[10px] uppercase tracking-[0.3em] text-[#A84848]/60 font-serif">Gratitude</span>
-              <p className="text-xl font-serif italic text-[#2A1A18]/80 leading-relaxed">
+            <div className="space-y-6 text-center px-8 border-x border-[#A84848]/10">
+              <span className="text-xs uppercase tracking-[0.3em] text-[#A84848]/60 font-serif">Gratitude</span>
+              <p className="text-2xl font-serif italic text-[#2A1A18]/80 leading-relaxed">
                 "{todayInfo.gratitude}"
               </p>
             </div>
             
-            <div className="flex flex-col items-center justify-center space-y-4">
-              <span className="text-[10px] uppercase tracking-[0.3em] text-[#A84848]/60 font-serif">Daily Bite</span>
-              <div className="text-6xl animate-bounce">
+            <div className="flex flex-col items-center justify-center space-y-6">
+              <span className="text-xs uppercase tracking-[0.3em] text-[#A84848]/60 font-serif">Daily Bite</span>
+              <div className="text-7xl animate-bounce">
                 {todayInfo.illustration}
               </div>
             </div>
@@ -198,10 +198,9 @@ export default function Home() {
                 <div className="w-32 h-32 rounded-2xl overflow-hidden flex-shrink-0 collage-border border-[#A84848]/10">
                   <img src={post.coverImage} className="w-full h-full object-cover grayscale-[0.2] group-hover:grayscale-0 transition-all" referrerPolicy="no-referrer" />
                 </div>
-                <div className="space-y-2">
-                  <span className="text-[10px] uppercase tracking-widest text-[#A84848]/60 font-serif">{post.category}</span>
+                <div className="space-y-3">
                   <h3 className="text-2xl font-serif italic text-[#1A0E0C] group-hover:text-[#A84848] transition-colors leading-tight">{post.title}</h3>
-                  <p className="text-sm text-[#2A1A18]/50 line-clamp-1 font-serif italic">{post.excerpt}</p>
+                  <p className="text-sm text-[#A84848]/60 font-serif tracking-widest uppercase">{post.date}</p>
                 </div>
               </Link>
             ))}

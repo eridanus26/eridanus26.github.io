@@ -72,3 +72,16 @@ Edit the `about` object at the bottom of `src/data/blogData.ts` to change your n
 
 ---
 *Happy Baking & Blogging!* 🥐✨
+
+---
+Update 0409 00:13
+
+How to add a new post now:
+
+Create a new file in src/data/posts/ (e.g., post4.ts).
+
+Define your post using the structure in the handbook.
+
+Import it in src/data/blogData.ts and add it to the list.
+
+Push to GitHub using the commands provided in the handbook.

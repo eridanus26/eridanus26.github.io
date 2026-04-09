@@ -47,15 +47,15 @@ export default function Food() {
           />
         </div>
 
-        <div className="flex flex-wrap justify-center gap-3">
-          <span className="text-[10px] uppercase tracking-widest text-[#A84848]/60 font-serif flex items-center mr-2">
-            <Filter size={12} className="mr-1" /> Quick Filters:
+        <div className="flex flex-wrap justify-center gap-4">
+          <span className="text-xs uppercase tracking-widest text-[#A84848]/60 font-serif flex items-center mr-2">
+            <Filter size={14} className="mr-2" /> Quick Filters:
           </span>
           {['Matcha', 'Croissant', 'Paris', 'Dessert', 'Baking'].map(tag => (
             <Badge 
               key={tag} 
               variant="outline" 
-              className="cursor-pointer hover:bg-[#A84848] hover:text-white transition-all border-[#A84848]/20 text-[#A84848]/60 font-serif italic"
+              className="cursor-pointer hover:bg-[#A84848] hover:text-white transition-all border-[#A84848]/20 text-[#A84848]/60 font-serif italic px-4 py-1 text-sm"
               onClick={() => setSearch(tag)}
             >
               {tag}
@@ -64,17 +64,17 @@ export default function Food() {
         </div>
       </div>
 
-      <Tabs defaultValue="all" className="space-y-12">
+      <Tabs defaultValue="all" className="space-y-16">
         <div className="flex justify-center">
-          <TabsList className="bg-[#F0E8E4] border border-[#A84848]/10 rounded-full p-1 h-14">
-            <TabsTrigger value="all" className="rounded-full px-8 text-xs font-serif tracking-widest uppercase data-[state=active]:bg-[#A84848] data-[state=active]:text-white transition-all">
-              <Coffee size={14} className="mr-2" /> All Flavors
+          <TabsList className="bg-[#F0E8E4] border border-[#A84848]/10 rounded-full p-1 h-16">
+            <TabsTrigger value="all" className="rounded-full px-10 text-sm font-serif tracking-widest uppercase data-[state=active]:bg-[#A84848] data-[state=active]:text-white transition-all">
+              <Coffee size={16} className="mr-2" /> All Flavors
             </TabsTrigger>
-            <TabsTrigger value="recipes" className="rounded-full px-8 text-xs font-serif tracking-widest uppercase data-[state=active]:bg-[#A84848] data-[state=active]:text-white transition-all">
-              <ChefHat size={14} className="mr-2" /> Recipes
+            <TabsTrigger value="recipes" className="rounded-full px-10 text-sm font-serif tracking-widest uppercase data-[state=active]:bg-[#A84848] data-[state=active]:text-white transition-all">
+              <ChefHat size={16} className="mr-2" /> Recipes
             </TabsTrigger>
-            <TabsTrigger value="reviews" className="rounded-full px-8 text-xs font-serif tracking-widest uppercase data-[state=active]:bg-[#A84848] data-[state=active]:text-white transition-all">
-              <Star size={14} className="mr-2" /> Reviews
+            <TabsTrigger value="reviews" className="rounded-full px-10 text-sm font-serif tracking-widest uppercase data-[state=active]:bg-[#A84848] data-[state=active]:text-white transition-all">
+              <Star size={16} className="mr-2" /> Reviews
             </TabsTrigger>
           </TabsList>
         </div>

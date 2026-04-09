@@ -30,6 +30,16 @@ export default function MapFeature({ customPosts, filterCategory = 'all' }: MapF
     return { x, y };
   };
 
+  const getCategoryColor = (category: PostCategory) => {
+    switch (category) {
+      case 'photography': return '#7A3030';
+      case 'travel': return '#7A3850';
+      case 'food': return '#1A0E0C';
+      case 'academic': return '#A84848';
+      default: return '#A84848';
+    }
+  };
+
   return (
     <div className="h-full flex flex-col space-y-8">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -57,6 +67,8 @@ export default function MapFeature({ customPosts, filterCategory = 'all' }: MapF
         {/* Markers */}
         {postsWithLocation.map((post) => {
           const { x, y } = getCoords(post.location!.lat, post.location!.lng);
+          const markerColor = getCategoryColor(post.category);
+          
           return (
             <Popover key={post.id}>
               <PopoverTrigger
@@ -65,8 +77,22 @@ export default function MapFeature({ customPosts, filterCategory = 'all' }: MapF
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     whileHover={{ scale: 1.2 }}
-                    style={{ left: `${(x / 800) * 100}%`, top: `${(y / 400) * 100}%` }}
-                    className="absolute -translate-x-1/2 -translate-y-1/2 p-2 bg-white rounded-full shadow-xl border border-[#A84848]/20 text-[#A84848] z-10 hover:bg-[#A84848] hover:text-white transition-all"
+                    style={{ 
+                      left: `${(x / 800) * 100}%`, 
+                      top: `${(y / 400) * 100}%`,
+                      backgroundColor: 'white',
+                      color: markerColor,
+                      borderColor: `${markerColor}40` // 40 is hex for 25% opacity
+                    }}
+                    className="absolute -translate-x-1/2 -translate-y-1/2 p-2 rounded-full shadow-xl border z-10 hover:text-white transition-all"
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = markerColor;
+                      e.currentTarget.style.color = 'white';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = 'white';
+                      e.currentTarget.style.color = markerColor;
+                    }}
                   >
                     <MapPin size={14} />
                   </motion.button>

@@ -4,67 +4,71 @@ Welcome to your personal digital archive. This handbook provides detailed instru
 
 ## 1. Managing Posts (New Workflow)
 
-To keep your project organized, each blog post is stored in its own file within the `src/data/posts/` directory.
+To keep your project organized, each blog post is stored in its own file within the `src/data/posts/`.
 
 ### How to add a new post:
 
 1.  **Create a new file**: In `src/data/posts/`, create a new file named `postN.ts` (e.g., `post4.ts`).
-2.  **Define the post**: Copy the structure from an existing post and update the fields.
+2.  **Define the post**: Copy the structure from an existing post.
+    *   **Subcategories**: You can now add a `subcategory` field (e.g., `subcategory: 'Desserts'`).
 3.  **Import in blogData**: Open `src/data/blogData.ts`, import your new post at the top, and add it to the `posts` array.
 
 ### Versatile Content Styling (Markdown + HTML)
 
-You can now use multi-line text and even HTML directly inside your post content. This allows for advanced styling like wrapping text around images or embedding external plugins.
+You can now use multi-line text and even HTML directly inside your post content.
 
 **Example of a versatile post content:**
 ```typescript
 export const myPost = {
   // ... metadata ...
+  subcategory: 'Baking', // [NEW] Add subcategories for better organization
   content: `
 # My Artistic Story
-
-You can write naturally across multiple lines.
 
 <div style="display: flex; gap: 20px; align-items: center; margin: 40px 0;">
   <img src="/images/my-photo.jpg" style="width: 200px; border-radius: 20px; transform: rotate(-2deg);" />
   <p style="font-style: italic; opacity: 0.8;">
-    This text is wrapped next to a rotated image using a simple HTML div!
+    Text wrapped next to a rotated image!
   </p>
 </div>
 
 ### Embedding Plugins
-You can paste embed codes from Spotify, Google Maps, or YouTube directly:
-
 <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/..." width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
   `
 };
 ```
 
-## 2. Image Storage
+## 2. Navigation & Search
 
-**Where to store your images:**
-Store all your personal images in the `public/images/` folder.
+-   **Search**: The search button in the navigation bar now opens a dialog. It searches through titles, excerpts, content, and tags.
+-   **Archive Pages**: Clicking on any **Tag** (e.g., `#travel`) or **Category/Folder** (e.g., `Food`) will take you to a dedicated archive page showing all related posts.
 
--   **Referencing images**: In your post content, you can refer to them using a simple path: `/images/your-image.jpg`.
--   **Why `public/`?**: Files in the `public` folder are served directly at the root of your website, making them easy to link without complex imports.
+## 3. Site Configuration & Appearance
 
-## 3. Site Configuration & Timezone
+### Site Title & Favicon (Browser Tab)
+To change how your site appears in the browser tab:
 
-You can customize global site settings in `src/data/blogData.ts`:
+1.  **Site Title**: Open `index.html` in the root directory and change the text inside the `<title>` tag.
+2.  **Favicon**: 
+    *   Upload your icon file (e.g., `favicon.ico` or `logo.png`) to the `public/` folder.
+    *   In `index.html`, add a link tag inside the `<head>` section:
+        `<link rel="icon" type="image/x-icon" href="/favicon.ico">`
 
--   **Timezone**: Change the `timezone` field (e.g., `'Asia/Tokyo'`, `'Europe/Paris'`, `'America/New_York'`). This automatically updates the "Today is..." date on the homepage.
--   **Site Stats**: The "Days Running" starts from **April 8, 2026** (configurable in `src/components/Footer.tsx`).
+### Site Metadata (In-App)
+In `src/data/blogData.ts`, you can customize:
+-   `siteTitle`: The main name shown on the homepage and navigation bar.
+-   `siteDescription`: The subtitle shown under the title.
+-   `timezone`: Change this (e.g., `'Asia/Tokyo'`) to update the "Today is..." date.
 
-## 4. Map & Locations
+## 4. Navigation & Search
+-   **Search**: The search button in the navigation bar now opens a dialog. It searches through titles, tags, locations, categories, and content with priority. It redirects to a dedicated search results page.
+-   **Archive Pages**: Clicking on any **Tag** or **Category** will take you to a dedicated archive page showing all related posts.
 
-To link a post to the Map view:
-1.  Add a `location` object: `{ lat: 35.6895, lng: 139.6917, name: 'Tokyo' }`.
-2.  Set `showOnMap: true`.
-
-**Map Formatting**:
-The map is now constrained to a maximum height of 600px and is contained within a "collage-card" to prevent it from bleeding into the background. It is fully responsive and will scale down on mobile devices.
-
-## 5. Local Development & Git Commands
+## 5. Folders & Organization
+The **Folders** tab in the Archive section now supports recursive subfolders.
+-   If a category has a `subcategory` defined in the post file, it will appear as a nested folder.
+-   Folders are collapsible and show the count of items within them.
+-   Clicking a folder name takes you to the category archive.
 
 ### Viewing Local Updates
 To see your changes on your own computer before pushing to GitHub:

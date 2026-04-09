@@ -23,12 +23,17 @@ export default function Footer() {
     const diff = Math.floor((now.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24));
     setDaysRunning(Math.max(0, diff));
 
-    // Simple visitor counter using localStorage
+    // Initial visitor count
     const storedVisits = localStorage.getItem('site_visits');
-    const currentVisits = storedVisits ? parseInt(storedVisits) : 1024; // Base number
-    const newVisits = currentVisits + 1;
-    localStorage.setItem('site_visits', newVisits.toString());
-    setVisitorCount(newVisits);
+    if (storedVisits) setVisitorCount(parseInt(storedVisits));
+
+    // Listen for updates from App.tsx
+    const handleUpdate = (e: any) => {
+      setVisitorCount(e.detail);
+    };
+
+    window.addEventListener('visitorCountUpdate', handleUpdate);
+    return () => window.removeEventListener('visitorCountUpdate', handleUpdate);
   }, []);
 
   return (
@@ -36,15 +41,15 @@ export default function Footer() {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
           <div className="space-y-4">
-            <h3 className="text-2xl font-serif italic text-[#1A0E0C]">{blogData.siteTitle}</h3>
-            <p className="text-sm text-[#2A1A18]/50 font-serif">
+            <h3 className="text-3xl font-serif italic text-[#1A0E0C]">{blogData.siteTitle}</h3>
+            <p className="text-base text-[#2A1A18]/50 font-serif">
               {blogData.siteIntro}
             </p>
           </div>
           
           <div className="space-y-4">
-            <h4 className="text-xs font-serif tracking-[0.2em] uppercase text-[#A84848]/60">Site Stats</h4>
-            <ul className="space-y-2 text-sm text-[#2A1A18]/70 font-serif">
+            <h4 className="text-sm font-serif tracking-[0.2em] uppercase text-[#A84848]/60">Site Stats</h4>
+            <ul className="space-y-2 text-base text-[#2A1A18]/70 font-serif">
               <li>Days Running: <span className="text-[#A84848] font-bold">{daysRunning}</span></li>
               <li>Total Visitors: <span className="text-[#A84848] font-bold">{visitorCount.toLocaleString()}</span></li>
               <li>Last Update: <span className="text-[#A84848] font-bold">{lastUpdateDate}</span></li>
@@ -52,10 +57,10 @@ export default function Footer() {
           </div>
 
           <div className="space-y-4">
-            <h4 className="text-xs font-serif tracking-[0.2em] uppercase text-[#A84848]/60">Connect</h4>
+            <h4 className="text-sm font-serif tracking-[0.2em] uppercase text-[#A84848]/60">Connect</h4>
             <div className="flex justify-center md:justify-start gap-6">
               {blogData.about.socials.map(s => (
-                <a key={s.platform} href={s.url} className="text-sm hover:text-[#A84848] transition-colors font-serif italic">
+                <a key={s.platform} href={s.url} className="text-base hover:text-[#A84848] transition-colors font-serif italic">
                   {s.platform}
                 </a>
               ))}

@@ -41,16 +41,14 @@
     background-color: var(--color-main-bg);
     color: var(--color-text-color);
     font-family: var(--font-sans);
-    font-size: 1.125rem; /* Increased from default */
+    font-size: 1.25rem; /* Increased from 1.125rem */
     @apply transition-colors duration-300;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    color: var(--color-heading-color);
-    font-family: var(--font-display);
-    @apply font-bold tracking-tight;
-  }
-
+  h1 { @apply text-5xl md:text-7xl; }
+  h2 { @apply text-4xl md:text-5xl; }
+  h3 { @apply text-3xl md:text-4xl; }
+  
   a {
     color: var(--color-link-color);
     @apply transition-colors duration-200;
@@ -84,24 +82,24 @@
   }
 
   .elegant-button {
-    @apply px-8 py-3 bg-[#1A0E0C] text-white text-xs font-serif tracking-[0.2em] uppercase rounded-full transition-all duration-300 hover:bg-[#A84848] hover:shadow-xl hover:scale-105 active:scale-95;
+    @apply px-10 py-4 bg-[#1A0E0C] text-white text-sm font-serif tracking-[0.2em] uppercase rounded-full transition-all duration-300 hover:bg-[#A84848] hover:shadow-xl hover:scale-105 active:scale-95;
   }
 
   .timeline-item {
-    @apply relative pl-8 pb-12 border-l border-[#A84848]/20 last:pb-0;
+    @apply relative pl-10 pb-16 border-l border-[#A84848]/20 last:pb-0;
   }
 
   .timeline-dot {
-    @apply absolute left-[-5px] top-0 w-[9px] h-[9px] rounded-full bg-[#A84848] ring-4 ring-[#FAF7F4];
+    @apply absolute left-[-6px] top-0 w-[12px] h-[12px] rounded-full bg-[#A84848] ring-4 ring-[#FAF7F4];
   }
 
   .markdown-body {
-    @apply font-serif text-xl leading-relaxed text-[#2A1A18]/80 space-y-6;
+    @apply font-serif text-2xl leading-relaxed text-[#2A1A18]/80 space-y-8;
   }
 
-  .markdown-body h1 { @apply text-4xl mt-12 mb-6; }
-  .markdown-body h2 { @apply text-3xl mt-10 mb-4; }
-  .markdown-body p { @apply mb-6; }
+  .markdown-body h1 { @apply text-5xl mt-16 mb-8; }
+  .markdown-body h2 { @apply text-4xl mt-14 mb-6; }
+  .markdown-body p { @apply mb-8; }
   .markdown-body blockquote { @apply border-l-4 border-[#A84848] pl-6 italic text-[#A84848]/70 bg-[#A84848]/5 py-4 rounded-r-xl; }
   .markdown-body img { @apply rounded-2xl shadow-xl my-12 border-[12px] border-white rotate-1 mx-auto; }
   
