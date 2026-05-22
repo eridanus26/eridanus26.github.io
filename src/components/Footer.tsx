@@ -36,19 +36,19 @@ export default function Footer() {
     setDaysRunning(Math.max(0, diff));
     
     // ... rest of your visitor count effect code
-    const namespace = 'eridanus26.github.io'; // Change this to your unique identifier or domain
-    const key = 'main-site-visits';
+    const siteIdentifier = 'eridanus26_eridanus26.github.io'; 
 
-    fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
+    fetch(`https://api.moe-counter.ru/hit/${siteIdentifier}/main-page`)
       .then((res) => res.json())
       .then((data) => {
-        if (data && data.value) {
-          setVisitorCount(data.value);
+        if (data && typeof data.hit === 'number') {
+          // We add your 4,869 baseline milestone so you don't start from zero!
+          setVisitorCount(4869 + data.hit);
         }
       })
       .catch((err) => {
-        console.error('Visitor tracking service unavailable:', err);
-        setVisitorCount(4869); // Graceful baseline fallback if the tracking API experiences latency
+        console.error('Global tracking network latency:', err);
+        setVisitorCount(4869); // Fail-safe layout fallback
       });
   }, []);
 
