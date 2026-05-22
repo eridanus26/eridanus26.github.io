@@ -225,17 +225,164 @@
 //   );
 // }
 
+// import { useParams, Link } from 'react-router-dom';
+// import { blogData } from '../data/blogData';
+// import { motion } from 'motion/react';
+// import { Calendar, MapPin, ArrowLeft, Clock, User } from 'lucide-react';
+// import ReactMarkdown from 'react-markdown';
+// import rehypeRaw from 'rehype-raw';
+// import { Badge } from '@/components/ui/badge';
+
+// export default function PostDetail() {
+//   const { id } = useParams();
+//   const post = blogData.posts.find(p => p.id === id);
+
+//   if (!post) {
+//     return (
+//       <div className="container mx-auto px-4 py-32 text-center space-y-6">
+//         <h1 className="text-4xl font-serif italic text-[#1A0E0C]">Post not found</h1>
+//         <Link to="/posts" className="elegant-button inline-block">Back to Archive</Link>
+//       </div>
+//     );
+//   }
+
+//   // Safe formatting helper for the frontmatter timestamp
+//   const formatPostTime = (isoString?: string): string => {
+//     if (!isoString) return '';
+//     const dateObj = new Date(isoString);
+//     return dateObj.toLocaleString('en-US', {
+//       year: 'numeric',
+//       month: 'long',
+//       day: 'numeric',
+//       hour: 'numeric',
+//       minute: '2-digit',
+//       hour12: true
+//     });
+//   };
+
+//   return (
+//     <div className="pb-32">
+//       {/* Hero Header */}
+//       <header className="relative h-[60vh] flex items-end justify-center overflow-hidden">
+//         <div className="absolute inset-0 z-0">
+//           <img 
+//             src={post.coverImage} 
+//             className="w-full h-full object-cover grayscale-[0.2] sepia-[0.1]"
+//             referrerPolicy="no-referrer"
+//             alt={post.title}
+//           />
+//           <div className="absolute inset-0 bg-gradient-to-t from-[#1A0E0C] via-[#1A0E0C]/40 to-transparent" />
+//         </div>
+        
+//         <div className="container mx-auto px-4 pb-12 relative z-10 text-center space-y-4 max-w-4xl">
+//           <Badge className="bg-[#A84848] text-white hover:bg-[#A84848]/90 font-serif uppercase tracking-[0.2em] px-4 py-1 text-xs">
+//             {post.category}
+//           </Badge>
+//           <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif italic text-white leading-tight">
+//             {post.title}
+//           </h1>
+          
+//           <div className="flex flex-wrap justify-center items-center gap-6 text-sm text-white/70 font-serif italic pt-2">
+//             <span className="flex items-center gap-2"><Calendar size={14} /> {post.date}</span>
+            
+//             {post.location && (
+//               <a 
+//                 href={`http://googleusercontent.com/maps.google.com/?q=${post.location.lat},${post.location.lng}`}
+//                 target="_blank" 
+//                 rel="noopener noreferrer"
+//                 /* 💡 Updated classes here: text-white/70 base, transitioning to text-[#A84848] on hover */
+//                 className="flex items-center gap-1 text-white/70 hover:text-[#A84848] hover:underline transition-colors duration-200 cursor-pointer"
+//               >
+//                 <MapPin size={14} /> 
+//                 <span>{post.location.name}</span>
+//               </a>
+//             )}
+//           </div>
+//         </div>
+//       </header>
+//       {/* Main Content Layout */}
+//       <main className="container mx-auto px-4 pt-16 max-w-3xl">
+//         <motion.article 
+//           initial={{ opacity: 0, y: 20 }}
+//           animate={{ opacity: 1, y: 0 }}
+//           transition={{ duration: 0.6 }}
+//           className="prose prose-stone max-w-none 
+//             prose-headings:font-serif prose-headings:italic prose-headings:text-[#1A0E0C] 
+//             prose-p:font-serif prose-p:text-lg prose-p:leading-relaxed prose-p:text-[#2A1A18]/80 
+//             prose-li:font-serif prose-li:text-[#2A1A18]/80
+//             prose-strong:text-[#1A0E0C] prose-strong:font-serif
+//             prose-a:text-[#A84848] hover:prose-a:underline font-serif"
+//         >
+//           <ReactMarkdown rehypePlugins={[rehypeRaw]}>
+//             {post.content}
+//           </ReactMarkdown>
+//         </motion.article>
+
+//         {/* Links / Metadata Footer section */}
+//         <div className="mt-16 pt-8 border-t border-[#A84848]/10 space-y-12">
+          
+//           {/* Last Updated Signature Line */}
+//           {post.updatedAt && (
+//             <div className="flex items-center gap-2 text-xs text-[#2A1A18]/40 font-serif italic tracking-wide bg-[#F0E8E4]/30 p-3 rounded-xl max-w-max">
+//               <Clock size={12} className="text-[#A84848]/60" />
+//               <span>This entry was last updated on {formatPostTime(post.updatedAt)}</span>
+//             </div>
+//           )}
+
+//           <div className="flex flex-wrap gap-4">
+//             {post.tags.map(tag => (
+//               <Link 
+//                 key={tag} 
+//                 to={`/archive/tag/${tag}`}
+//                 className="text-sm font-serif italic text-[#A84848] bg-[#F0D0D0] px-6 py-2 rounded-full hover:bg-[#A84848] hover:text-white transition-all"
+//               >
+//                 #{tag}
+//               </Link>
+//             ))}
+//           </div>
+
+//           <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
+//             <Link to="/posts" className="flex items-center gap-2 text-lg font-serif italic text-[#A84848] hover:underline">
+//               <ArrowLeft size={20} /> Back to Archive
+//             </Link>
+            
+//             <div className="flex items-center gap-6">
+//               <span className="text-sm font-serif italic text-[#2A1A18]/40">Share this story:</span>
+//               <div className="flex gap-4">
+//                 {['Twitter', 'Instagram', 'Link'].map(p => (
+//                   <button key={p} className="w-10 h-10 rounded-full border border-[#A84848]/10 flex items-center justify-center text-[#A84848] hover:bg-[#A84848] hover:text-white transition-all cursor-pointer text-xs font-serif italic">
+//                     {p}
+//                   </button>
+//                 ))}
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+//       </main>
+//     </div>
+//   );
+// }
+
 import { useParams, Link } from 'react-router-dom';
 import { blogData } from '../data/blogData';
 import { motion } from 'motion/react';
-import { Calendar, MapPin, ArrowLeft, Clock, User } from 'lucide-react';
+import { Calendar, MapPin, ArrowLeft, Clock, ShoppingBag, Star, Utensils } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import { Badge } from '@/components/ui/badge';
 
+// Extending our local interface directly to handle the markdown food frontmatter entries safely
+interface FoodPostExtensions {
+  cuisine?: string;
+  ingredients?: string[];
+  price?: string;
+  rating?: number | string;
+}
+
 export default function PostDetail() {
   const { id } = useParams();
-  const post = blogData.posts.find(p => p.id === id);
+  const rawPost = blogData.posts.find(p => p.id === id);
+  const post = rawPost as typeof rawPost & FoodPostExtensions;
 
   if (!post) {
     return (
@@ -260,6 +407,11 @@ export default function PostDetail() {
     });
   };
 
+  // Helper logic to quickly parse which type of food context we are dealing with
+  const isFoodCategory = post.category?.toLowerCase() === 'food';
+  const isRecipe = isFoodCategory && post.subcategory?.toLowerCase() === 'recipe';
+  const isReview = isFoodCategory && post.subcategory?.toLowerCase() === 'review';
+
   return (
     <div className="pb-32">
       {/* Hero Header */}
@@ -276,7 +428,7 @@ export default function PostDetail() {
         
         <div className="container mx-auto px-4 pb-12 relative z-10 text-center space-y-4 max-w-4xl">
           <Badge className="bg-[#A84848] text-white hover:bg-[#A84848]/90 font-serif uppercase tracking-[0.2em] px-4 py-1 text-xs">
-            {post.category}
+            {post.category} {post.subcategory && `/ ${post.subcategory}`}
           </Badge>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif italic text-white leading-tight">
             {post.title}
@@ -290,7 +442,6 @@ export default function PostDetail() {
                 href={`http://googleusercontent.com/maps.google.com/?q=${post.location.lat},${post.location.lng}`}
                 target="_blank" 
                 rel="noopener noreferrer"
-                /* 💡 Updated classes here: text-white/70 base, transitioning to text-[#A84848] on hover */
                 className="flex items-center gap-1 text-white/70 hover:text-[#A84848] hover:underline transition-colors duration-200 cursor-pointer"
               >
                 <MapPin size={14} /> 
@@ -300,8 +451,83 @@ export default function PostDetail() {
           </div>
         </div>
       </header>
+
       {/* Main Content Layout */}
       <main className="container mx-auto px-4 pt-16 max-w-3xl">
+        
+        {/* 💡 1. RECIPE INGREDIENTS BANNER DECK */}
+        {isRecipe && (
+          <motion.div 
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-12 p-6 md:p-8 bg-[#F0E8E4]/40 border border-[#A84848]/10 rounded-2xl font-serif space-y-4 shadow-sm"
+          >
+            <div className="flex items-center gap-2 text-[#A84848]">
+              <Utensils size={18} />
+              <h3 className="text-xl font-serif italic font-bold text-[#1A0E0C]">Recipe Quick Info</h3>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+              {post.cuisine && (
+                <div className="sm:col-span-3 text-sm text-[#2A1A18]/70">
+                  <span className="font-bold text-[#1A0E0C]">Cuisine:</span> {post.cuisine}
+                </div>
+              )}
+              {post.ingredients && post.ingredients.length > 0 && (
+                <div className="sm:col-span-3 space-y-2">
+                  <span className="text-sm font-bold text-[#1A0E0C]">Ingredients Needed:</span>
+                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-base text-[#2A1A18]/80 list-none pl-0">
+                    {post.ingredients.map((ing, i) => (
+                      <li key={i} className="flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#A84848]/50" />
+                        {ing}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          </motion.div>
+        )}
+
+        {/* 💡 2. FOOD REVIEW BANNER DECK */}
+        {isReview && (
+          <motion.div 
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-12 p-6 bg-white border border-[#A84848]/10 rounded-2xl font-serif shadow-md flex flex-wrap items-center justify-around gap-6 divide-y sm:divide-y-0 sm:divide-x divide-[#A84848]/10 text-center"
+          >
+            {post.cuisine && (
+              <div className="flex-1 min-w-[120px] space-y-1">
+                <div className="text-xs uppercase tracking-widest text-[#2A1A18]/40 flex items-center justify-center gap-1">
+                  <Utensils size={12} /> Cuisine
+                </div>
+                <div className="text-lg font-serif italic font-semibold text-[#1A0E0C]">{post.cuisine}</div>
+              </div>
+            )}
+            
+            {post.price && (
+              <div className="flex-1 min-w-[120px] space-y-1 pt-4 sm:pt-0 sm:pl-4">
+                <div className="text-xs uppercase tracking-widest text-[#2A1A18]/40 flex items-center justify-center gap-1">
+                  <ShoppingBag size={12} /> Price Range
+                </div>
+                <div className="text-lg font-serif italic font-semibold text-[#A84848]">{post.price}</div>
+              </div>
+            )}
+
+            {post.rating && (
+              <div className="flex-1 min-w-[120px] space-y-1 pt-4 sm:pt-0 sm:pl-4">
+                <div className="text-xs uppercase tracking-widest text-[#2A1A18]/40 flex items-center justify-center gap-1">
+                  <Star size={12} /> Rating
+                </div>
+                <div className="text-lg font-serif italic font-semibold text-[#1A0E0C] flex items-center justify-center gap-1">
+                  {post.rating} <span className="text-xs text-[#2A1A18]/40">/ 5</span>
+                </div>
+              </div>
+            )}
+          </motion.div>
+        )}
+
+        {/* Core Markdown Article Content */}
         <motion.article 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
