@@ -197,7 +197,7 @@ export default function Posts() {
               <Link
                 key={tag}
                 to={`/archive/tag/${tag}`}
-                className="px-8 py-3 rounded-full border border-[#A84848]/10 bg-white text-lg font-serif italic text-[#2A1A18]/70 hover:bg-[#A84848] hover:text-white transition-all shadow-sm"
+                className="px-8 py-3 rounded-full border border-[#A84848]/10 bg-white text-xl font-serif italic text-[#2A1A18]/70 hover:bg-[#A84848] hover:text-white transition-all shadow-sm"
               >
                 #{tag}
               </Link>

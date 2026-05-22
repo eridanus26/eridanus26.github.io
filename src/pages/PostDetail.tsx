@@ -592,7 +592,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { blogData } from '../data/blogData';
 import { motion } from 'motion/react';
-import { Calendar, MapPin, ArrowLeft, Clock, ShoppingBag, Star, Utensils, Twitter, Instagram, Link2 } from 'lucide-react';
+import { Calendar, MapPin, ArrowLeft, Clock, ShoppingBag, Star, Utensils, Link2 } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import { Badge } from '@/components/ui/badge';
@@ -610,9 +610,8 @@ export default function PostDetail() {
   const rawPost = blogData.posts.find(p => p.id === id);
   const post = rawPost as typeof rawPost & FoodPostExtensions;
 
-  // Track simple status feedback states for interactive share components
+  // Track the copy state status for the clipboard feedback overlay
   const [copyStatus, setCopyStatus] = useState<'idle' | 'copied'>('idle');
-  const [instaStatus, setInstaStatus] = useState<'idle' | 'notified'>('idle');
 
   if (!post) {
     return (
@@ -640,18 +639,7 @@ export default function PostDetail() {
   const isRecipe = isFoodCategory && post.subcategory?.toLowerCase() === 'recipe';
   const isReview = isFoodCategory && post.subcategory?.toLowerCase() === 'review';
 
-  // 💡 Explicit click actions for sharing natively
-  const handleTwitterShare = () => {
-    const shareText = encodeURIComponent(`"${post.title}" via ${blogData.siteTitle}`);
-    const shareUrl = encodeURIComponent(window.location.href);
-    window.open(`https://twitter.com/intent/tweet?text=${shareText}&url=${shareUrl}`, '_blank', 'noopener,noreferrer');
-  };
-
-  const handleInstagramInteraction = () => {
-    setInstaStatus('notified');
-    setTimeout(() => setInstaStatus('idle'), 3000);
-  };
-
+  // Clipboard API Handler to copy the current page link
   const handleLinkCopy = async () => {
     try {
       await navigator.clipboard.writeText(window.location.href);
@@ -703,6 +691,7 @@ export default function PostDetail() {
 
       {/* Main Content Layout */}
       <main className="container mx-auto px-4 pt-16 max-w-3xl">
+        {/* Recipe Header Block */}
         {isRecipe && (
           <motion.div 
             initial={{ opacity: 0, y: 15 }}
@@ -736,6 +725,7 @@ export default function PostDetail() {
           </motion.div>
         )}
 
+        {/* Review Header Block */}
         {isReview && (
           <motion.div 
             initial={{ opacity: 0, y: 15 }}
@@ -747,7 +737,7 @@ export default function PostDetail() {
                 <div className="text-xs uppercase tracking-widest text-[#2A1A18]/40 flex items-center justify-center gap-1">
                   <Utensils size={12} /> Cuisine
                 </div>
-                <div className="text-lg font-serif italic font-semibold text-[#1A0E0C]">{post.cuisine}</div>
+                <div className="text-xl font-serif italic font-semibold text-[#1A0E0C]">{post.cuisine}</div>
               </div>
             )}
             {post.price && (
@@ -755,7 +745,7 @@ export default function PostDetail() {
                 <div className="text-xs uppercase tracking-widest text-[#2A1A18]/40 flex items-center justify-center gap-1">
                   <ShoppingBag size={12} /> Price Range
                 </div>
-                <div className="text-lg font-serif italic font-semibold text-[#A84848]">{post.price}</div>
+                <div className="text-xl font-serif italic font-semibold text-[#A84848]">{post.price}</div>
               </div>
             )}
             {post.rating && (
@@ -763,7 +753,7 @@ export default function PostDetail() {
                 <div className="text-xs uppercase tracking-widest text-[#2A1A18]/40 flex items-center justify-center gap-1">
                   <Star size={12} /> Rating
                 </div>
-                <div className="text-lg font-serif italic font-semibold text-[#1A0E0C] flex items-center justify-center gap-1">
+                <div className="text-xl font-serif italic font-semibold text-[#1A0E0C] flex items-center justify-center gap-1">
                   {post.rating} <span className="text-xs text-[#2A1A18]/40">/ 5</span>
                 </div>
               </div>
@@ -777,7 +767,7 @@ export default function PostDetail() {
           transition={{ duration: 0.6 }}
           className="prose prose-stone max-w-none 
             prose-headings:font-serif prose-headings:italic prose-headings:text-[#1A0E0C] 
-            prose-p:font-serif prose-p:text-lg prose-p:leading-relaxed prose-p:text-[#2A1A18]/80 
+            prose-p:font-serif prose-p:text-xl prose-p:leading-relaxed prose-p:text-[#2A1A18]/80 
             prose-li:font-serif prose-li:text-[#2A1A18]/80
             prose-strong:text-[#1A0E0C] prose-strong:font-serif
             prose-a:text-[#A84848] hover:prose-a:underline font-serif"
@@ -808,51 +798,25 @@ export default function PostDetail() {
           </div>
 
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
-            <Link to="/posts" className="flex items-center gap-2 text-lg font-serif italic text-[#A84848] hover:underline">
+            <Link to="/posts" className="flex items-center gap-2 text-xl font-serif italic text-[#A84848] hover:underline">
               <ArrowLeft size={20} /> Back to Archive
             </Link>
             
-            {/* 💡 Operational Share Grid segment */}
-            <div className="flex items-center gap-6 relative">
-              <span className="text-sm font-serif italic text-[#2A1A18]/40">Share this story:</span>
-              <div className="flex items-center gap-3">
-                {/* Twitter / X Integration */}
-                <button 
-                  onClick={handleTwitterShare}
-                  title="Share on Twitter"
-                  className="w-10 h-10 rounded-full border border-[#A84848]/10 flex items-center justify-center text-[#A84848] hover:bg-[#A84848] hover:text-white transition-all cursor-pointer bg-white"
-                >
-                  <Twitter size={14} />
-                </button>
+            {/* 💡 Only the Clipboard Copy Link interface button remains here */}
+            <div className="flex items-center gap-4 relative">
+              <span className="text-sm font-serif italic text-[#2A1A18]/40">Copy Link:</span>
+              <button 
+                onClick={handleLinkCopy}
+                title="Copy link to clipboard"
+                className="w-10 h-10 rounded-full border border-[#A84848]/10 flex items-center justify-center text-[#A84848] hover:bg-[#A84848] hover:text-white transition-all cursor-pointer bg-white"
+              >
+                <Link2 size={14} />
+              </button>
 
-                {/* Instagram Notification Integration */}
-                <button 
-                  onClick={handleInstagramInteraction}
-                  title="Instagram Info"
-                  className="w-10 h-10 rounded-full border border-[#A84848]/10 flex items-center justify-center text-[#A84848] hover:bg-[#A84848] hover:text-white transition-all cursor-pointer bg-white"
-                >
-                  <Instagram size={14} />
-                </button>
-
-                {/* Copy Clipboard Integration */}
-                <button 
-                  onClick={handleLinkCopy}
-                  title="Copy link to clipboard"
-                  className="w-10 h-10 rounded-full border border-[#A84848]/10 flex items-center justify-center text-[#A84848] hover:bg-[#A84848] hover:text-white transition-all cursor-pointer bg-white"
-                >
-                  <Link2 size={14} />
-                </button>
-              </div>
-
-              {/* Dynamic Notification Overlays */}
+              {/* Toast Feedback Notification */}
               {copyStatus === 'copied' && (
-                <div className="absolute -top-10 right-0 bg-[#1A0E0C] text-white text-xs font-serif italic px-3 py-1.5 rounded-md shadow-md animate-fade-in-up">
+                <div className="absolute -top-10 right-0 bg-[#1A0E0C] text-white text-xs font-serif italic px-3 py-1.5 rounded-md shadow-md">
                   Copied to clipboard!
-                </div>
-              )}
-              {instaStatus === 'notified' && (
-                <div className="absolute -top-10 right-0 bg-[#A84848] text-white text-xs font-serif italic px-3 py-1.5 rounded-md shadow-md animate-fade-in-up">
-                  Share via story using our URL!
                 </div>
               )}
             </div>
