@@ -175,8 +175,19 @@ export default function Home() {
             </button>
           </Link>
         </div>
+        {/* 1. Locate the Map Section on your Home Page */}
         <div className="collage-card p-4 md:p-8 bg-white">
-          <MapFeature />
+          <div className="flex items-center gap-3 mb-8 px-4">
+            <MapIcon size={20} className="text-[#A84848]" />
+            <h2 className="text-xl font-serif italic text-[#1A0E0C]">Interactive Journey Map</h2>
+          </div>
+          
+          {/* FIX: Wrap the component in a relative layout container 
+            with explicitly declared height classes (e.g., 400px on mobile, 600px on desktop)
+          */}
+          <div className="w-full h-[400px] md:h-[600px] relative">
+            <MapFeature />
+          </div>
         </div>
       </section>
 

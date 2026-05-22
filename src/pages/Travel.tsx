@@ -20,12 +20,17 @@ export default function Travel() {
         <p className="text-[#2A1A18]/50 font-serif max-w-xl mx-auto">Journeys across borders, cultures, and landscapes.</p>
       </div>
 
+      {/* Find this section inside Travel.tsx and update the wrapper layout */}
       <div className="collage-card p-4 md:p-8 bg-white">
         <div className="flex items-center gap-3 mb-8 px-4">
           <MapIcon size={20} className="text-[#A84848]" />
           <h2 className="text-xl font-serif italic text-[#1A0E0C]">Interactive Journey Map</h2>
         </div>
-        <MapFeature customPosts={travelPosts} />
+        
+        {/* FIX: Wrap the component in a relative layout box with defined height bounds */}
+        <div className="w-full h-[400px] md:h-[600px] relative">
+          <MapFeature customPosts={travelPosts} />
+        </div>
       </div>
 
       <section className="space-y-12">
