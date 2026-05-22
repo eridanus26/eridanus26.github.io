@@ -969,6 +969,7 @@ export default function MapFeature({
       case 'travel': return '#7A3850';
       case 'food': return '#1A0E0C';
       case 'academic': return '#A84848';
+      case 'general': return '#2A1A18';
       default: return '#A84848';
     }
   };
@@ -1023,6 +1024,16 @@ export default function MapFeature({
                 }`}
               >
                 Food
+              </button>
+              <button 
+                onClick={() => handleFilterSelection('general')}
+                className={`px-3 py-1 text-xs rounded-full border font-serif italic cursor-pointer transition-all ${
+                  currentFilter === 'general' 
+                    ? 'bg-[#2A1A18] text-white border-[#2A1A18]' 
+                    : 'bg-[#F0E8E4]/60 text-[#2A1A18] border-none hover:bg-[#F0E8E4]'
+                }`}
+              >
+                General
               </button>
             </div>
           )}
