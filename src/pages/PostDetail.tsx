@@ -282,11 +282,22 @@ export default function PostDetail() {
             {post.title}
           </h1>
           
+          {/* Updated metadata container rows below */}
           <div className="flex flex-wrap justify-center items-center gap-6 text-sm text-white/70 font-serif italic pt-2">
-            <span className="flex items-center gap-2"><User size={14} /> {blogData.about.name}</span>
+            {/* 1. 💡 Author row removed entirely from here */}
             <span className="flex items-center gap-2"><Calendar size={14} /> {post.date}</span>
+            
+            {/* 2. 💡 Make the location coordinates an active anchor link to Google Maps */}
             {post.location && (
-              <span className="flex items-center gap-1"><MapPin size={14} /> {post.location.name}</span>
+              <a 
+                href={`https://www.google.com/maps/search/?api=1&query=${post.location.lat},${post.location.lng}`}
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center gap-1 hover:text-white hover:underline transition-colors cursor-pointer"
+              >
+                <MapPin size={14} /> 
+                <span>{post.location.name}</span>
+              </a>
             )}
           </div>
         </div>
