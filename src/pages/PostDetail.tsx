@@ -298,7 +298,12 @@ export default function PostDetail() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="prose prose-stone max-w-none prose-headings:font-serif prose-headings:italic prose-headings:text-[#1A0E0C] prose-p:font-serif prose-p:text-lg prose-p:leading-relaxed prose-p:text-[#2A1A18]/80 prose-a:text-[#A84848] hover:prose-a:underline"
+          className="prose prose-stone max-w-none 
+            prose-headings:font-serif prose-headings:italic prose-headings:text-[#1A0E0C] 
+            prose-p:font-serif prose-p:text-lg prose-p:leading-relaxed prose-p:text-[#2A1A18]/80 
+            prose-li:font-serif prose-li:text-[#2A1A18]/80
+            prose-strong:text-[#1A0E0C] prose-strong:font-serif
+            prose-a:text-[#A84848] hover:prose-a:underline font-serif"
         >
           <ReactMarkdown rehypePlugins={[rehypeRaw]}>
             {post.content}
