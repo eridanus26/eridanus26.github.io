@@ -1,0 +1,14 @@
+---
+id: "1"
+title: "Test Post"
+date: "2026-05-20"
+category: "general"
+subcategory: ""
+tags: ["personal"]
+coverImage: "https://picsum.photos/seed/bakery1/800/600"
+excerpt: "只是测试"
+---
+
+## 这里的正文
+这是测试内容。你现在可以直接在这里书写任何标准的 Markdown 语法，
+无需担心 JavaScript/TypeScript 的转义字符。
