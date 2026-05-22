@@ -681,6 +681,244 @@
 //   );
 // }
 
+// import { useState, useMemo } from 'react';
+// import { MapPin, Info, ArrowRight } from 'lucide-react';
+// import { blogData } from '../data/blogData';
+// import { AnyPost, PostCategory } from '../types';
+// import { Badge } from '@/components/ui/badge';
+// import { Link } from 'react-router-dom';
+
+// // Isolated subpath imports to ensure no build/syntax errors
+// import { APIProvider } from '@vis.gl/react-google-maps';
+// import { Map } from '@vis.gl/react-google-maps';
+// import { AdvancedMarker } from '@vis.gl/react-google-maps';
+// import { InfoWindow } from '@vis.gl/react-google-maps';
+// import { useAdvancedMarkerRef } from '@vis.gl/react-google-maps';
+
+// interface MapFeatureProps {
+//   customPosts?: AnyPost[];
+//   filterCategory?: PostCategory | 'all';
+//   showFilters?: boolean; // 👈 Add this new optional flag
+// }
+
+// export default function MapFeature({ 
+//   customPosts, 
+//   filterCategory = 'all', 
+//   showFilters = true // 👈 Default it to true so the main MapPage keeps them
+// }: MapFeatureProps) {
+//   const [activePostId, setActivePostId] = useState<string | null>(null);
+//   const [localFilter, setLocalFilter] = useState<PostCategory | 'all' | null>(null);
+
+//   const currentFilter = localFilter !== null ? localFilter : filterCategory;
+
+//   const postsWithLocation = useMemo(() => {
+//     const source = customPosts || blogData.posts;
+//     return source.filter(p => {
+//       const hasLocation = p.location && typeof p.location.lat === 'number' && typeof p.location.lng === 'number';
+//       const matchesCategory = currentFilter === 'all' || p.category === currentFilter;
+//       return hasLocation && p.showOnMap && matchesCategory;
+//     });
+//   }, [customPosts, currentFilter]);
+
+//   const getCategoryColor = (category: PostCategory) => {
+//     switch (category) {
+//       case 'photography': return '#7A3030';
+//       case 'travel': return '#7A3850';
+//       case 'food': return '#1A0E0C';
+//       case 'academic': return '#A84848';
+//       default: return '#A84848';
+//     }
+//   };
+
+//   return (
+//     <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY || ""}>
+//       <div className="h-full flex flex-col space-y-8">
+//         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+//           <div className="space-y-1">
+//             <h2 className="text-2xl font-serif italic text-[#1A0E0C]">Journey Explorer</h2>
+//             <p className="text-xs text-[#2A1A18]/50 font-serif">Discover stories by their geographical footprints.</p>
+//           </div>
+          
+//           {/* 💡 Wrap the filter buttons deck in a conditional check */}
+//           {showFilters && (
+//             <div className="flex flex-wrap gap-2 relative z-10">
+//               <button 
+//                 onClick={() => setLocalFilter('all')}
+//                 className={`px-3 py-1 text-xs rounded-full border font-serif italic cursor-pointer transition-all ${
+//                   currentFilter === 'all' 
+//                     ? 'bg-[#A84848] text-white border-[#A84848]' 
+//                     : 'bg-white text-[#2A1A18]/60 border-[#A84848]/10 hover:border-[#A84848]/30'
+//                 }`}
+//               >
+//                 All
+//               </button>
+//               <button 
+//                 onClick={() => setLocalFilter('photography')}
+//                 className={`px-3 py-1 text-xs rounded-full border font-serif italic cursor-pointer transition-all ${
+//                   currentFilter === 'photography' 
+//                     ? 'bg-[#7A3030] text-white border-[#7A3030]' 
+//                     : 'bg-[#F0D0D0] text-[#7A3030] border-none'
+//                 }`}
+//               >
+//                 Photography
+//               </button>
+//               <button 
+//                 onClick={() => setLocalFilter('travel')}
+//                 className={`px-3 py-1 text-xs rounded-full border font-serif italic cursor-pointer transition-all ${
+//                   currentFilter === 'travel' 
+//                     ? 'bg-[#7A3850] text-white border-[#7A3850]' 
+//                     : 'bg-[#E8D8E0] text-[#7A3850] border-none'
+//                 }`}
+//               >
+//                 Travel
+//               </button>
+//               <button 
+//                 onClick={() => setLocalFilter('food')}
+//                 className={`px-3 py-1 text-xs rounded-full border font-serif italic cursor-pointer transition-all ${
+//                   currentFilter === 'food' 
+//                     ? 'bg-[#1A0E0C] text-white border-[#1A0E0C]' 
+//                     : 'bg-[#F0E8E4] text-[#1A0E0C] border-none'
+//                 }`}
+//               >
+//                 Food
+//               </button>
+//             </div>
+//           )}
+//         </div>
+
+//         {/* ... Rest of MapContainer implementation, MarkerWithPopover, etc. remains exactly the same ... */}
+//         {/* Map Container Wrapper */}
+//         <div className="relative flex-grow bg-[#F0E8E4]/50 rounded-[2rem] border border-[#A84848]/10 overflow-hidden shadow-inner min-h-[450px]">
+          
+//           <Map
+//             defaultCenter={{ lat: 25, lng: 0 }}
+//             defaultZoom={2}
+//             gestureHandling={'cooperative'}
+//             disableDefaultUI={true}
+//             zoomControl={true}
+//             mapId="cd045a4e6fa89eed9b02217d" 
+//           >
+//             {postsWithLocation.map((post) => {
+//               const markerColor = getCategoryColor(post.category);
+//               const position = { lat: post.location!.lat, lng: post.location!.lng };
+              
+//               return (
+//                 <MarkerWithPopover
+//                   key={post.id}
+//                   post={post}
+//                   position={position}
+//                   markerColor={markerColor}
+//                   isOpen={activePostId === post.id}
+//                   onToggleOpen={(open) => setActivePostId(open ? post.id : null)}
+//                 />
+//               );
+//             })}
+//           </Map>
+
+//           <div className="absolute bottom-4 left-4 bg-white/60 backdrop-blur-md p-3 rounded-xl border border-[#A84848]/10 flex items-center gap-2 text-[10px] text-[#2A1A18]/60 font-serif italic z-10 pointer-events-none">
+//             <Info size={12} className="text-[#A84848]" />
+//             Click on markers to explore the stories.
+//           </div>
+//         </div>
+//       </div>
+//     </APIProvider>
+//   );
+// }
+
+// interface MarkerWithPopoverProps {
+//   post: AnyPost;
+//   position: { lat: number; lng: number };
+//   markerColor: string;
+//   isOpen: boolean;
+//   onToggleOpen: (open: boolean) => void;
+// }
+
+// function MarkerWithPopover({ post, position, markerColor, isOpen, onToggleOpen }: MarkerWithPopoverProps) {
+//   const [markerRef, marker] = useAdvancedMarkerRef();
+//   const [isHovered, setIsHovered] = useState(false);
+
+//   return (
+//     <>
+//       <AdvancedMarker
+//         ref={markerRef}
+//         position={position}
+//         title={post.title}
+//         onClick={() => onToggleOpen(!isOpen)}
+//       >
+//         <button
+//           style={{
+//             backgroundColor: isHovered || isOpen ? markerColor : 'white',
+//             color: isHovered || isOpen ? 'white' : markerColor,
+//             borderColor: `${markerColor}40`,
+//             width: '32px',
+//             height: '32px',
+//             display: 'flex',
+//             alignItems: 'center',
+//             justifyContent: 'center',
+//             transform: 'translate(-50%, -50%)',
+//           }}
+//           className="rounded-full shadow-xl border transition-all duration-200 pointer-events-auto"
+//           onMouseEnter={() => setIsHovered(true)}
+//           onMouseLeave={() => setIsHovered(false)}
+//         >
+//           <MapPin size={14} />
+//         </button>
+//       </AdvancedMarker>
+
+//       {isOpen && (
+//         <InfoWindow
+//           anchor={marker}
+//           onCloseClick={() => onToggleOpen(false)}
+//           headerDisabled={true} 
+//         >
+//           <div className="w-60 bg-white rounded-xl overflow-hidden shadow-sm flex flex-col">
+            
+//             {/* Image Header wrapper container */}
+//             <div className="relative h-24 w-full overflow-hidden">
+//               <img 
+//                 src={post.coverImage} 
+//                 className="w-full h-full object-cover grayscale-[0.2]" 
+//                 referrerPolicy="no-referrer" 
+//                 alt={post.title}
+//               />
+//               <Badge className="absolute top-2 left-2 bg-white/90 text-[#A84848] text-[9px] font-serif uppercase tracking-widest pointer-events-none">
+//                 {post.category}
+//               </Badge>
+//             </div>
+
+//             {/* Typography and interactive metadata link rows */}
+//             <div className="p-3 flex flex-col justify-between space-y-2">
+//               <h4 className="font-serif italic text-[#1A0E0C] leading-tight text-xs font-bold line-clamp-2">
+//                 {post.title}
+//               </h4>
+              
+//               <div className="flex items-center justify-between pt-1 border-t border-gray-50">
+//                 <a 
+//                   href={`https://www.google.com/maps/search/?api=1&query=${post.location!.lat},${post.location!.lng}`}
+//                   target="_blank" 
+//                   rel="noopener noreferrer"
+//                   className="text-[10px] text-[#2A1A18]/50 hover:text-[#A84848] font-serif flex items-center gap-1 hover:underline transition-colors cursor-pointer truncate max-w-[130px]"
+//                 >
+//                   <MapPin size={10} className="shrink-0" /> 
+//                   <span className="truncate">{post.location?.name}</span>
+//                 </a>
+
+//                 <Link 
+//                   to={`/post/${post.id}`} 
+//                   className="text-[10px] font-serif tracking-widest uppercase text-[#A84848] flex items-center gap-0.5 hover:underline font-semibold shrink-0"
+//                 >
+//                   Read <ArrowRight size={10} />
+//                 </Link>
+//               </div>
+//             </div>
+
+//           </div>
+//         </InfoWindow>
+//       )}
+//     </>
+//   );
+// }
+
 import { useState, useMemo } from 'react';
 import { MapPin, Info, ArrowRight } from 'lucide-react';
 import { blogData } from '../data/blogData';
@@ -688,23 +926,20 @@ import { AnyPost, PostCategory } from '../types';
 import { Badge } from '@/components/ui/badge';
 import { Link } from 'react-router-dom';
 
-// Isolated subpath imports to ensure no build/syntax errors
-import { APIProvider } from '@vis.gl/react-google-maps';
-import { Map } from '@vis.gl/react-google-maps';
-import { AdvancedMarker } from '@vis.gl/react-google-maps';
-import { InfoWindow } from '@vis.gl/react-google-maps';
-import { useAdvancedMarkerRef } from '@vis.gl/react-google-maps';
+import { APIProvider, Map, AdvancedMarker, InfoWindow, useAdvancedMarkerRef } from '@vis.gl/react-google-maps';
 
 interface MapFeatureProps {
   customPosts?: AnyPost[];
   filterCategory?: PostCategory | 'all';
-  showFilters?: boolean; // 👈 Add this new optional flag
+  showFilters?: boolean;
+  onCategoryChange?: (category: PostCategory | 'all') => void; // 💡 Added new sync prop
 }
 
 export default function MapFeature({ 
   customPosts, 
   filterCategory = 'all', 
-  showFilters = true // 👈 Default it to true so the main MapPage keeps them
+  showFilters = true,
+  onCategoryChange
 }: MapFeatureProps) {
   const [activePostId, setActivePostId] = useState<string | null>(null);
   const [localFilter, setLocalFilter] = useState<PostCategory | 'all' | null>(null);
@@ -719,6 +954,14 @@ export default function MapFeature({
       return hasLocation && p.showOnMap && matchesCategory;
     });
   }, [customPosts, currentFilter]);
+
+  // Helper to change filters locally and notify the parent component header
+  const handleFilterSelection = (category: PostCategory | 'all') => {
+    setLocalFilter(category);
+    if (onCategoryChange) {
+      onCategoryChange(category);
+    }
+  };
 
   const getCategoryColor = (category: PostCategory) => {
     switch (category) {
@@ -739,11 +982,10 @@ export default function MapFeature({
             <p className="text-xs text-[#2A1A18]/50 font-serif">Discover stories by their geographical footprints.</p>
           </div>
           
-          {/* 💡 Wrap the filter buttons deck in a conditional check */}
           {showFilters && (
             <div className="flex flex-wrap gap-2 relative z-10">
               <button 
-                onClick={() => setLocalFilter('all')}
+                onClick={() => handleFilterSelection('all')}
                 className={`px-3 py-1 text-xs rounded-full border font-serif italic cursor-pointer transition-all ${
                   currentFilter === 'all' 
                     ? 'bg-[#A84848] text-white border-[#A84848]' 
@@ -753,7 +995,7 @@ export default function MapFeature({
                 All
               </button>
               <button 
-                onClick={() => setLocalFilter('photography')}
+                onClick={() => handleFilterSelection('photography')}
                 className={`px-3 py-1 text-xs rounded-full border font-serif italic cursor-pointer transition-all ${
                   currentFilter === 'photography' 
                     ? 'bg-[#7A3030] text-white border-[#7A3030]' 
@@ -763,7 +1005,7 @@ export default function MapFeature({
                 Photography
               </button>
               <button 
-                onClick={() => setLocalFilter('travel')}
+                onClick={() => handleFilterSelection('travel')}
                 className={`px-3 py-1 text-xs rounded-full border font-serif italic cursor-pointer transition-all ${
                   currentFilter === 'travel' 
                     ? 'bg-[#7A3850] text-white border-[#7A3850]' 
@@ -773,7 +1015,7 @@ export default function MapFeature({
                 Travel
               </button>
               <button 
-                onClick={() => setLocalFilter('food')}
+                onClick={() => handleFilterSelection('food')}
                 className={`px-3 py-1 text-xs rounded-full border font-serif italic cursor-pointer transition-all ${
                   currentFilter === 'food' 
                     ? 'bg-[#1A0E0C] text-white border-[#1A0E0C]' 
@@ -786,10 +1028,7 @@ export default function MapFeature({
           )}
         </div>
 
-        {/* ... Rest of MapContainer implementation, MarkerWithPopover, etc. remains exactly the same ... */}
-        {/* Map Container Wrapper */}
         <div className="relative flex-grow bg-[#F0E8E4]/50 rounded-[2rem] border border-[#A84848]/10 overflow-hidden shadow-inner min-h-[450px]">
-          
           <Map
             defaultCenter={{ lat: 25, lng: 0 }}
             defaultZoom={2}
@@ -872,8 +1111,6 @@ function MarkerWithPopover({ post, position, markerColor, isOpen, onToggleOpen }
           headerDisabled={true} 
         >
           <div className="w-60 bg-white rounded-xl overflow-hidden shadow-sm flex flex-col">
-            
-            {/* Image Header wrapper container */}
             <div className="relative h-24 w-full overflow-hidden">
               <img 
                 src={post.coverImage} 
@@ -886,7 +1123,6 @@ function MarkerWithPopover({ post, position, markerColor, isOpen, onToggleOpen }
               </Badge>
             </div>
 
-            {/* Typography and interactive metadata link rows */}
             <div className="p-3 flex flex-col justify-between space-y-2">
               <h4 className="font-serif italic text-[#1A0E0C] leading-tight text-xs font-bold line-clamp-2">
                 {post.title}
@@ -911,7 +1147,6 @@ function MarkerWithPopover({ post, position, markerColor, isOpen, onToggleOpen }
                 </Link>
               </div>
             </div>
-
           </div>
         </InfoWindow>
       )}
