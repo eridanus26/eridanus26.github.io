@@ -25,7 +25,7 @@ export default function Photography() {
         <div className="inline-flex p-4 bg-[#F0E8E4] rounded-full text-[#A84848] mb-4">
           <Camera size={32} />
         </div>
-        <h1 className="text-6xl font-serif italic text-[#1A0E0C]">Visual Stories</h1>
+        <h1 className="text-6xl font-serif italic text-[#1A0E0C]">摄影日记</h1>
         <p className="text-[#2A1A18]/50 font-serif max-w-xl mx-auto">Capturing moments, light, and the quiet beauty of the everyday.</p>
       </div>
 
