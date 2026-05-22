@@ -4,6 +4,7 @@ export interface BasePost {
   id: string;
   title: string;
   date: string;
+  updatedAt?: string;
   category: PostCategory;
   subcategory?: string;
   tags: string[];

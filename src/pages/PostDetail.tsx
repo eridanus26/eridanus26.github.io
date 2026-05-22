@@ -109,10 +109,126 @@
 //   );
 // }
 
+// import { useParams, Link } from 'react-router-dom';
+// import { blogData } from '../data/blogData';
+// import { motion } from 'motion/react';
+// import { Calendar, MapPin, Tag, ArrowLeft, Clock, User } from 'lucide-react';
+// import ReactMarkdown from 'react-markdown';
+// import rehypeRaw from 'rehype-raw';
+// import { Badge } from '@/components/ui/badge';
+
+// export default function PostDetail() {
+//   const { id } = useParams();
+//   const post = blogData.posts.find(p => p.id === id);
+
+//   if (!post) {
+//     return (
+//       <div className="container mx-auto px-4 py-32 text-center space-y-6">
+//         <h1 className="text-4xl font-serif italic text-[#1A0E0C]">Post not found</h1>
+//         <Link to="/posts" className="elegant-button inline-block">Back to Archive</Link>
+//       </div>
+//     );
+//   }
+
+//   return (
+//     <div className="pb-32">
+//       {/* Hero Header */}
+//       <header className="relative h-[60vh] flex items-end justify-center overflow-hidden">
+//         <div className="absolute inset-0 z-0">
+//           <img 
+//             src={post.coverImage} 
+//             className="w-full h-full object-cover grayscale-[0.2] sepia-[0.1]"
+//             referrerPolicy="no-referrer"
+//             alt={post.title}
+//           />
+//           <div className="absolute inset-0 bg-gradient-to-t from-[#FAF7F4] via-[#FAF7F4]/40 to-transparent" />
+//         </div>
+
+//         <div className="container mx-auto px-4 pb-12 relative z-10 text-center max-w-4xl space-y-6">
+//           <Badge className="bg-[#A84848] text-white border-none font-serif text-xs uppercase tracking-widest px-4 py-1.5 rounded-full">
+//             {post.category}
+//           </Badge>
+//           <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif italic text-[#1A0E0C] leading-tight">
+//             {post.title}
+//           </h1>
+          
+//           <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-[#2A1A18]/50 font-serif relative z-30">
+//             <span className="flex items-center gap-2">
+//               <Calendar size={14} className="text-[#A84848]/40" />
+//               {post.date}
+//             </span>
+
+//             {/* Location block transformed to open the official Google Maps query link seamlessly */}
+//             {post.location && (
+//               <span className="flex items-center gap-2">
+//                 <MapPin size={14} className="text-[#A84848]/40" />
+//                 <a
+//                   href={`https://www.google.com/maps/search/?api=1&query=${post.location.lat},${post.location.lng}`}
+//                   target="_blank"
+//                   rel="noopener noreferrer"
+//                   className="hover:text-[#A84848] hover:underline transition-colors cursor-pointer font-medium"
+//                 >
+//                   {post.location.name}
+//                 </a>
+//               </span>
+//             )}
+
+//             <span className="flex items-center gap-2">
+//               <Clock size={14} className="text-[#A84848]/40" />
+//               5 min read
+//             </span>
+//           </div>
+//         </div>
+//       </header>
+
+//       {/* Main Content */}
+//       <article className="container mx-auto px-4 mt-16 max-w-3xl">
+//         <div className="prose prose-neutral prose-stone max-w-none font-serif text-lg leading-relaxed text-[#2A1A18]/80 selection:bg-[#F0D0D0]">
+//           <ReactMarkdown rehypePlugins={[rehypeRaw]}>
+//             {post.content}
+//           </ReactMarkdown>
+//         </div>
+
+//         {/* Footer info blocks / tags */}
+//         <div className="mt-16 pt-8 border-t border-[#A84848]/10 space-y-12">
+//           <div className="flex flex-wrap gap-4">
+//             {post.tags.map(tag => (
+//               <Link 
+//                 key={tag} 
+//                 to={`/archive/tag/${tag}`}
+//                 className="text-sm font-serif italic text-[#A84848] bg-[#F0D0D0] px-6 py-2 rounded-full hover:bg-[#A84848] hover:text-white transition-all"
+//               >
+//                 #{tag}
+//               </Link>
+//             ))}
+//           </div>
+
+//           <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
+//             <Link to="/posts" className="flex items-center gap-2 text-lg font-serif italic text-[#A84848] hover:underline">
+//               <ArrowLeft size={20} /> Back to Archive
+//             </Link>
+            
+//             <div className="flex items-center gap-6">
+//               <span className="text-sm font-serif italic text-[#2A1A18]/40">Share this story:</span>
+//               <div className="flex gap-4">
+//                 {['Twitter', 'Instagram', 'Link'].map(p => (
+//                   <button key={p} className="w-10 h-10 rounded-full border border-[#A84848]/10 flex items-center justify-center text-[#A84848] hover:bg-[#A84848] hover:text-white transition-all">
+//                     <span className="text-xs font-bold">{p[0]}</span>
+//                   </button>
+//                 ))}
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+//       </article>
+//     </div>
+//   );
+// }
+
 import { useParams, Link } from 'react-router-dom';
 import { blogData } from '../data/blogData';
 import { motion } from 'motion/react';
-import { Calendar, MapPin, Tag, ArrowLeft, Clock, User } from 'lucide-react';
+import { Calendar, MapPin, ArrowLeft, Clock, User } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import { Badge } from '@/components/ui/badge';
@@ -130,6 +246,20 @@ export default function PostDetail() {
     );
   }
 
+  // Safe formatting helper for the frontmatter timestamp
+  const formatPostTime = (isoString?: string): string => {
+    if (!isoString) return '';
+    const dateObj = new Date(isoString);
+    return dateObj.toLocaleString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: '2-digit',
+      hour12: true
+    });
+  };
+
   return (
     <div className="pb-32">
       {/* Hero Header */}
@@ -141,56 +271,51 @@ export default function PostDetail() {
             referrerPolicy="no-referrer"
             alt={post.title}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#FAF7F4] via-[#FAF7F4]/40 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#1A0E0C] via-[#1A0E0C]/40 to-transparent" />
         </div>
-
-        <div className="container mx-auto px-4 pb-12 relative z-10 text-center max-w-4xl space-y-6">
-          <Badge className="bg-[#A84848] text-white border-none font-serif text-xs uppercase tracking-widest px-4 py-1.5 rounded-full">
+        
+        <div className="container mx-auto px-4 pb-12 relative z-10 text-center space-y-4 max-w-4xl">
+          <Badge className="bg-[#A84848] text-white hover:bg-[#A84848]/90 font-serif uppercase tracking-[0.2em] px-4 py-1 text-xs">
             {post.category}
           </Badge>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif italic text-[#1A0E0C] leading-tight">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif italic text-white leading-tight">
             {post.title}
           </h1>
           
-          <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-[#2A1A18]/50 font-serif relative z-30">
-            <span className="flex items-center gap-2">
-              <Calendar size={14} className="text-[#A84848]/40" />
-              {post.date}
-            </span>
-
-            {/* Location block transformed to open the official Google Maps query link seamlessly */}
+          <div className="flex flex-wrap justify-center items-center gap-6 text-sm text-white/70 font-serif italic pt-2">
+            <span className="flex items-center gap-2"><User size={14} /> {blogData.about.name}</span>
+            <span className="flex items-center gap-2"><Calendar size={14} /> {post.date}</span>
             {post.location && (
-              <span className="flex items-center gap-2">
-                <MapPin size={14} className="text-[#A84848]/40" />
-                <a
-                  href={`https://www.google.com/maps/search/?api=1&query=${post.location.lat},${post.location.lng}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-[#A84848] hover:underline transition-colors cursor-pointer font-medium"
-                >
-                  {post.location.name}
-                </a>
-              </span>
+              <span className="flex items-center gap-1"><MapPin size={14} /> {post.location.name}</span>
             )}
-
-            <span className="flex items-center gap-2">
-              <Clock size={14} className="text-[#A84848]/40" />
-              5 min read
-            </span>
           </div>
         </div>
       </header>
 
-      {/* Main Content */}
-      <article className="container mx-auto px-4 mt-16 max-w-3xl">
-        <div className="prose prose-neutral prose-stone max-w-none font-serif text-lg leading-relaxed text-[#2A1A18]/80 selection:bg-[#F0D0D0]">
+      {/* Main Content Layout */}
+      <main className="container mx-auto px-4 pt-16 max-w-3xl">
+        <motion.article 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="prose prose-stone max-w-none prose-headings:font-serif prose-headings:italic prose-headings:text-[#1A0E0C] prose-p:font-serif prose-p:text-lg prose-p:leading-relaxed prose-p:text-[#2A1A18]/80 prose-a:text-[#A84848] hover:prose-a:underline"
+        >
           <ReactMarkdown rehypePlugins={[rehypeRaw]}>
             {post.content}
           </ReactMarkdown>
-        </div>
+        </motion.article>
 
-        {/* Footer info blocks / tags */}
+        {/* Links / Metadata Footer section */}
         <div className="mt-16 pt-8 border-t border-[#A84848]/10 space-y-12">
+          
+          {/* Last Updated Signature Line */}
+          {post.updatedAt && (
+            <div className="flex items-center gap-2 text-xs text-[#2A1A18]/40 font-serif italic tracking-wide bg-[#F0E8E4]/30 p-3 rounded-xl max-w-max">
+              <Clock size={12} className="text-[#A84848]/60" />
+              <span>This entry was last updated on {formatPostTime(post.updatedAt)}</span>
+            </div>
+          )}
+
           <div className="flex flex-wrap gap-4">
             {post.tags.map(tag => (
               <Link 
@@ -212,15 +337,15 @@ export default function PostDetail() {
               <span className="text-sm font-serif italic text-[#2A1A18]/40">Share this story:</span>
               <div className="flex gap-4">
                 {['Twitter', 'Instagram', 'Link'].map(p => (
-                  <button key={p} className="w-10 h-10 rounded-full border border-[#A84848]/10 flex items-center justify-center text-[#A84848] hover:bg-[#A84848] hover:text-white transition-all">
-                    <span className="text-xs font-bold">{p[0]}</span>
+                  <button key={p} className="w-10 h-10 rounded-full border border-[#A84848]/10 flex items-center justify-center text-[#A84848] hover:bg-[#A84848] hover:text-white transition-all cursor-pointer text-xs font-serif italic">
+                    {p}
                   </button>
                 ))}
               </div>
             </div>
           </div>
         </div>
-      </article>
+      </main>
     </div>
   );
 }
