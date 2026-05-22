@@ -8,9 +8,17 @@ export default function Footer() {
 
   const lastUpdateDate = useMemo(() => {
     if (blogData.posts.length === 0) return new Date().toLocaleDateString();
-    const dates = blogData.posts.map(p => new Date(p.date).getTime());
-    const latest = Math.max(...dates);
-    return new Date(latest).toLocaleDateString('en-US', {
+    
+    // Find the latest post date string
+    const latestPost = blogData.posts.reduce((latest, current) => {
+      return new Date(current.date) > new Date(latest.date) ? current : latest;
+    }, blogData.posts[0]);
+
+    // Split 'YYYY-MM-DD' manually so JavaScript treats it as local time, avoiding the UTC timezone shift
+    const [year, month, day] = latestPost.date.split('-').map(Number);
+    const localDate = new Date(year, month - 1, day);
+
+    return localDate.toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
       day: 'numeric'
@@ -18,22 +26,16 @@ export default function Footer() {
   }, []);
 
   useEffect(() => {
-    // Days running calculation
     const now = new Date();
-    const diff = Math.floor((now.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24));
+    
+    // Normalize both dates to midnight local time
+    const todayMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const startMidnight = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate());
+    
+    const diff = Math.round((todayMidnight.getTime() - startMidnight.getTime()) / (1000 * 60 * 60 * 24));
     setDaysRunning(Math.max(0, diff));
-
-    // Initial visitor count
-    const storedVisits = localStorage.getItem('site_visits');
-    if (storedVisits) setVisitorCount(parseInt(storedVisits));
-
-    // Listen for updates from App.tsx
-    const handleUpdate = (e: any) => {
-      setVisitorCount(e.detail);
-    };
-
-    window.addEventListener('visitorCountUpdate', handleUpdate);
-    return () => window.removeEventListener('visitorCountUpdate', handleUpdate);
+    
+    // ... rest of your visitor count effect code
   }, []);
 
   return (

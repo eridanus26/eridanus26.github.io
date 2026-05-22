@@ -27,16 +27,22 @@ function ScrollToTop() {
 export default function App() {
   const location = useLocation();
 
+  // Look for this inside your App.tsx useEffect block:
   useEffect(() => {
-    // Simple visitor counter using localStorage
-    const storedVisits = localStorage.getItem('site_visits');
-    const currentVisits = storedVisits ? parseInt(storedVisits) : 1024;
-    const newVisits = currentVisits + 1;
-    localStorage.setItem('site_visits', newVisits.toString());
+    let storedVisits = parseInt(localStorage.getItem('site_visits') || '0');
     
-    // Dispatch a custom event so Footer can listen to it
-    window.dispatchEvent(new CustomEvent('visitorCountUpdate', { detail: newVisits }));
-  }, [location.pathname]);
+    // Check if this specific tab/session has already recorded a visit
+    const hasVisitedThisSession = sessionStorage.getItem('has_visited_session');
+    
+    if (!hasVisitedThisSession) {
+      storedVisits += 1;
+      localStorage.setItem('site_visits', storedVisits.toString());
+      sessionStorage.setItem('has_visited_session', 'true');
+    }
+    
+    // Dispatch the event to update the footer count
+    window.dispatchEvent(new CustomEvent('visitorCountUpdate', { detail: storedVisits }));
+  }, []);
 
   return (
     <div className="min-h-screen bg-[#FAF7F4] selection:bg-[#F0D0D0] selection:text-[#7A3030]">
