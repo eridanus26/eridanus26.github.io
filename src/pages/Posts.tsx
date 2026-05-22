@@ -147,7 +147,7 @@ export default function Posts() {
       </div>
 
       <Tabs defaultValue="all" className="space-y-20">
-        <div className="flex justify-center">
+        {/* <div className="flex justify-center">
           <TabsList className="bg-[#F0E8E4] border border-[#A84848]/10 rounded-full p-1 h-16">
             <TabsTrigger value="all" className="rounded-full px-10 text-sm font-serif tracking-widest uppercase data-[state=active]:bg-[#A84848] data-[state=active]:text-white transition-all">
               <Layers size={16} className="mr-2" /> All Posts
@@ -160,6 +160,35 @@ export default function Posts() {
             </TabsTrigger>
             <TabsTrigger value="tags" className="rounded-full px-10 text-sm font-serif tracking-widest uppercase data-[state=active]:bg-[#A84848] data-[state=active]:text-white transition-all">
               <Tag size={16} className="mr-2" /> Tags
+            </TabsTrigger>
+          </TabsList>
+        </div> */}
+        {/* 💡 Wrap TabsList in a container that handles overflow-x smoothly on mobile */}
+        <div className="w-full overflow-x-auto scrollbar-none -mx-4 px-4 md:mx-0 md:px-0">
+          <TabsList className="flex w-max md:w-full md:grid md:grid-cols-4 bg-[#F0E8E4]/60 p-1 rounded-full gap-1 min-w-[450px] md:min-w-0">
+            <TabsTrigger 
+              value="all" 
+              className="rounded-full font-serif italic text-sm py-2 px-6 data-[state=active]:bg-[#A84848] data-[state=active]:text-white whitespace-nowrap"
+            >
+              All Stories
+            </TabsTrigger>
+            <TabsTrigger 
+              value="folders" 
+              className="rounded-full font-serif italic text-sm py-2 px-6 data-[state=active]:bg-[#A84848] data-[state=active]:text-white whitespace-nowrap"
+            >
+              Index Tree
+            </TabsTrigger>
+            <TabsTrigger 
+              value="archives" 
+              className="rounded-full font-serif italic text-sm py-2 px-6 data-[state=active]:bg-[#A84848] data-[state=active]:text-white whitespace-nowrap"
+            >
+              Chronology
+            </TabsTrigger>
+            <TabsTrigger 
+              value="tags" 
+              className="rounded-full font-serif italic text-sm py-2 px-6 data-[state=active]:bg-[#A84848] data-[state=active]:text-white whitespace-nowrap"
+            >
+              Cloud Tags
             </TabsTrigger>
           </TabsList>
         </div>
