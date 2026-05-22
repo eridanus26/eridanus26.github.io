@@ -45,36 +45,36 @@
 //   ]
 // };
 
-import matter from 'gray-matter';
+import fm from 'front-matter';
 import { BlogData, AnyPost } from '../types';
 
-// 1. Dynamically read all markdown files as raw text strings at build time
+// Dynamically pull all markdown files as raw text strings at build time
 const markdownModules = import.meta.glob('./posts/*.md', { query: '?raw', eager: true });
 
 const parsedPosts: AnyPost[] = Object.entries(markdownModules).map(([path, fileContent]) => {
   const rawSource = (fileContent as { default: string }).default;
   
-  // Parse the frontmatter metadata block and raw markdown content
-  const { data, content } = matter(rawSource);
+  // Use front-matter to cleanly parse attributes and the main body text
+  const { attributes, body } = fm<any>(rawSource);
   
+  // Construct the base object matching your core post fields
+  const basePost = {
+    id: attributes.id,
+    title: attributes.title,
+    date: attributes.date,
+    category: attributes.category,
+    subcategory: attributes.subcategory || '',
+    tags: attributes.tags || [],
+    excerpt: attributes.excerpt || '',
+    coverImage: attributes.coverImage,
+    content: body, // The main markdown content text block
+  };
+
+  // Safely pass through any optional or specific category fields 
+  // (e.g., location objects, images arrays, ratings, etc.)
   return {
-    id: data.id,
-    title: data.title,
-    date: data.date,
-    category: data.category,
-    subcategory: data.subcategory || '',
-    tags: data.tags || [],
-    excerpt: data.excerpt || '',
-    coverImage: data.coverImage,
-    content: content, // This passes along the pure markdown body string down to ReactMarkdown
-    location: data.location ? {
-      name: data.location.name,
-      lat: data.location.lat,
-      lng: data.location.lng
-    } : undefined,
-    // Add additional conditional custom fields if needed (e.g. rating, projectType)
-    ...(data.rating && { rating: data.rating }),
-    ...(data.projectType && { projectType: data.projectType })
+    ...basePost,
+    ...attributes, // This spreads all variant-specific fields seamlessly
   } as AnyPost;
 });
 
@@ -84,7 +84,7 @@ export const blogData: BlogData = {
   siteIntro: 'We are all made of stardust.',
   timezone: 'America/Los_Angeles',
   
-  // The dynamically generated array of posts, sorted by date automatically
+  // Dynamically populated posts array sorted by date
   posts: parsedPosts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()),
   
   about: {
