@@ -27,9 +27,9 @@ export default function Travel() {
           <h2 className="text-xl font-serif italic text-[#1A0E0C]">Interactive Journey Map</h2>
         </div>
         
-        {/* FIX: Wrap the component in a relative layout box with defined height bounds */}
         <div className="w-full h-[400px] md:h-[600px] relative">
-          <MapFeature customPosts={travelPosts} />
+          {/* 💡 Explicitly pass showFilters={false} here */}
+          <MapFeature customPosts={travelPosts} showFilters={false} />
         </div>
       </div>
 

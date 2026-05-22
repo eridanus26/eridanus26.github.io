@@ -698,15 +698,17 @@ import { useAdvancedMarkerRef } from '@vis.gl/react-google-maps';
 interface MapFeatureProps {
   customPosts?: AnyPost[];
   filterCategory?: PostCategory | 'all';
+  showFilters?: boolean; // 👈 Add this new optional flag
 }
 
-export default function MapFeature({ customPosts, filterCategory = 'all' }: MapFeatureProps) {
+export default function MapFeature({ 
+  customPosts, 
+  filterCategory = 'all', 
+  showFilters = true // 👈 Default it to true so the main MapPage keeps them
+}: MapFeatureProps) {
   const [activePostId, setActivePostId] = useState<string | null>(null);
-  
-  // Local active state to handle changes when clicking categories directly inside this component header
   const [localFilter, setLocalFilter] = useState<PostCategory | 'all' | null>(null);
 
-  // Derives the current effective filter state from either parent prop or local override click handlers
   const currentFilter = localFilter !== null ? localFilter : filterCategory;
 
   const postsWithLocation = useMemo(() => {
@@ -737,51 +739,54 @@ export default function MapFeature({ customPosts, filterCategory = 'all' }: MapF
             <p className="text-xs text-[#2A1A18]/50 font-serif">Discover stories by their geographical footprints.</p>
           </div>
           
-          {/* Interactive filter control decks connected to component state updates */}
-          <div className="flex flex-wrap gap-2 relative z-10">
-            <button 
-              onClick={() => setLocalFilter('all')}
-              className={`px-3 py-1 text-xs rounded-full border font-serif italic cursor-pointer transition-all ${
-                currentFilter === 'all' 
-                  ? 'bg-[#A84848] text-white border-[#A84848]' 
-                  : 'bg-white text-[#2A1A18]/60 border-[#A84848]/10 hover:border-[#A84848]/30'
-              }`}
-            >
-              All
-            </button>
-            <button 
-              onClick={() => setLocalFilter('photography')}
-              className={`px-3 py-1 text-xs rounded-full border font-serif italic cursor-pointer transition-all ${
-                currentFilter === 'photography' 
-                  ? 'bg-[#7A3030] text-white border-[#7A3030]' 
-                  : 'bg-[#F0D0D0] text-[#7A3030] border-none'
-              }`}
-            >
-              Photography
-            </button>
-            <button 
-              onClick={() => setLocalFilter('travel')}
-              className={`px-3 py-1 text-xs rounded-full border font-serif italic cursor-pointer transition-all ${
-                currentFilter === 'travel' 
-                  ? 'bg-[#7A3850] text-white border-[#7A3850]' 
-                  : 'bg-[#E8D8E0] text-[#7A3850] border-none'
-              }`}
-            >
-              Travel
-            </button>
-            <button 
-              onClick={() => setLocalFilter('food')}
-              className={`px-3 py-1 text-xs rounded-full border font-serif italic cursor-pointer transition-all ${
-                currentFilter === 'food' 
-                  ? 'bg-[#1A0E0C] text-white border-[#1A0E0C]' 
-                  : 'bg-[#F0E8E4] text-[#1A0E0C] border-none'
-              }`}
-            >
-              Food
-            </button>
-          </div>
+          {/* 💡 Wrap the filter buttons deck in a conditional check */}
+          {showFilters && (
+            <div className="flex flex-wrap gap-2 relative z-10">
+              <button 
+                onClick={() => setLocalFilter('all')}
+                className={`px-3 py-1 text-xs rounded-full border font-serif italic cursor-pointer transition-all ${
+                  currentFilter === 'all' 
+                    ? 'bg-[#A84848] text-white border-[#A84848]' 
+                    : 'bg-white text-[#2A1A18]/60 border-[#A84848]/10 hover:border-[#A84848]/30'
+                }`}
+              >
+                All
+              </button>
+              <button 
+                onClick={() => setLocalFilter('photography')}
+                className={`px-3 py-1 text-xs rounded-full border font-serif italic cursor-pointer transition-all ${
+                  currentFilter === 'photography' 
+                    ? 'bg-[#7A3030] text-white border-[#7A3030]' 
+                    : 'bg-[#F0D0D0] text-[#7A3030] border-none'
+                }`}
+              >
+                Photography
+              </button>
+              <button 
+                onClick={() => setLocalFilter('travel')}
+                className={`px-3 py-1 text-xs rounded-full border font-serif italic cursor-pointer transition-all ${
+                  currentFilter === 'travel' 
+                    ? 'bg-[#7A3850] text-white border-[#7A3850]' 
+                    : 'bg-[#E8D8E0] text-[#7A3850] border-none'
+                }`}
+              >
+                Travel
+              </button>
+              <button 
+                onClick={() => setLocalFilter('food')}
+                className={`px-3 py-1 text-xs rounded-full border font-serif italic cursor-pointer transition-all ${
+                  currentFilter === 'food' 
+                    ? 'bg-[#1A0E0C] text-white border-[#1A0E0C]' 
+                    : 'bg-[#F0E8E4] text-[#1A0E0C] border-none'
+                }`}
+              >
+                Food
+              </button>
+            </div>
+          )}
         </div>
 
+        {/* ... Rest of MapContainer implementation, MarkerWithPopover, etc. remains exactly the same ... */}
         {/* Map Container Wrapper */}
         <div className="relative flex-grow bg-[#F0E8E4]/50 rounded-[2rem] border border-[#A84848]/10 overflow-hidden shadow-inner min-h-[450px]">
           
