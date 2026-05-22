@@ -282,18 +282,16 @@ export default function PostDetail() {
             {post.title}
           </h1>
           
-          {/* Updated metadata container rows below */}
           <div className="flex flex-wrap justify-center items-center gap-6 text-sm text-white/70 font-serif italic pt-2">
-            {/* 1. 💡 Author row removed entirely from here */}
             <span className="flex items-center gap-2"><Calendar size={14} /> {post.date}</span>
             
-            {/* 2. 💡 Make the location coordinates an active anchor link to Google Maps */}
             {post.location && (
               <a 
-                href={`https://www.google.com/maps/search/?api=1&query=${post.location.lat},${post.location.lng}`}
+                href={`http://googleusercontent.com/maps.google.com/?q=${post.location.lat},${post.location.lng}`}
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="flex items-center gap-1 hover:text-white hover:underline transition-colors cursor-pointer"
+                /* 💡 Updated classes here: text-white/70 base, transitioning to text-[#A84848] on hover */
+                className="flex items-center gap-1 text-white/70 hover:text-[#A84848] hover:underline transition-colors duration-200 cursor-pointer"
               >
                 <MapPin size={14} /> 
                 <span>{post.location.name}</span>
@@ -302,7 +300,6 @@ export default function PostDetail() {
           </div>
         </div>
       </header>
-
       {/* Main Content Layout */}
       <main className="container mx-auto px-4 pt-16 max-w-3xl">
         <motion.article 
