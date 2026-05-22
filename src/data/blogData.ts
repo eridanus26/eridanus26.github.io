@@ -82,19 +82,19 @@ export const blogData: BlogData = {
   siteTitle: '寒夜録',
   siteDescription: '無の世界',
   siteIntro: 'We are all made of stardust.',
-  timezone: 'America/Los_Angeles',
+  timezone: 'America/New_York',
   
   // Dynamically populated posts array sorted by date
   posts: parsedPosts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()),
   
   about: {
-    name: '寒夜',
-    bio: '無の世界。Curating moments of silence and sweetness in a loud world.',
+    name: 'Eri',
+    bio: '無の世界',
     avatar: 'https://picsum.photos/seed/kanya/400/400',
     socials: [
-      { platform: 'Instagram', url: '#' },
+      { platform: 'Instagram', url: 'https://www.instagram.com/eri24_camera/' },
       { platform: 'WeChat', url: '#' },
-      { platform: '食べログ', url: '#' }
+      { platform: '食べログ', url: 'https://tabelog.com/rvwr/030070185/' }
     ]
   },
   gratitudeLibrary: [

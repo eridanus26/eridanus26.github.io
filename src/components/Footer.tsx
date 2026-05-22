@@ -72,7 +72,7 @@ export default function Footer() {
         
         <div className="mt-16 pt-8 border-t border-[#A84848]/5 text-center">
           <p className="text-[10px] uppercase tracking-[0.3em] text-[#2A1A18]/30">
-            © 2024 • Crafted with Elegance
+            2026 • We are all made of stardust.
           </p>
         </div>
       </div>
