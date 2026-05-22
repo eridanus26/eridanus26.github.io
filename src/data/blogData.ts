@@ -107,6 +107,6 @@ export const blogData: BlogData = {
     "I am inspired by the creativity of those around me."
   ],
   foodIllustrations: [
-    "🥐", "🧁", "🥨", "🍰", "🍩", "🍪", "🥞", "🧇", "🥧"
+    "🍙", "🍎", "🥗", "🍣", "🍛", "🍡", "🍢", "🍱", "🍜", "🍝"
   ]
 };

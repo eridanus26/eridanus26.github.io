@@ -387,34 +387,39 @@ export default function Posts() {
           {/* 💡 Outer slider controller variant: Handles layout properties cleanly on different monitors */}
           {/* src/pages/Posts.tsx */}
           <div className="w-full overflow-x-auto md:overflow-visible scrollbar-none -mx-4 px-4 md:mx-0 md:px-0">
-            <TabsList className="bg-[#F0E8E4] border border-[#A84848]/10 rounded-full p-1 h-16 flex w-max min-w-[500px] md:min-w-0 md:w-full md:grid md:grid-cols-4">
+            {/* 💡 Using an all-flex approach with flex-1 prevents grid layout calculations from breaking alignment */}
+            <TabsList className="bg-[#F0E8E4] border border-[#A84848]/10 rounded-full p-1 h-16 flex w-max min-w-[500px] md:min-w-0 md:w-full gap-0">
               
               <TabsTrigger 
                 value="all" 
-                className="rounded-full px-6 md:px-0 h-full text-sm font-serif tracking-widest uppercase data-[state=active]:bg-[#A84848] data-[state=active]:text-white transition-all whitespace-nowrap flex items-center justify-center w-full"
+                className="rounded-full px-6 md:px-0 h-full text-sm font-serif tracking-widest uppercase data-[state=active]:bg-[#A84848] data-[state=active]:text-white transition-all whitespace-nowrap flex items-center justify-center flex-1"
               >
-                <Layers size={16} className="mr-2 flex-shrink-0" /> <span>All Posts</span>
+                <Layers size={16} className="mr-2 flex-shrink-0" />
+                <span>All Posts</span>
               </TabsTrigger>
 
               <TabsTrigger 
                 value="folders" 
-                className="rounded-full px-6 md:px-0 h-full text-sm font-serif tracking-widest uppercase data-[state=active]:bg-[#A84848] data-[state=active]:text-white transition-all whitespace-nowrap flex items-center justify-center w-full"
+                className="rounded-full px-6 md:px-0 h-full text-sm font-serif tracking-widest uppercase data-[state=active]:bg-[#A84848] data-[state=active]:text-white transition-all whitespace-nowrap flex items-center justify-center flex-1"
               >
-                <Folder size={16} className="mr-2 flex-shrink-0" /> <span>Folders</span>
+                <Folder size={16} className="mr-2 flex-shrink-0" />
+                <span>Folders</span>
               </TabsTrigger>
 
               <TabsTrigger 
                 value="archives" 
-                className="rounded-full px-6 md:px-0 h-full text-sm font-serif tracking-widest uppercase data-[state=active]:bg-[#A84848] data-[state=active]:text-white transition-all whitespace-nowrap flex items-center justify-center w-full"
+                className="rounded-full px-6 md:px-0 h-full text-sm font-serif tracking-widest uppercase data-[state=active]:bg-[#A84848] data-[state=active]:text-white transition-all whitespace-nowrap flex items-center justify-center flex-1"
               >
-                <Calendar size={16} className="mr-2 flex-shrink-0" /> <span>Timeline</span>
+                <Calendar size={16} className="mr-2 flex-shrink-0" />
+                <span>Timeline</span>
               </TabsTrigger>
 
               <TabsTrigger 
                 value="tags" 
-                className="rounded-full px-6 md:px-0 h-full text-sm font-serif tracking-widest uppercase data-[state=active]:bg-[#A84848] data-[state=active]:text-white transition-all whitespace-nowrap flex items-center justify-center w-full"
+                className="rounded-full px-6 md:px-0 h-full text-sm font-serif tracking-widest uppercase data-[state=active]:bg-[#A84848] data-[state=active]:text-white transition-all whitespace-nowrap flex items-center justify-center flex-1"
               >
-                <Tag size={16} className="mr-2 flex-shrink-0" /> <span>Tags</span>
+                <Tag size={16} className="mr-2 flex-shrink-0" />
+                <span>Tags</span>
               </TabsTrigger>
 
             </TabsList>

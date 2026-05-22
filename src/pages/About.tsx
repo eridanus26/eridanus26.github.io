@@ -72,7 +72,7 @@ export default function About() {
           <div className="pt-12 border-t border-[#A84848]/10">
             <p className="text-sm font-serif italic text-[#2A1A18]/40 flex items-center gap-2">
               <Heart size={14} className="text-[#A84848]/40" />
-              "今日ごとに　今日や限りと　惜しめども　またも今年に　逢ひにけるかな"
+              今日ごとに　今日や限りと　惜しめども　またも今年に　逢ひにけるかな
             </p>
           </div>
         </div>
