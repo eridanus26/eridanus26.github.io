@@ -37,7 +37,7 @@ export default function About() {
               <span className="text-xs font-serif tracking-[0.3em] uppercase text-[#A84848]/60">The Storyteller</span>
               <Sparkles size={14} className="text-[#d4a8c8]" />
             </div>
-            <h1 className="text-6xl md:text-7xl font-serif italic text-[#1A0E0C]">I'm {about.name}</h1>
+            <h1 className="text-6xl md:text-7xl font-serif italic text-[#1A0E0C]">我是 {about.name}</h1>
             <div className="prose prose-stone lg:prose-xl font-serif italic text-[#2A1A18]/70 leading-relaxed">
               {about.bio}
             </div>
@@ -72,7 +72,7 @@ export default function About() {
           <div className="pt-12 border-t border-[#A84848]/10">
             <p className="text-sm font-serif italic text-[#2A1A18]/40 flex items-center gap-2">
               <Heart size={14} className="text-[#A84848]/40" />
-              "Life is a collection of stories, make yours a masterpiece."
+              "今日ごとに　今日や限りと　惜しめども　またも今年に　逢ひにけるかな"
             </p>
           </div>
         </div>
