@@ -383,47 +383,43 @@ export default function Posts() {
       </div>
 
       <Tabs defaultValue="all" className="space-y-20">
-        <div className="flex justify-center">
-          {/* 💡 Outer slider controller variant: Handles layout properties cleanly on different monitors */}
-          {/* src/pages/Posts.tsx */}
-          <div className="w-full overflow-x-auto md:overflow-visible scrollbar-none -mx-4 px-4 md:mx-0 md:px-0">
-            {/* 💡 Using an all-flex approach with flex-1 prevents grid layout calculations from breaking alignment */}
-            <TabsList className="bg-[#F0E8E4] border border-[#A84848]/10 rounded-full p-1 h-16 flex w-max min-w-[500px] md:min-w-0 md:w-full gap-0">
-              
-              <TabsTrigger 
-                value="all" 
-                className="rounded-full px-6 md:px-0 h-full text-sm font-serif tracking-widest uppercase data-[state=active]:bg-[#A84848] data-[state=active]:text-white transition-all whitespace-nowrap flex items-center justify-center flex-1"
-              >
-                <Layers size={16} className="mr-2 flex-shrink-0" />
-                <span>All Posts</span>
-              </TabsTrigger>
+        <div className="flex justify-center w-full overflow-x-auto scrollbar-none">
+          {/* 💡 Using a strict responsive grid layout guarantees all 4 tabs are precisely identical in width, fixing the white pill shift completely */}
+          <TabsList className="bg-[#F0E8E4] border border-[#A84848]/10 rounded-full p-1 h-16 grid grid-cols-4 w-full max-w-[650px] min-w-[480px]">
+            
+            <TabsTrigger 
+              value="all" 
+              className="rounded-full h-full text-sm font-serif tracking-widest uppercase data-[state=active]:bg-[#A84848] data-[state=active]:text-white data-[state=active]:shadow-sm transition-all flex items-center justify-center gap-2"
+            >
+              <Layers size={16} className="flex-shrink-0" /> 
+              <span className="whitespace-nowrap">All Posts</span>
+            </TabsTrigger>
 
-              <TabsTrigger 
-                value="folders" 
-                className="rounded-full px-6 md:px-0 h-full text-sm font-serif tracking-widest uppercase data-[state=active]:bg-[#A84848] data-[state=active]:text-white transition-all whitespace-nowrap flex items-center justify-center flex-1"
-              >
-                <Folder size={16} className="mr-2 flex-shrink-0" />
-                <span>Folders</span>
-              </TabsTrigger>
+            <TabsTrigger 
+              value="folders" 
+              className="rounded-full h-full text-sm font-serif tracking-widest uppercase data-[state=active]:bg-[#A84848] data-[state=active]:text-white data-[state=active]:shadow-sm transition-all flex items-center justify-center gap-2"
+            >
+              <Folder size={16} className="flex-shrink-0" /> 
+              <span className="whitespace-nowrap">Folders</span>
+            </TabsTrigger>
 
-              <TabsTrigger 
-                value="archives" 
-                className="rounded-full px-6 md:px-0 h-full text-sm font-serif tracking-widest uppercase data-[state=active]:bg-[#A84848] data-[state=active]:text-white transition-all whitespace-nowrap flex items-center justify-center flex-1"
-              >
-                <Calendar size={16} className="mr-2 flex-shrink-0" />
-                <span>Timeline</span>
-              </TabsTrigger>
+            <TabsTrigger 
+              value="archives" 
+              className="rounded-full h-full text-sm font-serif tracking-widest uppercase data-[state=active]:bg-[#A84848] data-[state=active]:text-white data-[state=active]:shadow-sm transition-all flex items-center justify-center gap-2"
+            >
+              <Calendar size={16} className="flex-shrink-0" /> 
+              <span className="whitespace-nowrap">Timeline</span>
+            </TabsTrigger>
 
-              <TabsTrigger 
-                value="tags" 
-                className="rounded-full px-6 md:px-0 h-full text-sm font-serif tracking-widest uppercase data-[state=active]:bg-[#A84848] data-[state=active]:text-white transition-all whitespace-nowrap flex items-center justify-center flex-1"
-              >
-                <Tag size={16} className="mr-2 flex-shrink-0" />
-                <span>Tags</span>
-              </TabsTrigger>
+            <TabsTrigger 
+              value="tags" 
+              className="rounded-full h-full text-sm font-serif tracking-widest uppercase data-[state=active]:bg-[#A84848] data-[state=active]:text-white data-[state=active]:shadow-sm transition-all flex items-center justify-center gap-2"
+            >
+              <Tag size={16} className="flex-shrink-0" /> 
+              <span className="whitespace-nowrap">Tags</span>
+            </TabsTrigger>
 
-            </TabsList>
-          </div>
+          </TabsList>
         </div>
 
         <TabsContent value="all" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
