@@ -384,43 +384,48 @@ export default function Posts() {
 
       <Tabs defaultValue="all" className="space-y-20">
         <div className="flex justify-center w-full">
-          {/* 💡 py-3 replaces h-16 to kill the vertical scrollbar forever, and min-w-0 let's it shrink smoothly with Safari */}
-          <TabsList className="bg-[#F0E8E4] border border-[#A84848]/10 rounded-full p-1 min-h-[4rem] py-3 grid grid-cols-4 w-full max-w-[650px] min-w-0 gap-1 items-center">
+          {/* 💡 Container matches the exact 'max-w-2xl' width of the search input above. On mobile screens, it allows left-right swiping */}
+          <div className="w-full max-w-2xl overflow-x-auto scrollbar-none">
             
-            <TabsTrigger 
-              value="all" 
-              className="rounded-full h-full text-xs sm:text-sm font-serif tracking-widest uppercase data-[state=active]:bg-[#A84848] data-[state=active]:text-white data-[state=active]:shadow-sm transition-all flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 px-1 py-2 w-full"
-            >
-              <Layers size={14} className="flex-shrink-0" /> 
-              <span className="whitespace-nowrap">All Posts</span>
-            </TabsTrigger>
+            {/* 💡 h-14 keeps it thin and elegant like the search input, flex layouts preserve clean internal proportions */}
+            <TabsList className="bg-[#F0E8E4] border border-[#A84848]/10 rounded-full p-1 h-14 flex w-full min-w-[500px] sm:min-w-0 gap-1 items-center">
+              
+              <TabsTrigger 
+                value="all" 
+                className="rounded-full h-full text-xs sm:text-sm font-serif tracking-widest uppercase data-[state=active]:bg-[#A84848] data-[state=active]:text-white data-[state=active]:shadow-sm transition-all flex items-center justify-center gap-2 flex-1 px-2"
+              >
+                <Layers size={14} className="flex-shrink-0" />
+                <span className="whitespace-nowrap">All Posts</span>
+              </TabsTrigger>
 
-            <TabsTrigger 
-              value="folders" 
-              className="rounded-full h-full text-xs sm:text-sm font-serif tracking-widest uppercase data-[state=active]:bg-[#A84848] data-[state=active]:text-white data-[state=active]:shadow-sm transition-all flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 px-1 py-2 w-full"
-            >
-              <Folder size={14} className="flex-shrink-0" /> 
-              <span className="whitespace-nowrap">Folders</span>
-            </TabsTrigger>
+              <TabsTrigger 
+                value="folders" 
+                className="rounded-full h-full text-xs sm:text-sm font-serif tracking-widest uppercase data-[state=active]:bg-[#A84848] data-[state=active]:text-white data-[state=active]:shadow-sm transition-all flex items-center justify-center gap-2 flex-1 px-2"
+              >
+                <Folder size={14} className="flex-shrink-0" />
+                <span className="whitespace-nowrap">Folders</span>
+              </TabsTrigger>
 
-            <TabsTrigger 
-              value="archives" 
-              className="rounded-full h-full text-xs sm:text-sm font-serif tracking-widest uppercase data-[state=active]:bg-[#A84848] data-[state=active]:text-white data-[state=active]:shadow-sm transition-all flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 px-1 py-2 w-full"
-            >
-              <Calendar size={14} className="flex-shrink-0" /> 
-              <span className="whitespace-nowrap">Timeline</span>
-            </TabsTrigger>
+              <TabsTrigger 
+                value="archives" 
+                className="rounded-full h-full text-xs sm:text-sm font-serif tracking-widest uppercase data-[state=active]:bg-[#A84848] data-[state=active]:text-white data-[state=active]:shadow-sm transition-all flex items-center justify-center gap-2 flex-1 px-2"
+              >
+                <Calendar size={14} className="flex-shrink-0" />
+                <span className="whitespace-nowrap">Timeline</span>
+              </TabsTrigger>
 
-            <TabsTrigger 
-              value="tags" 
-              className="rounded-full h-full text-xs sm:text-sm font-serif tracking-widest uppercase data-[state=active]:bg-[#A84848] data-[state=active]:text-white data-[state=active]:shadow-sm transition-all flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 px-1 py-2 w-full"
-            >
-              <Tag size={14} className="flex-shrink-0" /> 
-              <span className="whitespace-nowrap">Tags</span>
-            </TabsTrigger>
+              <TabsTrigger 
+                value="tags" 
+                className="rounded-full h-full text-xs sm:text-sm font-serif tracking-widest uppercase data-[state=active]:bg-[#A84848] data-[state=active]:text-white data-[state=active]:shadow-sm transition-all flex items-center justify-center gap-2 flex-1 px-2"
+              >
+                <Tag size={14} className="flex-shrink-0" />
+                <span className="whitespace-nowrap">Tags</span>
+              </TabsTrigger>
 
-          </TabsList>
+            </TabsList>
+          </div>
         </div>
+        
         <TabsContent value="all" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
           {filteredPosts.map((post) => (
             <PostCard key={post.id} post={post} />
