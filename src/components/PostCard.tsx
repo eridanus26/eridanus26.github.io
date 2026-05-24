@@ -123,7 +123,7 @@ export default function PostCard({ post }: PostCardProps) {
           />
           <div className="absolute top-3 left-3 flex flex-wrap gap-2">
             {isAcademic && (
-              <Badge className="bg-[#A84848] text-white border-none font-serif text-xs px-3 py-1">
+              <Badge className="bg-[#A84848] text-white border-none font-serif text-base px-3 py-3">
                 {academicPost?.projectType}
               </Badge>
             )}

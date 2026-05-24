@@ -19,41 +19,41 @@ export default function Academics() {
         <div className="inline-flex p-4 bg-[#F0E8E4] rounded-full text-[#A84848] mb-4">
           <GraduationCap size={32} />
         </div>
-        <h1 className="text-6xl font-serif italic text-[#1A0E0C]">Academics & Projects</h1>
-        <p className="text-[#2A1A18]/50 font-serif max-w-xl mx-auto">A repository of my academic journey, course notes, and technical projects.</p>
+        <h1 className="text-6xl font-serif italic text-[#1A0E0C]">学习</h1>
+        {/* <p className="text-[#2A1A18]/50 font-serif max-w-xl mx-auto">A repository of my academic journey, course notes, and technical projects.</p> */}
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
         <div className="space-y-8">
           <div className="flex items-center gap-4 border-b border-[#A84848]/10 pb-4">
-            <Book size={24} className="text-[#A84848]" />
-            <h2 className="text-3xl font-serif italic text-[#1A0E0C]">Course Notes</h2>
+            {/* <Book size={24} className="text-[#A84848]" /> */}
+            <h2 className="text-3xl font-serif italic text-[#1A0E0C]">课程笔记</h2>
           </div>
           <div className="space-y-8">
             {courseNotes.map(post => <PostCard key={post.id} post={post} />)}
-            {courseNotes.length === 0 && <p className="text-lg font-serif italic text-[#2A1A18]/40">No notes uploaded yet.</p>}
+            {courseNotes.length === 0 && <p className="text-lg font-serif italic text-[#2A1A18]/40">这里还啥都没有...</p>}
           </div>
         </div>
 
         <div className="space-y-8">
           <div className="flex items-center gap-4 border-b border-[#A84848]/10 pb-4">
-            <Code size={24} className="text-[#A84848]" />
-            <h2 className="text-3xl font-serif italic text-[#1A0E0C]">Projects</h2>
+            {/* <Code size={24} className="text-[#A84848]" /> */}
+            <h2 className="text-3xl font-serif italic text-[#1A0E0C]">项目</h2>
           </div>
           <div className="space-y-8">
             {projects.map(post => <PostCard key={post.id} post={post} />)}
-            {projects.length === 0 && <p className="text-lg font-serif italic text-[#2A1A18]/40">No projects uploaded yet.</p>}
+            {projects.length === 0 && <p className="text-lg font-serif italic text-[#2A1A18]/40">这里还啥都没有...</p>}
           </div>
         </div>
 
         <div className="space-y-8">
           <div className="flex items-center gap-4 border-b border-[#A84848]/10 pb-4">
-            <Microscope size={24} className="text-[#A84848]" />
-            <h2 className="text-3xl font-serif italic text-[#1A0E0C]">Research</h2>
+            {/* <Microscope size={24} className="text-[#A84848]" /> */}
+            <h2 className="text-3xl font-serif italic text-[#1A0E0C]">研究</h2>
           </div>
           <div className="space-y-8">
             {research.map(post => <PostCard key={post.id} post={post} />)}
-            {research.length === 0 && <p className="text-lg font-serif italic text-[#2A1A18]/40">No research papers yet.</p>}
+            {research.length === 0 && <p className="text-lg font-serif italic text-[#2A1A18]/40">这里还啥都没有...</p>}
           </div>
         </div>
       </div>

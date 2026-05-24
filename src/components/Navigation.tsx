@@ -68,17 +68,17 @@ export default function Navigation() {
             } />
             <DialogContent className="sm:max-w-[600px] bg-[#FAF7F4] border-[#A84848]/10 p-12">
               <form onSubmit={handleSearch} className="space-y-8">
-                <div className="space-y-4 text-center">
-                  <h2 className="text-4xl font-serif italic text-[#1A0E0C]">Search the Archive</h2>
+                {/* <div className="space-y-4 text-center">
+                  <h2 className="text-4xl font-serif italic text-[#1A0E0C]">搜索</h2>
                   <p className="text-lg text-[#2A1A18]/50 font-serif">Enter keywords to find stories, recipes, or notes.</p>
-                </div>
+                </div> */}
                 <div className="relative">
                   <input
                     autoFocus
                     type="text"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Type something..."
+                    placeholder="想搜什么呢🤔"
                     className="w-full bg-white border-b-2 border-[#A84848]/20 focus:border-[#A84848] py-4 px-2 text-2xl font-serif italic outline-none transition-colors"
                   />
                   <Button type="submit" className="absolute right-0 bottom-2 bg-transparent hover:bg-transparent text-[#A84848]">
@@ -100,20 +100,20 @@ export default function Navigation() {
             } />
             <DialogContent className="sm:max-w-[600px] bg-[#FAF7F4] border-[#A84848]/10 p-12">
               <form onSubmit={handleSearch} className="space-y-8">
-                <div className="space-y-4 text-center">
-                  <h2 className="text-4xl font-serif italic text-[#1A0E0C]">Search the Archive</h2>
+                {/* <div className="space-y-4 text-center">
+                  <h2 className="text-4xl font-serif italic text-[#1A0E0C]">搜索</h2>
                   <p className="text-lg text-[#2A1A18]/50 font-serif">Enter keywords to find stories, recipes, or notes.</p>
-                </div>
+                </div> */}
                 <div className="relative">
                   <input
                     autoFocus
                     type="text"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Type something..."
-                    className="w-full bg-white border-b-2 border-[#A84848]/20 focus:border-[#A84848] py-4 px-2 text-2xl font-serif italic outline-none transition-colors"
+                    placeholder="想搜什么呢🤔"
+                    className="w-full bg-white border-b-2 border-[#A84848]/20 focus:border-[#A84848] py-4 px-2 text-xl font-serif italic outline-none transition-colors"
                   />
-                  <Button type="submit" className="absolute right-0 bottom-2 bg-transparent hover:bg-transparent text-[#A84848]">
+                  <Button type="submit" className="absolute right-0 top-1/2 -translate-y-1/2 bg-transparent hover:bg-transparent text-[#A84848]">
                     <ArrowRight size={24} />
                   </Button>
                 </div>

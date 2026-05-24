@@ -37,8 +37,8 @@ export default function Archive() {
     <div className="container mx-auto px-4 py-24 min-h-screen">
       <div className="max-w-4xl mx-auto space-y-16">
         <div className="space-y-6 text-center">
-          <Link to="/posts" className="inline-flex items-center gap-2 text-sm font-serif italic text-[#A84848] hover:underline mb-8">
-            <ArrowLeft size={16} /> Back to All Posts
+          <Link to="/posts" className="inline-flex items-center gap-2 text-lg font-serif italic text-[#A84848] hover:underline mb-8">
+            <ArrowLeft size={16} /> 返回文章列表
           </Link>
           
           <div className="flex flex-col items-center gap-4">
@@ -46,12 +46,12 @@ export default function Archive() {
               {filterType === 'tag' ? <Tag size={32} /> : filterType === 'category' ? <Folder size={32} /> : <Tag size={32} />}
             </div>
             <h1 className="text-5xl md:text-6xl font-serif italic text-[#1A0E0C]">
-              {filterType === 'tag' ? `Posts tagged with "${filterValue}"` : 
+              {filterType === 'tag' ? `包含 "${filterValue}" 标签的帖子` : 
                filterType === 'category' ? `Collection: ${filterValue}` : 
                `Search results for "${filterValue}"`}
             </h1>
             <p className="text-xl text-[#2A1A18]/50 font-serif italic">
-              {filteredPosts.length} {filteredPosts.length === 1 ? 'story' : 'stories'} found
+              找到了{filteredPosts.length} {filteredPosts.length === 1 ? '个' : '个'}！
             </p>
           </div>
         </div>
@@ -102,8 +102,8 @@ export default function Archive() {
             ))
           ) : (
             <div className="text-center py-20 space-y-6">
-              <p className="text-2xl font-serif italic text-[#2A1A18]/40">No stories found matching your criteria.</p>
-              <Link to="/posts" className="elegant-button inline-block">Explore All Stories</Link>
+              <p className="text-2xl font-serif italic text-[#2A1A18]/40">你来到了荒无人烟的地方...</p>
+              <Link to="/posts" className="elegant-button inline-block">返回文章列表</Link>
             </div>
           )}
         </div>

@@ -51,10 +51,10 @@ export default function Search() {
           <SearchIcon size={32} />
         </div>
         <h1 className="text-5xl font-serif italic text-[#1A0E0C]">
-          Search Results for "{query}"
+          关于 "{query}" 的帖子
         </h1>
         <p className="text-[#2A1A18]/50 font-serif max-w-xl mx-auto">
-          {results.length} {results.length === 1 ? 'story' : 'stories'} found matching your keywords.
+          找到了{results.length} {results.length === 1 ? '个' : '个'}！
         </p>
       </div>
 
@@ -67,8 +67,8 @@ export default function Search() {
       ) : (
         <div className="text-center py-32 space-y-6">
           <div className="text-6xl opacity-20">🔍</div>
-          <h3 className="text-2xl font-serif italic text-[#1A0E0C]">No matches found</h3>
-          <p className="text-[#2A1A18]/50 font-serif">Try different keywords or check your spelling.</p>
+          <h3 className="text-2xl font-serif italic text-[#1A0E0C]">你来到了荒无人烟的地方...</h3>
+          <p className="text-[#2A1A18]/50 font-serif">再找找吧！</p>
         </div>
       )}
     </div>
