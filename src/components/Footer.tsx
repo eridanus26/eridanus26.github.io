@@ -1,5 +1,6 @@
 import { useEffect, useState, useMemo } from 'react';
 import { blogData } from '../data/blogData';
+import { RubyText } from '../components/RubyText';
 
 export default function Footer() {
   const [daysRunning, setDaysRunning] = useState(0);
@@ -57,26 +58,30 @@ export default function Footer() {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
           <div className="space-y-4">
-            <h3 className="text-3xl font-serif italic text-[#1A0E0C]">{blogData.siteTitle}</h3>
+            <h3 className="text-3xl font-serif not-italic text-[#1A0E0C]">
+              <RubyText kanji="寒" reading="かん" />
+              <RubyText kanji="夜" reading="や" />
+              <RubyText kanji="録" reading="ろく" />
+            </h3>
             <p className="text-base text-[#2A1A18]/50 font-serif">
               {blogData.siteIntro}
             </p>
           </div>
           
           <div className="space-y-4">
-            <h4 className="text-sm font-serif tracking-[0.2em] uppercase text-[#A84848]/60">Site Stats</h4>
+            <h4 className="text-lg font-serif tracking-[0.2em] uppercase text-[#A84848]/60">本站数据 📊</h4>
             <ul className="space-y-2 text-base text-[#2A1A18]/70 font-serif">
-              <li>Days Running: <span className="text-[#A84848] font-bold">{daysRunning}</span></li>
-              <li>Total Visitors: <span className="text-[#A84848] font-bold">{visitorCount.toLocaleString()}</span></li>
-              <li>Last Update: <span className="text-[#A84848] font-bold">{lastUpdateDate}</span></li>
+              <li>运行了 <span className="text-[#A84848] font-bold">{daysRunning}</span> 天</li>
+              {/* <li>Total Visitors: <span className="text-[#A84848] font-bold">{visitorCount.toLocaleString()}</span></li> */}
+              <li>最后更新于 <span className="text-[#A84848] font-bold">{lastUpdateDate}</span></li>
             </ul>
           </div>
 
           <div className="space-y-4">
-            <h4 className="text-sm font-serif tracking-[0.2em] uppercase text-[#A84848]/60">Connect</h4>
+            <h4 className="text-lg font-serif tracking-[0.2em] uppercase text-[#A84848]/60">找到我 🔍</h4>
             <div className="flex justify-center md:justify-start gap-6">
               {blogData.about.socials.map(s => (
-                <a key={s.platform} href={s.url} className="text-base hover:text-[#A84848] transition-colors font-serif italic">
+                <a key={s.platform} href={s.url} className="text-sm hover:text-[#A84848] transition-colors font-serif italic">
                   {s.platform}
                 </a>
               ))}
@@ -85,8 +90,8 @@ export default function Footer() {
         </div>
         
         <div className="mt-16 pt-8 border-t border-[#A84848]/5 text-center">
-          <p className="text-[10px] uppercase tracking-[0.3em] text-[#2A1A18]/30">
-            2026 • We are all made of stardust.
+          <p className="text-[14px] font-serif font-bold uppercase tracking-[0.1em] text-[#2A1A18]/30">
+            ©2026 • Eridanus • We are all made of stardust.
           </p>
         </div>
       </div>

@@ -88,13 +88,15 @@ export const blogData: BlogData = {
   posts: parsedPosts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()),
   
   about: {
-    name: 'Eri',
+    name: 'Eridanus',
     bio: '無の世界',
     avatar: '/images/avatar.png',
     socials: [
       { platform: 'Instagram', url: 'https://www.instagram.com/eri24_camera/' },
-      { platform: 'WeChat', url: '#' },
-      { platform: '食べログ', url: 'https://tabelog.com/rvwr/030070185/' }
+      { platform: '微信公众号', url: '/images/qrcode_wechat.jpg' },
+      { platform: '食べログ', url: 'https://tabelog.com/rvwr/030070185/' },
+      { platform: '小红书', url: 'https://www.xiaohongshu.com/user/profile/6713fbec000000001d02079b' },
+      { platform: '哔哩哔哩', url: 'https://space.bilibili.com/1023948792/' }
     ]
   },
   gratitudeLibrary: [
