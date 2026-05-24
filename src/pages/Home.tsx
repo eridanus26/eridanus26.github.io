@@ -9,7 +9,10 @@ import { cn } from '@/lib/utils';
 import { useEffect, useState } from 'react';
 
 export default function Home() {
-  const featuredPosts = blogData.posts.slice(0, 3);
+  // const featuredPosts = blogData.posts.slice(0, 3);
+  const featuredPosts = [...blogData.posts]
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 3);
   const latestPosts = blogData.posts.slice(0, 6);
   
   const [todayInfo, setTodayInfo] = useState({
@@ -53,14 +56,14 @@ export default function Home() {
             className="space-y-10"
           >
             <div className="space-y-4">
-              <span className="text-xs font-serif tracking-[0.4em] uppercase text-[#A84848]/60 block">Est. 2024</span>
+              {/* <span className="text-xs font-serif tracking-[0.4em] uppercase text-[#A84848]/60 block">Est. 2024</span> */}
               <h1 className="text-6xl md:text-8xl text-[#1A0E0C] font-serif italic leading-[1.1] tracking-tighter">
-                {blogData.siteTitle.split('')[0]} <span className="text-[#A84848] not-italic">{blogData.siteTitle.slice(1)}</span>
+                {blogData.siteTitle.slice(0, 2)} <span className="text-[#A84848] not-italic">{blogData.siteTitle.slice(2)}</span>
               </h1>
             </div>
             
             <p className="text-xl text-[#2A1A18]/60 font-serif italic max-w-lg leading-relaxed">
-              {blogData.siteDescription} — A digital collage of photography, travel, culinary experiments, and academic pursuits.
+              {blogData.siteDescription}
             </p>
             
             <div className="flex flex-wrap gap-8 pt-4">
@@ -114,19 +117,19 @@ export default function Home() {
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-center relative z-10">
             <div className="space-y-4 text-center md:text-left">
-              <span className="text-xs uppercase tracking-[0.3em] text-[#A84848]/60 font-serif">Today is</span>
+              <span className="text-base uppercase tracking-[0.3em] text-[#A84848]/60 font-serif">今天是</span>
               <h3 className="text-3xl font-serif italic text-[#1A0E0C]">{todayInfo.date}</h3>
             </div>
             
             <div className="space-y-6 text-center px-8 border-x border-[#A84848]/10">
-              <span className="text-xs uppercase tracking-[0.3em] text-[#A84848]/60 font-serif">Gratitude</span>
+              <span className="text-base uppercase tracking-[0.3em] text-[#A84848]/60 font-serif">每日一言</span>
               <p className="text-2xl font-serif italic text-[#2A1A18]/80 leading-relaxed">
-                "{todayInfo.gratitude}"
+                {todayInfo.gratitude}
               </p>
             </div>
             
             <div className="flex flex-col items-center justify-center space-y-6">
-              <span className="text-xs uppercase tracking-[0.3em] text-[#A84848]/60 font-serif">Daily Bite</span>
+              {/* <span className="text-base uppercase tracking-[0.3em] text-[#A84848]/60 font-serif">Daily Bite</span> */}
               <div className="text-7xl animate-bounce">
                 {todayInfo.illustration}
               </div>
@@ -139,11 +142,11 @@ export default function Home() {
       <section className="container mx-auto px-4 space-y-16">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="space-y-4">
-            <h2 className="text-5xl font-serif italic text-[#1A0E0C]">Today's Specials</h2>
-            <p className="text-[#2A1A18]/50 font-serif max-w-md">A hand-picked selection of stories that resonate with the current season.</p>
+            <h2 className="text-5xl font-serif italic text-[#1A0E0C]">今日特色</h2>
+            {/* <p className="text-[#2A1A18]/50 font-serif max-w-md">A hand-picked selection of stories that resonate with the current season.</p> */}
           </div>
-          <Link to="/posts" className="text-xs font-serif tracking-widest uppercase text-[#A84848] hover:underline">
-            View Full Menu
+          <Link to="/posts" className="text-base font-serif tracking-widest uppercase text-[#A84848] hover:underline">
+            查看完整菜单
           </Link>
         </div>
 
@@ -166,21 +169,21 @@ export default function Home() {
       <section className="container mx-auto px-4 space-y-16">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="space-y-4">
-            <h2 className="text-5xl font-serif italic text-[#1A0E0C]">Journey Map</h2>
-            <p className="text-[#2A1A18]/50 font-serif max-w-md">Explore stories by their geographical footprints across the globe.</p>
+            <h2 className="text-5xl font-serif italic text-[#1A0E0C]">旅程</h2>
+            {/* <p className="text-[#2A1A18]/50 font-serif max-w-md">Explore stories by their geographical footprints across the globe.</p> */}
           </div>
           <Link to="/map">
             <button className="elegant-button flex items-center gap-2">
-              <MapIcon size={16} /> Open Full Map
+              <MapIcon size={16} /> 查看完整地图
             </button>
           </Link>
         </div>
         {/* 1. Locate the Map Section on your Home Page */}
         <div className="collage-card p-4 md:p-8 bg-white">
-          <div className="flex items-center gap-3 mb-8 px-4">
+          {/* <div className="flex items-center gap-3 mb-8 px-4">
             <MapIcon size={20} className="text-[#A84848]" />
             <h2 className="text-xl font-serif italic text-[#1A0E0C]">Interactive Journey Map</h2>
-          </div>
+          </div> */}
           
           {/* FIX: Wrap the component in a relative layout container 
             with explicitly declared height classes (e.g., 400px on mobile, 600px on desktop)
@@ -195,8 +198,8 @@ export default function Home() {
       <section className="bg-[#F8F4F6] py-32 rounded-[4rem] text-[#1A0E0C]">
         <div className="container mx-auto px-4 space-y-20">
           <div className="text-center space-y-6">
-            <h2 className="text-5xl font-serif italic text-[#1A0E0C]">Fresh from the Oven</h2>
-            <p className="text-[#2A1A18]/50 font-serif max-w-xl mx-auto">The latest musings, captures, and discoveries from my daily explorations.</p>
+            <h2 className="text-5xl font-serif italic text-[#1A0E0C]">最近更新</h2>
+            {/* <p className="text-[#2A1A18]/50 font-serif max-w-xl mx-auto">The latest musings, captures, and discoveries from my daily explorations.</p> */}
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
@@ -211,7 +214,7 @@ export default function Home() {
                 </div>
                 <div className="space-y-3">
                   <h3 className="text-2xl font-serif italic text-[#1A0E0C] group-hover:text-[#A84848] transition-colors leading-tight">{post.title}</h3>
-                  <p className="text-sm text-[#A84848]/60 font-serif tracking-widest uppercase">{post.date}</p>
+                  <p className="text-base text-[#A84848]/60 font-serif tracking-widest uppercase">{post.date}</p>
                 </div>
               </Link>
             ))}
@@ -219,7 +222,7 @@ export default function Home() {
           
           <div className="text-center pt-10">
             <Link to="/posts">
-              <button className="elegant-button bg-[#A84848] text-white hover:bg-[#8A3838]">Explore Full Archive</button>
+              <button className="elegant-button bg-[#A84848] text-white hover:bg-[#8A3838]">归档</button>
             </Link>
           </div>
         </div>

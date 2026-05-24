@@ -368,15 +368,15 @@ export default function Posts() {
   return (
     <div className="container mx-auto px-4 py-20 space-y-20">
       <div className="text-center space-y-6">
-        <h1 className="text-6xl font-serif italic text-[#1A0E0C]">The Archive</h1>
-        <p className="text-[#2A1A18]/50 font-serif max-w-xl mx-auto">A chronological collection of thoughts, captures, and discoveries.</p>
+        <h1 className="text-6xl font-serif italic text-[#1A0E0C]">论博主脑子里都装了些什么</h1>
+        {/* <p className="text-[#2A1A18]/50 font-serif max-w-xl mx-auto">A chronological collection of thoughts, captures, and discoveries.</p> */}
       </div>
 
       <div className="max-w-2xl mx-auto relative">
         <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-[#A84848]/40" size={20} />
         <Input 
-          placeholder="Search by title or tag..." 
-          className="pl-12 h-14 rounded-full border-[#A84848]/10 bg-white shadow-sm focus-visible:ring-[#A84848]/30 font-serif italic"
+          placeholder="搜索标题或标签..." 
+          className="pl-12 h-14 rounded-full border-[#A84848]/10 bg-white shadow-sm focus-visible:ring-[#A84848]/30 placeholder:text-base font-serif italic"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
@@ -388,38 +388,40 @@ export default function Posts() {
           <div className="w-full max-w-2xl overflow-x-auto scrollbar-none">
             
             {/* 💡 h-14 keeps it thin and elegant like the search input, flex layouts preserve clean internal proportions */}
-            <TabsList className="bg-[#F0E8E4] border border-[#A84848]/10 rounded-full p-1 h-14 flex w-full min-w-[500px] sm:min-w-0 gap-1 items-center">
-              
+            {/* <TabsList className="bg-[#F0E8E4] border border-[#A84848]/10 rounded-full p-1 h-14 flex w-full min-w-[500px] sm:min-w-0 gap-1 items-center"> */}
+            <TabsList className="bg-[#F0E8E4] border border-[#A84848]/10 rounded-full py-5 h-auto w-full min-w-[500px] flex items-center">
+  
               <TabsTrigger 
                 value="all" 
-                className="rounded-full h-full text-xs sm:text-sm font-serif tracking-widest uppercase data-[state=active]:bg-[#A84848] data-[state=active]:text-white data-[state=active]:shadow-sm transition-all flex items-center justify-center gap-2 flex-1 px-2"
+                className="rounded-full px-10 py-4 text-base font-serif tracking-widest uppercase flex items-center justify-center data-[state=active]:bg-white data-[state=active]:text-[#1A0E0C] data-[state=active]:shadow-sm transition-all"
               >
-                <Layers size={14} className="flex-shrink-0" />
-                <span className="whitespace-nowrap">All Posts</span>
+                {/* <Layers size={14} className="flex-shrink-0" /> */}
+                <span className="whitespace-nowrap">全部</span>
               </TabsTrigger>
 
               <TabsTrigger 
                 value="folders" 
-                className="rounded-full h-full text-xs sm:text-sm font-serif tracking-widest uppercase data-[state=active]:bg-[#A84848] data-[state=active]:text-white data-[state=active]:shadow-sm transition-all flex items-center justify-center gap-2 flex-1 px-2"
+                // className="rounded-full h-full text-xs sm:text-sm font-serif tracking-widest uppercase data-[state=active]:bg-[#A84848] data-[state=active]:text-white data-[state=active]:shadow-sm transition-all flex items-center justify-center gap-2 flex-1 px-2"
+                className="rounded-full px-10 py-4 text-base font-serif tracking-widest uppercase flex items-center justify-center data-[state=active]:bg-white data-[state=active]:text-[#1A0E0C] data-[state=active]:shadow-sm transition-all"
               >
-                <Folder size={14} className="flex-shrink-0" />
-                <span className="whitespace-nowrap">Folders</span>
+                {/* <Folder size={14} className="flex-shrink-0" /> */}
+                <span className="whitespace-nowrap">分类</span>
               </TabsTrigger>
 
               <TabsTrigger 
                 value="archives" 
-                className="rounded-full h-full text-xs sm:text-sm font-serif tracking-widest uppercase data-[state=active]:bg-[#A84848] data-[state=active]:text-white data-[state=active]:shadow-sm transition-all flex items-center justify-center gap-2 flex-1 px-2"
+                className="rounded-full px-10 py-4 text-base font-serif tracking-widest uppercase flex items-center justify-center data-[state=active]:bg-white data-[state=active]:text-[#1A0E0C] data-[state=active]:shadow-sm transition-all"
               >
-                <Calendar size={14} className="flex-shrink-0" />
-                <span className="whitespace-nowrap">Timeline</span>
+                {/* <Calendar size={14} className="flex-shrink-0" /> */}
+                <span className="whitespace-nowrap">归档</span>
               </TabsTrigger>
 
               <TabsTrigger 
                 value="tags" 
-                className="rounded-full h-full text-xs sm:text-sm font-serif tracking-widest uppercase data-[state=active]:bg-[#A84848] data-[state=active]:text-white data-[state=active]:shadow-sm transition-all flex items-center justify-center gap-2 flex-1 px-2"
+                className="rounded-full px-10 py-4 text-base font-serif tracking-widest uppercase flex items-center justify-center data-[state=active]:bg-white data-[state=active]:text-[#1A0E0C] data-[state=active]:shadow-sm transition-all"
               >
-                <Tag size={14} className="flex-shrink-0" />
-                <span className="whitespace-nowrap">Tags</span>
+                {/* <Tag size={14} className="flex-shrink-0" /> */}
+                <span className="whitespace-nowrap">标签</span>
               </TabsTrigger>
 
             </TabsList>

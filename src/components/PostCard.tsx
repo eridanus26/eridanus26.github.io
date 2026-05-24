@@ -132,8 +132,8 @@ export default function PostCard({ post }: PostCardProps) {
 
         {/* Text Container with pointer-events-none to let main card clicks pass through */}
         <div className="p-8 pt-4 flex-1 flex flex-col space-y-6 z-10 pointer-events-none">
-          <div className="flex items-center justify-between text-xs uppercase tracking-[0.2em] text-[#9A7A78] font-serif">
-            <span className="flex items-center gap-2">
+          <div className="flex items-center justify-between text-base uppercase tracking-[0.2em] text-[#9A7A78] font-serif">
+            <span className="tracking-wider flex items-center gap-2">
               <Calendar size={14} className="text-[#A84848]/40" />
               {post.date}
             </span>
@@ -146,7 +146,7 @@ export default function PostCard({ post }: PostCardProps) {
                   href={`https://www.google.com/maps/search/?api=1&query=${post.location.lat},${post.location.lng}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-[#A84848] hover:underline transition-colors cursor-pointer"
+                  className="tracking-wider hover:text-[#A84848] hover:underline transition-colors cursor-pointer"
                   onClick={(e) => e.stopPropagation()} // Intercepts click so it doesn't open the blog post route
                 >
                   {post.location.name}
@@ -155,7 +155,7 @@ export default function PostCard({ post }: PostCardProps) {
             )}
           </div>
 
-          <h3 className="text-2xl font-serif italic text-[#1A0E0C] group-hover:text-[#A84848] transition-colors leading-tight">
+          <h3 className="text-3xl font-serif italic text-[#1A0E0C] group-hover:text-[#A84848] transition-colors leading-tight">
             {post.title}
           </h3>
 

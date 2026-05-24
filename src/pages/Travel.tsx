@@ -16,16 +16,16 @@ export default function Travel() {
         <div className="inline-flex p-4 bg-[#F0E8E4] rounded-full text-[#A84848] mb-4">
           <Compass size={32} />
         </div>
-        <h1 className="text-6xl font-serif italic text-[#1A0E0C]">Wanderlust</h1>
-        <p className="text-[#2A1A18]/50 font-serif max-w-xl mx-auto">Journeys across borders, cultures, and landscapes.</p>
+        <h1 className="text-6xl font-serif italic text-[#1A0E0C]">旅行</h1>
+        {/* <p className="text-[#2A1A18]/50 font-serif max-w-xl mx-auto">Journeys across borders, cultures, and landscapes.</p> */}
       </div>
 
       {/* Find this section inside Travel.tsx and update the wrapper layout */}
       <div className="collage-card p-4 md:p-8 bg-white">
-        <div className="flex items-center gap-3 mb-8 px-4">
+        {/* <div className="flex items-center gap-3 mb-8 px-4">
           <MapIcon size={20} className="text-[#A84848]" />
           <h2 className="text-xl font-serif italic text-[#1A0E0C]">Interactive Journey Map</h2>
-        </div>
+        </div> */}
         
         <div className="w-full h-[400px] md:h-[600px] relative">
           {/* 💡 Explicitly pass showFilters={false} here */}
@@ -35,7 +35,7 @@ export default function Travel() {
 
       <section className="space-y-12">
         <div className="flex items-center gap-6">
-          <h2 className="text-3xl font-serif italic text-[#1A0E0C]">Recent Journeys</h2>
+          <h2 className="text-3xl font-serif italic text-[#1A0E0C]">最近的旅程</h2>
           <div className="h-[1px] flex-1 bg-[#A84848]/10" />
         </div>
 

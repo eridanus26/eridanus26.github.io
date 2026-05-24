@@ -3,6 +3,7 @@ import { ChevronDown } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
 import { blogData } from '../data/blogData';
 
+
 export default function WelcomePage() {
   const location = useLocation();
   const isHome = location.pathname === '/';
@@ -23,16 +24,17 @@ export default function WelcomePage() {
           className="text-center space-y-8 px-4 relative z-10"
         >
           <div className="space-y-2">
-            <span className="text-sm font-serif tracking-[0.3em] uppercase text-[#A84848]/60">Welcome to</span>
+            {/* <span className="text-sm font-serif tracking-[0.3em] uppercase text-[#A84848]/60">欢迎来到</span> */}
             <h1 className="text-7xl md:text-9xl text-[#1A0E0C] font-serif italic tracking-tighter">
-              {blogData.siteTitle.split('')[0]} <span className="text-[#d4a8c8] not-italic">{blogData.siteTitle.slice(1)}</span>
+              {blogData.siteTitle.slice(0, 2)} 
+              <span className="text-[#d4a8c8] not-italic">{blogData.siteTitle.slice(2)}</span>
             </h1>
-            <p className="text-xs font-serif tracking-[0.5em] uppercase text-[#A84848]/40 mt-4">{blogData.siteDescription}</p>
+            <p className="text-base font-serif tracking-[0.5em] uppercase text-[#A84848]/40 mt-4">{blogData.siteDescription}</p>
           </div>
           
-          <p className="text-lg text-[#2A1A18]/60 font-serif italic max-w-md mx-auto">
+          {/* <p className="text-lg text-[#2A1A18]/60 font-serif italic max-w-md mx-auto">
             A collection of moments, flavors, and academic pursuits.
-          </p>
+          </p> */}
           
           <div className="pt-20">
             <motion.div
@@ -40,7 +42,7 @@ export default function WelcomePage() {
               transition={{ duration: 2, repeat: Infinity }}
               className="flex flex-col items-center gap-3 text-[#A84848]/40"
             >
-              <span className="text-xs font-serif tracking-[0.2em] uppercase">Scroll to Explore</span>
+              {/* <span className="text-xs font-serif tracking-[0.2em] uppercase">往下滑</span> */}
               <ChevronDown size={24} />
             </motion.div>
           </div>
@@ -50,8 +52,8 @@ export default function WelcomePage() {
         <div className="absolute inset-0 pointer-events-none opacity-20">
           <div className="absolute top-[15%] left-[10%] w-32 h-40 border border-[#A84848]/20 rotate-[-12deg]" />
           <div className="absolute bottom-[20%] right-[15%] w-40 h-32 border border-[#d4a8c8]/20 rotate-[8deg]" />
-          <span className="absolute top-[25%] right-[20%] text-6xl opacity-40">🥐</span>
-          <span className="absolute bottom-[25%] left-[20%] text-6xl opacity-40">📸</span>
+          <span className="absolute top-[25%] right-[20%] text-6xl opacity-90">🥐</span>
+          <span className="absolute bottom-[25%] left-[20%] text-6xl opacity-90">📸</span>
         </div>
       </div>
     </div>

@@ -920,7 +920,7 @@
 // }
 
 import { useState, useMemo } from 'react';
-import { MapPin, Info, ArrowRight } from 'lucide-react';
+import { MapPin, Info, ArrowRight, Earth } from 'lucide-react';
 import { blogData } from '../data/blogData';
 import { AnyPost, PostCategory } from '../types';
 import { Badge } from '@/components/ui/badge';
@@ -979,8 +979,9 @@ export default function MapFeature({
       <div className="h-full flex flex-col space-y-8">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="space-y-1">
-            <h2 className="text-2xl font-serif italic text-[#1A0E0C]">Journey Explorer</h2>
-            <p className="text-xs text-[#2A1A18]/50 font-serif">Discover stories by their geographical footprints.</p>
+            {/* <Earth size={20} /> */}
+            {/* <h2 className="text-2xl font-serif italic text-[#1A0E0C]">世界旅途</h2> */}
+            {/* <p className="text-xs text-[#2A1A18]/50 font-serif">Discover stories by their geographical footprints.</p> */}
           </div>
           
           {showFilters && (
@@ -993,47 +994,47 @@ export default function MapFeature({
                     : 'bg-white text-[#2A1A18]/60 border-[#A84848]/10 hover:border-[#A84848]/30'
                 }`}
               >
-                All
+                全部
               </button>
               <button 
                 onClick={() => handleFilterSelection('photography')}
-                className={`px-3 py-1 text-xs rounded-full border font-serif italic cursor-pointer transition-all ${
+                className={`px-3 py-1 text-base rounded-full border font-serif italic cursor-pointer transition-all ${
                   currentFilter === 'photography' 
                     ? 'bg-[#7A3030] text-white border-[#7A3030]' 
                     : 'bg-[#F0D0D0] text-[#7A3030] border-none'
                 }`}
               >
-                Photography
+                影
               </button>
               <button 
                 onClick={() => handleFilterSelection('travel')}
-                className={`px-3 py-1 text-xs rounded-full border font-serif italic cursor-pointer transition-all ${
+                className={`px-3 py-1 text-base rounded-full border font-serif italic cursor-pointer transition-all ${
                   currentFilter === 'travel' 
                     ? 'bg-[#7A3850] text-white border-[#7A3850]' 
                     : 'bg-[#E8D8E0] text-[#7A3850] border-none'
                 }`}
               >
-                Travel
+                旅
               </button>
               <button 
                 onClick={() => handleFilterSelection('food')}
-                className={`px-3 py-1 text-xs rounded-full border font-serif italic cursor-pointer transition-all ${
+                className={`px-3 py-1 text-base rounded-full border font-serif italic cursor-pointer transition-all ${
                   currentFilter === 'food' 
                     ? 'bg-[#1A0E0C] text-white border-[#1A0E0C]' 
                     : 'bg-[#F0E8E4] text-[#1A0E0C] border-none'
                 }`}
               >
-                Food
+                食
               </button>
               <button 
                 onClick={() => handleFilterSelection('general')}
-                className={`px-3 py-1 text-xs rounded-full border font-serif italic cursor-pointer transition-all ${
+                className={`px-3 py-1 text-base rounded-full border font-serif italic cursor-pointer transition-all ${
                   currentFilter === 'general' 
                     ? 'bg-[#2A1A18] text-white border-[#2A1A18]' 
                     : 'bg-[#F0E8E4]/60 text-[#2A1A18] border-none hover:bg-[#F0E8E4]'
                 }`}
               >
-                General
+                杂谈
               </button>
             </div>
           )}
@@ -1065,9 +1066,9 @@ export default function MapFeature({
             })}
           </Map>
 
-          <div className="absolute bottom-4 left-4 bg-white/60 backdrop-blur-md p-3 rounded-xl border border-[#A84848]/10 flex items-center gap-2 text-[10px] text-[#2A1A18]/60 font-serif italic z-10 pointer-events-none">
-            <Info size={12} className="text-[#A84848]" />
-            Click on markers to explore the stories.
+          <div className="absolute bottom-4 left-4 bg-white/60 backdrop-blur-md p-3 rounded-xl border border-[#A84848]/10 flex items-center gap-2 text-[12px] text-[#2A1A18]/60 font-serif italic z-10 pointer-events-none">
+            <Info size={14} className="text-[#A84848]" />
+            点击查看更多 👀
           </div>
         </div>
       </div>
@@ -1121,7 +1122,7 @@ function MarkerWithPopover({ post, position, markerColor, isOpen, onToggleOpen }
           onCloseClick={() => onToggleOpen(false)}
           headerDisabled={true} 
         >
-          <div className="w-60 bg-white rounded-xl overflow-hidden shadow-sm flex flex-col">
+          <div className="w-60 bg-white rounded-xl overflow-hidden flex flex-col">
             <div className="relative h-24 w-full overflow-hidden">
               <img 
                 src={post.coverImage} 
@@ -1129,13 +1130,13 @@ function MarkerWithPopover({ post, position, markerColor, isOpen, onToggleOpen }
                 referrerPolicy="no-referrer" 
                 alt={post.title}
               />
-              <Badge className="absolute top-2 left-2 bg-white/90 text-[#A84848] text-[9px] font-serif uppercase tracking-widest pointer-events-none">
+              <Badge className="absolute top-2 left-2 bg-white/90 text-[#A84848] text-[10px] font-serif uppercase tracking-widest pointer-events-none">
                 {post.category}
               </Badge>
             </div>
 
             <div className="p-3 flex flex-col justify-between space-y-2">
-              <h4 className="font-serif italic text-[#1A0E0C] leading-tight text-xs font-bold line-clamp-2">
+              <h4 className="font-serif italic text-[#1A0E0C] leading-tight text-[16px] font-bold line-clamp-2">
                 {post.title}
               </h4>
               
@@ -1144,7 +1145,7 @@ function MarkerWithPopover({ post, position, markerColor, isOpen, onToggleOpen }
                   href={`https://www.google.com/maps/search/?api=1&query=${post.location!.lat},${post.location!.lng}`}
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="text-[10px] text-[#2A1A18]/50 hover:text-[#A84848] font-serif flex items-center gap-1 hover:underline transition-colors cursor-pointer truncate max-w-[130px]"
+                  className="text-[12px] text-[#2A1A18]/50 hover:text-[#A84848] font-serif flex items-center gap-1 hover:underline transition-colors cursor-pointer truncate max-w-[130px]"
                 >
                   <MapPin size={10} className="shrink-0" /> 
                   <span className="truncate">{post.location?.name}</span>
@@ -1152,9 +1153,9 @@ function MarkerWithPopover({ post, position, markerColor, isOpen, onToggleOpen }
 
                 <Link 
                   to={`/post/${post.id}`} 
-                  className="text-[10px] font-serif tracking-widest uppercase text-[#A84848] flex items-center gap-0.5 hover:underline font-semibold shrink-0"
+                  className="text-[12px] font-serif tracking-widest uppercase text-[#A84848] flex items-center gap-0.5 hover:underline font-semibold shrink-0"
                 >
-                  Read <ArrowRight size={10} />
+                  阅读 <ArrowRight size={10} />
                 </Link>
               </div>
             </div>

@@ -83,14 +83,14 @@ export default function MapPage() {
         <div className="inline-flex p-4 bg-[#F0E8E4] rounded-full text-[#A84848] mb-4">
           <Compass size={32} />
         </div>
-        <h1 className="text-6xl font-serif italic text-[#1A0E0C]">World Explorer</h1>
-        <p className="text-[#2A1A18]/50 font-serif max-w-xl mx-auto">
+        <h1 className="text-6xl font-serif italic text-[#1A0E0C]">世界之旅</h1>
+        {/* <p className="text-[#2A1A18]/50 font-serif max-w-xl mx-auto">
           A geographical archive of my journeys, flavors, and visual captures.
-        </p>
+        </p> */}
       </div>
 
       <div className="collage-card p-4 md:p-8 bg-white shadow-2xl overflow-hidden">
-        <div className="flex items-center justify-between mb-8 px-4">
+        {/* <div className="flex items-center justify-between mb-8 px-4">
           <div className="flex items-center gap-3">
             <MapIcon size={20} className="text-[#A84848]" />
             <h2 className="text-xl font-serif italic text-[#1A0E0C]">Interactive Journey Map</h2>
@@ -98,7 +98,7 @@ export default function MapPage() {
           <div className="text-[10px] uppercase tracking-widest text-[#A84848]/40 font-serif flex items-center gap-2">
             <Filter size={12} /> Filtering: {activeCategory}
           </div>
-        </div>
+        </div> */}
         <div className="w-full h-[400px] md:h-[600px] relative">
           {/* 💡 Pass the state modifier down to keep them in sync */}
           <MapFeature 

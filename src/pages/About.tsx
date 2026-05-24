@@ -25,7 +25,7 @@ export default function About() {
           </div>
           <div className="absolute -bottom-8 -right-8 w-48 h-48 collage-border rotate-[6deg] shadow-xl overflow-hidden bg-white p-0 hidden md:block">
             <img 
-              src="https://picsum.photos/seed/about-sub/400/400" 
+              src="/images/about/1766013996000_R0001548.JPG" 
               className="w-full h-full object-cover"
               referrerPolicy="no-referrer"
             />
