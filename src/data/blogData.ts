@@ -90,7 +90,7 @@ export const blogData: BlogData = {
   about: {
     name: 'Eri',
     bio: '無の世界',
-    avatar: 'https://picsum.photos/seed/kanya/400/400',
+    avatar: '/images/avatar.png',
     socials: [
       { platform: 'Instagram', url: 'https://www.instagram.com/eri24_camera/' },
       { platform: 'WeChat', url: '#' },
@@ -98,13 +98,13 @@ export const blogData: BlogData = {
     ]
   },
   gratitudeLibrary: [
-    "I am grateful for the warm sunlight on my face this morning.",
-    "Today, I find inspiration in the quiet moments of reflection.",
-    "The beauty of nature never fails to amaze me.",
-    "I am thankful for the kind words of a stranger.",
-    "Every day is a new opportunity to learn and grow.",
-    "The smell of fresh rain on dry earth is a simple joy.",
-    "I am inspired by the creativity of those around me."
+    "己所不欲，勿施于人。",
+    "日月逝矣，岁不我与！",
+    "人生天地之间，若白驹之过隙，忽然而已。",
+    "举物而暗，无务博闻。",
+    "人情反复，世路崎岖。",
+    "弱水三千，我只取一瓢饮。",
+    "见一叶落，而知岁之将暮；观一花开，而知春之将至。"
   ],
   foodIllustrations: [
     "🍙", "🍎", "🥗", "🍣", "🍛", "🍡", "🍢", "🍱", "🍜", "🍝"

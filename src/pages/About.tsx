@@ -1,6 +1,6 @@
 import { blogData } from '../data/blogData';
 import { motion } from 'motion/react';
-import { Instagram, Twitter, Mail, Heart, Sparkles } from 'lucide-react';
+import { Instagram, Twitter, Mail, Heart, Sparkles, Message-Circle } from 'lucide-react';
 
 export default function About() {
   const { about } = blogData;
@@ -45,7 +45,7 @@ export default function About() {
 
           <div className="space-y-8">
             <div className="flex items-center gap-4">
-              <h3 className="text-xl font-serif italic text-[#1A0E0C]">Let's Connect</h3>
+              <h3 className="text-xl font-serif italic text-[#1A0E0C]">哪里可以找到我🔍</h3>
               <div className="h-[1px] flex-1 bg-[#A84848]/10" />
             </div>
             
@@ -60,7 +60,7 @@ export default function About() {
                 >
                   <div className="p-3 rounded-full border border-[#A84848]/10 group-hover:bg-[#A84848] group-hover:text-white transition-all">
                     {social.platform === 'Instagram' && <Instagram size={20} />}
-                    {social.platform === 'Twitter' && <Twitter size={20} />}
+                    {social.platform === 'WeChat' && <Message-Circle size={20} />}
                     {!['Instagram', 'Twitter'].includes(social.platform) && <Mail size={20} />}
                   </div>
                   <span>{social.platform}</span>
