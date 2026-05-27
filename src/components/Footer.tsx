@@ -71,7 +71,7 @@ export default function Footer() {
           <div className="space-y-4">
             <h4 className="text-lg font-serif tracking-[0.2em] uppercase text-[#A84848]/60">本站数据 📊</h4>
             <ul className="space-y-2 text-base text-[#2A1A18]/70 font-serif">
-              <li>运行了 <span className="text-[#A84848] font-bold">{daysRunning}</span> 天</li>
+              <li>已运行 <span className="text-[#A84848] font-bold">{daysRunning}</span> 天</li>
               {/* <li>Total Visitors: <span className="text-[#A84848] font-bold">{visitorCount.toLocaleString()}</span></li> */}
               <li>最后更新于 <span className="text-[#A84848] font-bold">{lastUpdateDate}</span></li>
             </ul>

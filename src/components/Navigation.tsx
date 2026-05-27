@@ -8,14 +8,14 @@ import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { blogData } from '../data/blogData';
 
 const navItems = [
-  { name: 'Home', path: '/' },
-  { name: 'Posts', path: '/posts' },
-  { name: 'Photography', path: '/photography' },
-  { name: 'Travel', path: '/travel' },
-  { name: 'Food', path: '/food' },
-  { name: 'Map', path: '/map' },
-  { name: 'Academics', path: '/academics', icon: GraduationCap },
-  { name: 'About', path: '/about' },
+  { name: '首页', path: '/' },
+  { name: '帖子', path: '/posts' },
+  { name: '摄影', path: '/photography' },
+  { name: '旅行', path: '/travel' },
+  { name: '美食', path: '/food' },
+  { name: '地图', path: '/map' },
+  { name: '学习', path: '/academics', icon: GraduationCap },
+  { name: '简介', path: '/about' },
 ];
 
 export default function Navigation() {
@@ -49,7 +49,7 @@ export default function Navigation() {
               key={item.path}
               to={item.path}
               className={cn(
-                "text-sm font-serif tracking-[0.15em] uppercase transition-all duration-300 hover:text-[#A84848]",
+                "text-base font-serif tracking-[0.15em] uppercase transition-all duration-300 hover:text-[#A84848]",
                 location.pathname === item.path 
                   ? "text-[#A84848] font-bold border-b border-[#A84848]/30 pb-1" 
                   : "text-[#2A1A18]/60"
@@ -63,7 +63,7 @@ export default function Navigation() {
           <Dialog open={isSearchOpen} onOpenChange={setIsSearchOpen}>
             <DialogTrigger render={
               <Button variant="ghost" size="icon" className="text-[#A84848]/60 hover:text-[#A84848]">
-                <Search size={20} />
+                <Search size={24} />
               </Button>
             } />
             <DialogContent className="sm:max-w-[600px] bg-[#FAF7F4] border-[#A84848]/10 p-12">
@@ -95,7 +95,7 @@ export default function Navigation() {
           <Dialog open={isSearchOpen} onOpenChange={setIsSearchOpen}>
             <DialogTrigger render={
               <Button variant="ghost" size="icon" className="text-[#A84848]">
-                <Search size={22} />
+                <Search size={24} />
               </Button>
             } />
             <DialogContent className="sm:max-w-[600px] bg-[#FAF7F4] border-[#A84848]/10 p-12">

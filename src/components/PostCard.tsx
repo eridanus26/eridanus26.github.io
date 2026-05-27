@@ -127,6 +127,11 @@ export default function PostCard({ post }: PostCardProps) {
                 {academicPost?.projectType}
               </Badge>
             )}
+            {isFood && foodPost?.foodType && (
+              <Badge className="bg-[#A84848] text-white border-none font-serif text-base px-3 py-3">
+                {foodPost.foodType}
+              </Badge>
+            )}
           </div>
         </div>
 

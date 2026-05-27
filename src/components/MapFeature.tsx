@@ -988,7 +988,7 @@ export default function MapFeature({
             <div className="flex flex-wrap gap-2 relative z-10">
               <button 
                 onClick={() => handleFilterSelection('all')}
-                className={`px-3 py-1 text-xs rounded-full border font-serif italic cursor-pointer transition-all ${
+                className={`px-3 py-1 text-base rounded-full border font-serif italic cursor-pointer transition-all ${
                   currentFilter === 'all' 
                     ? 'bg-[#A84848] text-white border-[#A84848]' 
                     : 'bg-white text-[#2A1A18]/60 border-[#A84848]/10 hover:border-[#A84848]/30'

@@ -254,55 +254,122 @@ interface FolderNode {
   posts: typeof blogData.posts;
 }
 
+// function FolderItem({ node, depth = 0 }: { node: FolderNode; depth?: number }) {
+//   const [isOpen, setIsOpen] = useState(depth === 0);
+//   const hasSubfolders = node.subfolders.size > 0;
+  
+//   return (
+//     <div className="space-y-2">
+//       <div 
+//         className={cn(
+//           "flex items-center gap-3 p-3 rounded-xl transition-all cursor-pointer group",
+//           depth === 0 ? "bg-[#F0E8E4]/50 border border-[#A84848]/10" : "hover:bg-[#F0E8E4]/30"
+//         )}
+//         onClick={() => setIsOpen(!isOpen)}
+//       >
+//         <div className="flex items-center gap-3 flex-1">
+//           {hasSubfolders ? (
+//             <ChevronRight 
+//               size={18} 
+//               className={cn("text-[#A84848] transition-transform", isOpen && "rotate-90")} 
+//             />
+//           ) : (
+//             <Folder size={18} className="text-[#A84848]/40" />
+//           )}
+//           <Link 
+//             to={`/archive/category/${encodeURIComponent(node.name)}`} 
+//             onClick={(e) => e.stopPropagation()}
+//             className="text-xl font-serif italic text-[#1A0E0C] hover:text-[#A84848] transition-colors"
+//           >
+//             {node.name}
+//           </Link>
+//           <span className="text-xs font-serif text-[#2A1A18]/30 ml-auto">{node.posts.length} items</span>
+//         </div>
+//       </div>
+
+//       {isOpen && (
+//         <div className={cn("space-y-2", depth >= 0 && "pl-8 border-l border-[#A84848]/10 ml-5")}>
+//           {hasSubfolders ? (
+//             Array.from(node.subfolders.values()).map(sub => (
+//               <FolderItem key={sub.path} node={sub} depth={depth + 1} />
+//             ))
+//           ) : (
+//             <div className="grid grid-cols-1 gap-2 pt-2">
+//               {node.posts.map(post => (
+//                 <Link 
+//                   key={post.id} 
+//                   to={`/post/${post.id}`}
+//                   className="flex items-center gap-3 p-3 rounded-lg hover:bg-[#F0E8E4] transition-all group"
+//                 >
+//                   <div className="w-1.5 h-1.5 rounded-full bg-[#A84848]/20 group-hover:bg-[#A84848] transition-colors" />
+//                   <span className="text-base font-serif text-[#2A1A18]/60 group-hover:text-[#A84848] transition-colors">{post.title}</span>
+//                 </Link>
+//               ))}
+//             </div>
+//           )}
+//         </div>
+//       )}
+//     </div>
+//   );
+// }
+
 function FolderItem({ node, depth = 0 }: { node: FolderNode; depth?: number }) {
   const [isOpen, setIsOpen] = useState(depth === 0);
   const hasSubfolders = node.subfolders.size > 0;
   
   return (
-    <div className="space-y-2">
+    <div className="w-full space-y-2 block">
       <div 
         className={cn(
-          "flex items-center gap-3 p-3 rounded-xl transition-all cursor-pointer group",
+          "w-full flex items-center p-3 rounded-xl transition-all cursor-pointer group",
           depth === 0 ? "bg-[#F0E8E4]/50 border border-[#A84848]/10" : "hover:bg-[#F0E8E4]/30"
         )}
         onClick={() => setIsOpen(!isOpen)}
       >
-        <div className="flex items-center gap-3 flex-1">
-          {hasSubfolders ? (
-            <ChevronRight 
-              size={18} 
-              className={cn("text-[#A84848] transition-transform", isOpen && "rotate-90")} 
-            />
-          ) : (
-            <Folder size={18} className="text-[#A84848]/40" />
-          )}
-          <Link 
-            to={`/archive/category/${encodeURIComponent(node.name)}`} 
-            onClick={(e) => e.stopPropagation()}
-            className="text-xl font-serif italic text-[#1A0E0C] hover:text-[#A84848] transition-colors"
-          >
-            {node.name}
-          </Link>
-          <span className="text-xs font-serif text-[#2A1A18]/30 ml-auto">{node.posts.length} items</span>
+        {/* 💡 This explicit grid layout forces a full-width structure that never shifts */}
+        <div className="grid grid-cols-[1fr_auto] items-center w-full gap-4">
+          <div className="flex items-center gap-3 min-w-0">
+            {hasSubfolders ? (
+              <ChevronRight 
+                size={18} 
+                className={cn("text-[#A84848] transition-transform flex-shrink-0", isOpen && "rotate-90")} 
+              />
+            ) : (
+              <Folder size={18} className="text-[#A84848]/40 flex-shrink-0" />
+            )}
+            <Link 
+              to={`/archive/category/${encodeURIComponent(node.name)}`} 
+              onClick={(e) => e.stopPropagation()}
+              className="text-xl font-serif italic text-[#1A0E0C] hover:text-[#A84848] transition-colors truncate"
+            >
+              {node.name}
+            </Link>
+          </div>
+          
+          <span className="text-xs font-serif text-[#2A1A18]/30 flex-shrink-0 text-right">
+            {node.posts.length} items
+          </span>
         </div>
       </div>
 
       {isOpen && (
-        <div className={cn("space-y-2", depth >= 0 && "pl-8 border-l border-[#A84848]/10 ml-5")}>
+        <div className={cn("space-y-2 w-full block", depth >= 0 && "pl-8 border-l border-[#A84848]/10 ml-5")}>
           {hasSubfolders ? (
             Array.from(node.subfolders.values()).map(sub => (
               <FolderItem key={sub.path} node={sub} depth={depth + 1} />
             ))
           ) : (
-            <div className="grid grid-cols-1 gap-2 pt-2">
+            <div className="grid grid-cols-1 gap-2 pt-2 w-full">
               {node.posts.map(post => (
                 <Link 
                   key={post.id} 
                   to={`/post/${post.id}`}
-                  className="flex items-center gap-3 p-3 rounded-lg hover:bg-[#F0E8E4] transition-all group"
+                  className="grid grid-cols-[auto_1fr] items-center gap-3 p-3 rounded-lg hover:bg-[#F0E8E4] transition-all group w-full"
                 >
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#A84848]/20 group-hover:bg-[#A84848] transition-colors" />
-                  <span className="text-base font-serif text-[#2A1A18]/60 group-hover:text-[#A84848] transition-colors">{post.title}</span>
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#A84848]/20 group-hover:bg-[#A84848] transition-colors flex-shrink-0" />
+                  <span className="text-base font-serif text-[#2A1A18]/60 group-hover:text-[#A84848] transition-colors truncate">
+                    {post.title}
+                  </span>
                 </Link>
               ))}
             </div>
@@ -385,7 +452,7 @@ export default function Posts() {
       <Tabs defaultValue="all" className="space-y-20">
         <div className="flex justify-center w-full">
           {/* 💡 Container matches the exact 'max-w-2xl' width of the search input above. On mobile screens, it allows left-right swiping */}
-          <div className="w-full max-w-2xl overflow-x-auto scrollbar-none">
+          <div className="w-full max-w-2xl overflow-x-auto custom-scrollbar pb-2">
             
             {/* 💡 h-14 keeps it thin and elegant like the search input, flex layouts preserve clean internal proportions */}
             {/* <TabsList className="bg-[#F0E8E4] border border-[#A84848]/10 rounded-full p-1 h-14 flex w-full min-w-[500px] sm:min-w-0 gap-1 items-center"> */}
@@ -434,7 +501,7 @@ export default function Posts() {
           ))}
         </TabsContent>
 
-        <TabsContent value="folders" className="max-w-4xl mx-auto space-y-4">
+        <TabsContent value="folders" className="w-full max-w-2xl mx-auto space-y-4 px-0">
           {folderTree.map(node => (
             <FolderItem key={node.path} node={node} />
           ))}
@@ -445,7 +512,7 @@ export default function Posts() {
             <div key={post.id} className="timeline-item group">
               <div className="timeline-dot group-hover:scale-150 transition-transform" />
               <div className="space-y-4">
-                <span className="text-xs font-serif tracking-[0.2em] uppercase text-[#A84848]/60">{post.date}</span>
+                <span className="text-base font-serif tracking-[0.2em] uppercase text-[#A84848]/60">{post.date}</span>
                 <h3 className="text-2xl font-serif italic text-[#1A0E0C] hover:text-[#A84848] transition-colors cursor-pointer">
                   <Link to={`/post/${post.id}`}>{post.title}</Link>
                 </h3>
@@ -463,7 +530,7 @@ export default function Posts() {
                 to={`/archive/tag/${tag}`}
                 className="px-8 py-3 rounded-full border border-[#A84848]/10 bg-white text-xl font-serif italic text-[#2A1A18]/70 hover:bg-[#A84848] hover:text-white transition-all shadow-sm"
               >
-                #{tag}
+                # {tag}
               </Link>
             ))}
           </div>

@@ -15,6 +15,7 @@ import PostDetail from './pages/PostDetail';
 import Archive from './pages/Archive';
 import Search from './pages/Search';
 import { useEffect } from 'react';
+import 'katex/dist/katex.min.css';
 
 function ScrollToTop() {
   const { pathname } = useLocation();

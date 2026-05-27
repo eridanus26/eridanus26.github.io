@@ -97,11 +97,67 @@
     @apply font-serif text-2xl leading-relaxed text-[#2A1A18]/80 space-y-8;
   }
 
-  .markdown-body h1 { @apply text-5xl mt-16 mb-8; }
-  .markdown-body h2 { @apply text-4xl mt-14 mb-6; }
-  .markdown-body p { @apply mb-8; }
-  .markdown-body blockquote { @apply border-l-4 border-[#A84848] pl-6 italic text-[#A84848]/70 bg-[#A84848]/5 py-4 rounded-r-xl; }
+  .markdown-body h1 { @apply text-5xl md:text-6xl mt-16 mb-8 font-bold; }
+  .markdown-body h2 { @apply text-3xl md:text-4xl mt-12 mb-6 font-semibold text-[#1A0E0C]; }
+  .markdown-body h3 { @apply text-2xl md:text-3xl mt-8 mb-4 font-normal text-[#1A0E0C]/90; }
+  .markdown-body p { @apply text-lg mb-8; }
+  .markdown-body blockquote { @apply border-l-4 border-[#A84848] pl-6 text-lg font-serif text-[#A84848]/70 bg-[#A84848]/5 py-4 rounded-r-xl; }
   .markdown-body img { @apply rounded-2xl shadow-xl my-12 border-[12px] border-white rotate-1 mx-auto; }
+  .markdown-body table {
+    @apply w-full border-collapse my-6 text-base text-[#2A1A18]/80;
+  }
+  .markdown-body th {
+    @apply border-b-2 border-[#A84848]/20 bg-[#F0D0D0]/30 px-4 py-3 text-left font-serif font-semibold text-[#1A0E0C];
+  }
+  .markdown-body td {
+    @apply border-b border-[#A84848]/10 px-4 py-3 font-sans;
+  }
+  .markdown-body tr:hover {
+    @apply bg-[#F0E8E4]/20;
+  }
+  .markdown-body mark {
+    @apply bg-[#F0D0D0] text-[#7A3030] px-1.5 py-0.5 rounded-md font-serif mx-0.5;
+    text-decoration: none !important;
+  }
+
+  /* 2. Fix the Strikethrough Line (~~text~~) */
+  .markdown-body del {
+    @apply text-[#2A1A18]/40 line-through decoration-[#A84848]/30;
+  }
+
+  /* 3. Make Tasklist Layout items clean and side-by-side */
+  .markdown-body li:has(input[type="checkbox"]) {
+    @apply list-none pl-0 flex items-center gap-1 my-2;
+  }
+
+    /* 🖍️ 1. FORCE THE HIGHLIGHT STYLING TO RENDER */
+  .prose mark,
+  .markdown-body mark {
+    background-color: #F0D0D0 !important;
+    color: #7A3030 !important;
+    padding: 2px 6px !important;
+    border-radius: 6px !important;
+    font-family: serif !important;
+    display: inline-block !important;
+    text-decoration: none !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  /* 🧼 2. COMPLETELY WIPE THE WEIRD STRIKE-THROUGH FROM SUBSCRIPTS */
+  .prose sub,
+  .markdown-body sub,
+  .prose sup,
+  .markdown-body sup {
+    text-decoration: none !important;
+    text-decoration-line: none !important;
+    border: none !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    display: inline-block !important;
+  }
+
   
   /* Avant-garde artistic expressions */
   .artistic-float {
@@ -116,6 +172,7 @@
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
+  height: 6px; /* For horizontal scrollbar */
 }
 
 ::-webkit-scrollbar-track {
@@ -130,6 +187,26 @@
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-accent-primary);
 }
+/* ✨ ADD THIS NEW CLASS HERE FOR THE HORIZONTAL SCROLLBAR ✨ */
+/* Update this block in your index.css */
+.custom-scrollbar::-webkit-scrollbar {
+  display: block !important;    /* Forces it to show up if a plugin hid it */
+  height: 6px !important;       /* Forces it to be elegantly thin */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--color-rose-accent) !important;
+  border-radius: 10px !important;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent-primary) !important;
+}
+
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/geist";
@@ -259,3 +336,4 @@
     @apply font-sans;
     }
 }
+

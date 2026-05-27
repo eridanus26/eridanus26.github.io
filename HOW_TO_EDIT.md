@@ -15,6 +15,7 @@ tags:                           # Array of strings
   - "personal"
   - "update"
 excerpt: "Short brief sentence" # String summary
+updatedAt: "2026-05-22T16:08:18-04:00"
 coverImage: "https://..."       # Image URL string
 
 ### Category-Specific Fields

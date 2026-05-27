@@ -3,7 +3,7 @@ id: "4"                         # String wrapped in quotes
 title: "Matcha"        # String
 date: "2026-05-22"              # YYYY-MM-DD
 category: "food"             # Must be: general, photography, travel, food, or academic
-subcategory: "Recipes"
+subcategory: "recipe"
 ingredients:                    # Array of items
   - "Matcha powder"
   - "Flour"

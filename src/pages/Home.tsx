@@ -222,7 +222,7 @@ export default function Home() {
           
           <div className="text-center pt-10">
             <Link to="/posts">
-              <button className="elegant-button bg-[#A84848] text-white hover:bg-[#8A3838]">归档</button>
+              <button className="elegant-button bg-[#A84848] text-white hover:bg-[#8A3838]">查看所有帖子</button>
             </Link>
           </div>
         </div>
