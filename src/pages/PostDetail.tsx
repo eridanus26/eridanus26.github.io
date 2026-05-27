@@ -792,9 +792,9 @@ useEffect(() => {
         </div>
         
         <div className="container mx-auto px-4 pb-12 relative z-10 text-center space-y-4 max-w-4xl">
-          <Badge className="bg-[#A84848] text-white hover:bg-[#A84848]/90 font-serif uppercase tracking-[0.2em] px-4 py-1 text-sm">
+          {/* <Badge className="bg-[#A84848] text-white hover:bg-[#A84848]/90 font-serif uppercase tracking-[0.2em] px-4 py-1 text-sm">
             {post.category} {post.subcategory && `/ ${post.subcategory}`}
-          </Badge>
+          </Badge> */}
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif italic text-white leading-tight">
             {post.title}
           </h1>
@@ -835,13 +835,13 @@ useEffect(() => {
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
                   {post.cuisine && (
-                    <div className="sm:col-span-3 text-sm text-[#2A1A18]/70">
+                    <div className="sm:col-span-3 text-base text-[#2A1A18]/70">
                       <span className="font-bold text-[#1A0E0C]">Cuisine:</span> {post.cuisine}
                     </div>
                   )}
                   {post.ingredients && post.ingredients.length > 0 && (
                     <div className="sm:col-span-3 space-y-2">
-                      <span className="text-sm font-bold text-[#1A0E0C]">Ingredients Needed:</span>
+                      <span className="text-base font-bold text-[#1A0E0C]">Ingredients Needed:</span>
                       <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-base text-[#2A1A18]/80 list-none pl-0">
                         {post.ingredients.map((ing, i) => (
                           <li key={i} className="flex items-center gap-2">
@@ -996,7 +996,7 @@ useEffect(() => {
                     <>
                       <span className="mx-2 text-[#A84848]/30 font-sans text-xs">/</span>
                       <Link 
-                        to={`/archive/category/${post.category?.toLowerCase()}/${post.subcategory?.toLowerCase()}`}
+                        to={`/archive/category/${post.subcategory?.toLowerCase()}`}
                         className="hover:text-[#A84848] transition-colors italic"
                       >
                         {post.subcategory}
@@ -1025,34 +1025,34 @@ useEffect(() => {
                 {/* Last / Previous Post Button */}
                 {prevPost ? (
                   <Link 
-                    to={`/posts/${prevPost.id}`}
+                    to={`/post/${prevPost.id}`}
                     onClick={() => window.scrollTo(0, 0)} // 💡 Forces layout frame reset on mobile views
                     className="group flex flex-col p-4 rounded-xl border border-[#A84848]/10 bg-white hover:bg-[#F0E8E4]/20 transition-all text-left"
                   >
-                    <span className="text-xs text-[#A84848] font-serif uppercase tracking-wider mb-1">← Last Entry</span>
+                    <span className="text-base text-[#A84848] font-serif uppercase tracking-wider mb-1">← Next Entry</span>
                     <span className="text-base font-serif font-medium text-[#1A0E0C] group-hover:underline line-clamp-1">{prevPost.title}</span>
                   </Link>
                 ) : (
                   <div className="flex flex-col p-4 rounded-xl border border-dashed border-[#2A1A18]/10 bg-gray-50 opacity-40 cursor-not-allowed text-left">
-                    <span className="text-xs text-[#2A1A18]/50 font-serif uppercase tracking-wider mb-1">← Last Entry</span>
-                    <span className="text-base font-serif italic text-[#2A1A18]/40">Oldest post reached</span>
+                    <span className="text-base text-[#2A1A18]/50 font-serif uppercase tracking-wider mb-1">← Next Entry</span>
+                    <span className="text-base font-serif italic text-[#2A1A18]/40">Newest post reached</span>
                   </div>
                 )}
 
                 {/* Next Post Button */}
                 {nextPost ? (
                   <Link 
-                    to={`/posts/${nextPost.id}`}
+                    to={`/post/${nextPost.id}`}
                     onClick={() => window.scrollTo(0, 0)} // 💡 Forces layout frame reset on mobile views
                     className="group flex flex-col p-4 rounded-xl border border-[#A84848]/10 bg-white hover:bg-[#F0E8E4]/20 transition-all text-right"
                   >
-                    <span className="text-xs text-[#A84848] font-serif uppercase tracking-wider mb-1">Next Entry →</span>
+                    <span className="text-base text-[#A84848] font-serif uppercase tracking-wider mb-1">Last Entry →</span>
                     <span className="text-base font-serif font-medium text-[#1A0E0C] group-hover:underline line-clamp-1">{nextPost.title}</span>
                   </Link>
                 ) : (
                   <div className="flex flex-col p-4 rounded-xl border border-dashed border-[#2A1A18]/10 bg-gray-50 opacity-40 cursor-not-allowed text-right">
-                    <span className="text-xs text-[#2A1A18]/50 font-serif uppercase tracking-wider mb-1">Next Entry →</span>
-                    <span className="text-base font-serif italic text-[#2A1A18]/40">Newest post reached</span>
+                    <span className="text-base text-[#2A1A18]/50 font-serif uppercase tracking-wider mb-1">Last Entry →</span>
+                    <span className="text-base font-serif italic text-[#2A1A18]/40">Oldest post reached</span>
                   </div>
                 )}
               </div>
@@ -1064,7 +1064,7 @@ useEffect(() => {
                 </Link>
                 
                 <div className="flex items-center gap-4 relative">
-                  <span className="text-sm font-serif italic text-[#2A1A18]/40">Copy Link:</span>
+                  <span className="text-base font-serif italic text-[#2A1A18]/40">Copy Link:</span>
                   <button 
                     onClick={handleLinkCopy}
                     title="Copy link to clipboard"

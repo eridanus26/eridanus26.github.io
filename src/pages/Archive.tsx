@@ -46,8 +46,8 @@ export default function Archive() {
               {filterType === 'tag' ? <Tag size={32} /> : filterType === 'category' ? <Folder size={32} /> : <Tag size={32} />}
             </div>
             <h1 className="text-5xl md:text-6xl font-serif italic text-[#1A0E0C]">
-              {filterType === 'tag' ? `包含 "${filterValue}" 标签的帖子` : 
-               filterType === 'category' ? `Collection: ${filterValue}` : 
+              {filterType === 'tag' ? `包含 #${filterValue} 标签的帖子` : 
+               filterType === 'category' ? `分类为 ${filterValue} 的帖子` : 
                `Search results for "${filterValue}"`}
             </h1>
             <p className="text-xl text-[#2A1A18]/50 font-serif italic">
@@ -75,7 +75,7 @@ export default function Archive() {
                   />
                 </div>
                 <div className="md:col-span-8 space-y-4">
-                  <div className="flex items-center gap-4 text-sm font-serif italic text-[#A84848]/60">
+                  <div className="flex items-center gap-4 text-lg font-serif italic text-[#A84848]/60">
                     <span className="flex items-center gap-1"><Calendar size={14} /> {post.date}</span>
                   </div>
                   <Link to={`/post/${post.id}`}>
@@ -91,9 +91,9 @@ export default function Archive() {
                       <Link 
                         key={tag} 
                         to={`/archive/tag/${tag}`}
-                        className="text-xs font-serif italic text-[#A84848]/60 hover:text-[#A84848]"
+                        className="text-lg font-serif italic text-[#A84848]/60 hover:text-[#A84848]"
                       >
-                        #{tag}
+                        # {tag}
                       </Link>
                     ))}
                   </div>
